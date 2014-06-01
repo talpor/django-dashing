@@ -1,0 +1,58 @@
+.widget-graph { 
+    background-color: #ff9618;;
+    position: relative;
+}
+
+.widget-graph svg {
+    position: absolute;
+    opacity: 0.4;
+    fill-opacity: 0.4;
+    left: 0px;
+    top: 0px;
+}
+
+.widget-graph .title, .value {
+    position: relative;
+    z-index: 99;
+}
+
+.widget-graph .title { 
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-graph .more-info {
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 0;
+}
+
+.widget-graph .x_tick {
+    position: absolute;
+    bottom: 0;
+}
+
+.widget-graph .x_tick .title {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.4);
+    opacity: 0.5;
+    padding-bottom: 3px;
+}
+
+.widget-graph .y_ticks {
+    font-size: 20px;
+    fill: rgba(0, 0, 0, 0.4);
+    fill-opacity: 1;
+}
+
+.widget-graph .domain {
+    display: none;
+}
+
+.widget-graph .x_tick {
+    border: none;
+}
+
+.widget-graph .tick {
+    stroke: transparent !important;
+}

@@ -1,0 +1,44 @@
+.widget-list>div { 
+    background-color: #12b0c5;
+}
+
+.widget-list .title { 
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-list ol, ul {
+    margin: 0 15px;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-list ol {
+    list-style-position: inside;
+}
+
+.widget-list li {
+    margin-bottom: 5px;
+}
+
+.widget-list .list-nostyle {
+    list-style: none;
+}
+
+.widget-list .label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-list .value {
+    float: right;
+    margin-left: 12px;
+    font-weight: 600;
+    color: $value-color;
+}
+
+.widget-list .updated-at {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.widget-list .more-info {
+    color: rgba(255, 255, 255, 0.7);
+}

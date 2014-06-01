@@ -1,0 +1,25 @@
+.widget-number {
+    background-color: #96bf48;
+}
+
+.widget-number .title { 
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-number .value {
+    color: #fff;
+}
+
+.widget-number .change-rate {
+    font-weight: 500;
+    font-size: 30px;
+    color: #fff;
+}
+
+.widget-number .more-info {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-number .updated-at {
+    color: rgba(0, 0, 0, 0.3);
+}

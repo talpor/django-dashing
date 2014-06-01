@@ -1,0 +1,11 @@
+.widget-clock {
+    background-color: rgb(220, 89, 69);
+}
+
+.widget-clock h1 {
+    font-size: 30px;
+}
+
+.widget-clock h2 {
+    font-size: 76px;
+}

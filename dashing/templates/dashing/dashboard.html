@@ -1,0 +1,26 @@
+{% extends 'dashing/base.html' %}
+
+{% block 'stylesheets' %}
+<link rel="stylesheet" href="{{ STATIC_URL }}widgets/clock/clock.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}widgets/list/list.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}widgets/number/number.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}widgets/graph/graph.css">
+{% endblock %}
+
+{% block 'scripts' %}
+<script type="text/javascript" src="{{ STATIC_URL }}widgets/clock/clock.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}widgets/list/list.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}widgets/number/number.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}widgets/graph/graph.js"></script>
+{% endblock %}
+
+{% block 'templates' %}
+{% include 'dashing/widgets/_clock.html' %}
+{% include 'dashing/widgets/_list.html' %}
+{% include 'dashing/widgets/_number.html' %}
+{% include 'dashing/widgets/_graph.html' %}
+{% endblock %}
+
+{% block 'config_file' %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/dashboard.js"></script>
+{% endblock %}
