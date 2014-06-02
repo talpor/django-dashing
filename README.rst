@@ -19,7 +19,7 @@ Installation
 ===============================================
 1. Install latest stable version from BitBucket:
 
-.. code-block:: none
+.. code-block:: shell
 
     $ pip install -e git+https://bitbucket.org/individuo7/django-dashing/@87ea50ac5c24c4e8e11dd49956bc787d7fe701f2#egg=dashing
 
