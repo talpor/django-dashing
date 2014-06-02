@@ -21,7 +21,7 @@ Installation
 
 .. code-block:: text
 
-    $ pip install -e git+https://bitbucket.org/individuo7/django-dashing/@87ea50ac5c24c4e8e11dd49956bc787d7fe701f2#egg=dashing
+    $ pip install -e git+https://bitbucket.org/individuo7/django-dashing/@5faf49896cf95d4abd62cb64f9177ce602b49b41#egg=dashing
 
 2. Add `dashing` to ``INSTALLED_APPS`` of the your projects.
 
