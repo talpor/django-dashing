@@ -3,18 +3,6 @@ var dashboard = new Dashboard();
 
 dashboard.add_widget('clock_widget', 'Clock');
 
-dashboard.add_widget('buzzwords_widget', 'List', {
-    getData: function () {
-        this.data = {
-            title: 'Buzzwords',
-            more_info: '# of times said around the office',
-            updated_at: 'Last updated at 18:58',
-            data: [{'adf': 24}, {'Pivoting': 12}, {'Turn-key': 2}, {'Pivoting': 12}, {'Turn-key': 2}, {'Pivoting': 12}, {'Turn-key': 2}]
-        };
-        dashboard.publish('buzzwords_widget/render');
-    }
-});
-
 dashboard.add_widget('current_valuation_widget', 'Number', {
     getData: function () {
         this.data = {
@@ -28,7 +16,19 @@ dashboard.add_widget('current_valuation_widget', 'Number', {
     }
 });
 
-dashboard.add_widget('hourly_errands_widget', 'Graph', {
+dashboard.add_widget('buzzwords_widget', 'List', {
+    getData: function () {
+        this.data = {
+            title: 'Buzzwords',
+            more_info: '# of times said around the office',
+            updated_at: 'Last updated at 18:58',
+            data: [{'Exit strategy': 24}, {'Web 2.0': 12}, {'Turn-key': 2}, {'Enterprise': 12}, {'Pivoting': 3}, {'Leverage': 10}, {'Streamlininess': 4}, {'Paradigm shift': 6}, {'Synergy': 7}]
+        };
+        dashboard.publish('buzzwords_widget/render');
+    }
+});
+
+dashboard.add_widget('convergence_widget', 'Graph', {
     getData: function () {
         this.data = {
             title: 'Convergence',
@@ -42,6 +42,6 @@ dashboard.add_widget('hourly_errands_widget', 'Graph', {
                     { x: 4, y: 32 }
                 ]
             };
-        dashboard.publish('hourly_errands_widget/render');
+        dashboard.publish('convergence_widget/render');
     }
 });

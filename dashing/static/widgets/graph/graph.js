@@ -15,7 +15,7 @@ Dashboard.widgets.Graph = function (dashboard) {
         var self = this,
             graph = self.getWidget();
 
-        graph.find('.title').text(self.data.title);
+        graph.find('h1.title').text(self.data.title);
         graph.find('.value').text(self.data.value);
         graph.find('.more-info').text(self.data.more_info);
 
