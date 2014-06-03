@@ -1,19 +1,17 @@
 /*global Dashboard, $*/
 Dashboard.widgets.Number = function (dashboard) {
+    var self = this,
+        widget,
+        init = function () {
+            var html = $('#templates').find('.widget-number').clone();
+            widget = dashboard.grid.add_widget(
+                html,
+                self.col,
+                self.row);
+        };
     this.row = 1;
     this.col = 1;
-    this.__widget__ = undefined;
-    this.__init__ = function () {
-        var self = this,
-            html = $('#templates').find('.widget-number').clone();
-        self.__widget__ = dashboard.grid.add_widget(
-            html,
-            self.col,
-            self.row);
-    };
     this.render = function () {
-        var self = this,
-            widget = self.getWidget();
         widget.find('.value').html(self.data.value);
         widget.find('.title').text(self.data.title);
         widget.find('.change-rate').text(self.data.change_rate);
@@ -22,9 +20,9 @@ Dashboard.widgets.Number = function (dashboard) {
     };
     this.data = {};
     this.getWidget = function () {
-        return this.__widget__;
+        return widget;
     };
     this.getData = function () {};
     this.interval = 1000;
-    this.__init__();
+    init();
 };

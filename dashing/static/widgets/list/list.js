@@ -1,19 +1,18 @@
 /*global Dashboard, $*/
 Dashboard.widgets.List = function (dashboard) {
+    var self = this,
+        widget,
+        init = function () {
+            var html = $('#templates').find('.widget-list').clone();
+            widget = dashboard.grid.add_widget(
+                html,
+                self.col,
+                self.row);
+        };
     this.row = 2;
     this.col = 1;
-    this.__widget__ = undefined;
-    this.__init__ = function () {
-        var self = this,
-            html = $('#templates').find('.widget-list').clone();
-        self.__widget__ = dashboard.grid.add_widget(
-            html,
-            self.col,
-            self.row);
-    };
     this.render = function () {
-        var self = this,
-            list = self.getWidget(),
+        var list = self.getWidget(),
             content = '';
         
         if (self.data.data) {
@@ -33,9 +32,9 @@ Dashboard.widgets.List = function (dashboard) {
     };
     this.data = {};
     this.getWidget = function () {
-        return this.__widget__;
+        return widget;
     };
     this.getData = function () {};
     this.interval = 10000;
-    this.__init__();
+    init();
 };

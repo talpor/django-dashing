@@ -1,16 +1,15 @@
 /*global Dashboard, $*/
 Dashboard.widgets.Clock = function (dashboard) {
-    this.row = 1;
-    this.col = 1;
-    this.__widget__ = undefined;
-    this.__init__ = function () {
+    var init = function () {
         var self = this,
             html = $('#templates').find('.widget-clock').clone();
-        self.__widget__ = dashboard.grid.add_widget(
+        widget = dashboard.grid.add_widget(
             html,
             self.col,
             self.row);
-    };
+    }, widget;
+    this.row = 1;
+    this.col = 1;
     this.render = function render () {
         var self = this,
             clock = self.getWidget();
@@ -19,7 +18,7 @@ Dashboard.widgets.Clock = function (dashboard) {
     };
     this.data = {};
     this.getWidget = function () {
-        return this.__widget__;
+        return widget;
     };
     this.getData = function () {
         var self = this,
@@ -38,5 +37,5 @@ Dashboard.widgets.Clock = function (dashboard) {
         self.render();
     };
     this.interval = 500;
-    this.__init__();
+    init();
 };

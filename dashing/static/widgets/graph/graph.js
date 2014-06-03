@@ -1,19 +1,18 @@
 /*global $, Dashboard, Rickshaw*/
 Dashboard.widgets.Graph = function (dashboard) {
+    var self = this,
+        init = function () {
+            var html = $('#templates').find('.widget-graph').clone();
+            widget = dashboard.grid.add_widget(
+                html,
+                self.col,
+                self.row);
+        },
+        widget;
     this.row = 1;
     this.col = 2;
-    this.__widget__ = undefined;
-    this.__init__ = function () {
-        var self = this,
-            html = $('#templates').find('.widget-graph').clone();
-        self.__widget__ = dashboard.grid.add_widget(
-            html,
-            self.col,
-            self.row);
-    };
     this.render = function () {
-        var self = this,
-            graph = self.getWidget();
+        var graph = self.getWidget();
 
         graph.find('h1.title').text(self.data.title);
         graph.find('.value').text(self.data.value);
@@ -24,8 +23,7 @@ Dashboard.widgets.Graph = function (dashboard) {
         }
     };
     this.renderGraph = function (container) {
-        var self = this,
-            graph = new Rickshaw.Graph({
+        var graph = new Rickshaw.Graph({
                 element: container[0], 
                 width: container.width(), 
                 height: container.height(), 
@@ -49,9 +47,9 @@ Dashboard.widgets.Graph = function (dashboard) {
     };
     this.data = {};
     this.getWidget = function () {
-        return this.__widget__;
+        return widget;
     };
     this.getData = function () {};
     this.interval = 1000;
-    this.__init__();
+    init();
 };
