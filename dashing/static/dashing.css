@@ -121,6 +121,26 @@ h3 {
     right: 0;
 }
 
-#templates {
+#templates, .gridster {
     display: none;
+}
+
+#confModal {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    display: none;
+}
+
+#confModal .box {
+    display: inline-block;
+    background-color: #ff9618;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    cursor: pointer;
 }

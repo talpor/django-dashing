@@ -1,9 +1,9 @@
 /*global Dashboard*/
 var dashboard = new Dashboard();
 
-dashboard.add_widget('clock_widget', 'Clock');
+dashboard.addWidget('clock_widget', 'Clock');
 
-dashboard.add_widget('current_valuation_widget', 'Number', {
+dashboard.addWidget('current_valuation_widget', 'Number', {
     getData: function () {
         this.data = {
             title: 'Current Valuation',
@@ -16,7 +16,7 @@ dashboard.add_widget('current_valuation_widget', 'Number', {
     }
 });
 
-dashboard.add_widget('buzzwords_widget', 'List', {
+dashboard.addWidget('buzzwords_widget', 'List', {
     getData: function () {
         this.data = {
             title: 'Buzzwords',
@@ -28,7 +28,7 @@ dashboard.add_widget('buzzwords_widget', 'List', {
     }
 });
 
-dashboard.add_widget('convergence_widget', 'Graph', {
+dashboard.addWidget('convergence_widget', 'Graph', {
     getData: function () {
         this.data = {
             title: 'Convergence',
