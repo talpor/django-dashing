@@ -139,8 +139,9 @@ h3 {
 #confModal .box {
     display: inline-block;
     background-color: #ff9618;
-    width: 100px;
-    height: 100px;
+    width: 160px;
+    height: 160px;
     margin: 10px;
     cursor: pointer;
+    padding: 7px 17px;
 }

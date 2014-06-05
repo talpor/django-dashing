@@ -52,7 +52,7 @@ Config File
 
 You need put the ``dashing-config.js`` in the static directory (you can change the patch and name if you wrote a template file and start to create widgets for your project.
 
-The dashing config file should start with the creation of a new dashboard ``var dashboard = new Dashboard();`` and start to place widgets with the following syntax ``dashboard.add_widget(<name_of_widget>, <type_of_widget>, <options>);`` where `name_of_widget` is the name that describe the objective of the widget (should be unique) `type_of_widget` is a valid widget type (Clock, Graph, List, Number) and options depends of each widget.
+The dashing config file should start with the creation of a new dashboard ``var dashboard = new Dashboard();`` and start to place widgets with the following syntax ``dashboard.addWidget(<name_of_widget>, <type_of_widget>, <options>);`` where `name_of_widget` is the name that describe the objective of the widget (should be unique) `type_of_widget` is a valid widget type (Clock, Graph, List, Number) and options depends of each widget.
 
 Template File
 -------------
@@ -88,7 +88,7 @@ For example if you create a number widget
     
     ...
     
-    dashboard.add_widget('example_widget', 'Number', {
+    dashboard.addWidget('example_widget', 'Number', {
         getData: function () {
             this.data = {
                 title: 'Current Valuation',

@@ -1,14 +1,14 @@
 /*global Dashboard, $*/
 Dashboard.widgets.List = function (dashboard) {
     var self = this,
-        widget,
-        init = function () {
-            var html = $('#templates').find('.widget-list').clone();
-            widget = dashboard.grid.add_widget(
-                html,
-                self.col,
-                self.row);
-        };
+        widget;
+    this.__init__ = function () {
+        var html = $('#templates').find('.widget-list').clone();
+        widget = dashboard.grid.add_widget(
+            html,
+            self.col,
+            self.row);
+    };
     this.row = 2;
     this.col = 1;
     this.render = function () {
@@ -36,5 +36,4 @@ Dashboard.widgets.List = function (dashboard) {
     };
     this.getData = function () {};
     this.interval = 10000;
-    init();
 };

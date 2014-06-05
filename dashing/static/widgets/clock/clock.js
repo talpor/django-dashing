@@ -1,13 +1,14 @@
 /*global Dashboard, $*/
 Dashboard.widgets.Clock = function (dashboard) {
-    var init = function () {
+    var widget;
+    this.__init__ = function () {
         var self = this,
             html = $('#templates').find('.widget-clock').clone();
         widget = dashboard.grid.add_widget(
             html,
             self.col,
             self.row);
-    }, widget;
+    };
     this.row = 1;
     this.col = 1;
     this.render = function render () {
@@ -37,5 +38,4 @@ Dashboard.widgets.Clock = function (dashboard) {
         self.render();
     };
     this.interval = 500;
-    init();
 };

@@ -1,14 +1,14 @@
 /*global $, Dashboard, Rickshaw*/
 Dashboard.widgets.Graph = function (dashboard) {
     var self = this,
-        init = function () {
-            var html = $('#templates').find('.widget-graph').clone();
-            widget = dashboard.grid.add_widget(
-                html,
-                self.col,
-                self.row);
-        },
         widget;
+    this.__init__ = function () {
+        var html = $('#templates').find('.widget-graph').clone();
+        widget = dashboard.grid.add_widget(
+            html,
+            self.col,
+            self.row);
+    };
     this.row = 1;
     this.col = 2;
     this.render = function () {
@@ -51,5 +51,4 @@ Dashboard.widgets.Graph = function (dashboard) {
     };
     this.getData = function () {};
     this.interval = 1000;
-    init();
 };

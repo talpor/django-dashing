@@ -133,6 +133,9 @@ var DashboardSet = function() {
             }
 
             $.extend(widget, options);
+            if (widget.__init__) {
+                widget.__init__();
+            }
 
             widgetSet.push({
                 'name': name,
