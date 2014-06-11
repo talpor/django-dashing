@@ -14,7 +14,7 @@ setup(
     license='BSD License',
     description='A simple Django dashboard app to visualize interesting data about your project.',
     long_description=README,
-    url='http://appjango.com/',
+    url='https://github.com/talpor/django-dashing/',
     author='Mauricio Reyes',
     author_email='mreyes@talpor.com',
     classifiers=[
