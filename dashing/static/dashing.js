@@ -80,8 +80,8 @@ var DashboardSet = function() {
                     $wrapper.css('display', 'block');
                 }
                 $wrapper.css({
-                    width: options.viewportWidth + 'px' || $(window).width() + 'px',
-                    height: options.viewportHeight + 'px' || $(window).height() + 'px'
+                    width: options.viewportWidth ? options.viewportWidth + 'px' : $(window).width() + 'px',
+                    height: options.viewportHeight ? + options.viewportWidth + 'px' : $(window).height() + 'px'
                 });
                 
                 self.grid = $wrapper.find('ul').gridster({
