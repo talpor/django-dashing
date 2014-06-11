@@ -80,21 +80,17 @@ var DashboardSet = function() {
                     $wrapper.css('display', 'block');
                 }
                 $wrapper.css({
-                    width: options.viewport_width || $(window).width() + 'px',
-                    height: options.viewport_height || $(window).height() + 'px'
+                    width: options.viewportWidth + 'px' || $(window).width() + 'px',
+                    height: options.viewportHeight + 'px' || $(window).height() + 'px'
                 });
                 
                 self.grid = $wrapper.find('ul').gridster({
-                    widget_margins: options.widget_margins || [5, 5],
-                    widget_base_dimensions: options.widget_base_dimensions || [370, 340]
+                    widget_margins: options.widgetMargins || [5, 5],
+                    widget_base_dimensions: options.widgetBaseDimensions || [370, 340]
                 }).data('gridster');
                 
                 $(options.selector || "#container").append($wrapper);
-                
-                /*if (!options.hidden) {
-                    self.show();
-                }*/
-                
+
                 self.widgets = {};
                 for (var key in Dashboard.widgets) {
                     self.widgets[key] = Dashboard.widgets[key];
