@@ -40,3 +40,11 @@ Installation
 
 4. Start the development server and visit http://127.0.0.1:8000/dashboard/
    to view the dummy dashboard.
+
+
+
+`Read the docs`__.
+
+.. _readthedocs: http://django-dashing.readthedocs.org/
+
+__ readthedocs_
