@@ -32,7 +32,7 @@ Installation
         'dashing',
     )
 
-3. Include the polls URLconf in your project urls.py like this:
+3. Include the dashboard URLconf in your project urls.py like this:
 
 .. code-block:: python
     
