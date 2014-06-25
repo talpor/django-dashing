@@ -62,7 +62,7 @@ You can create a `dashboard.html` file to specify which widgets you can use or a
 Python Widget Classes
 ----------------------
 
-Optionally this app provide an useful set of classes to return the expected data for the default widgets, you can create a `widget.py` file and inherit of these classes or create your own widgets inherit from ``dashing.widgets.Widget``.
+Optionally this app provide an useful set of classes to return the expected data for the default widgets, you can create a `widgets.py` file and inherit of these classes or create your own widgets inherit from ``dashing.widgets.Widget``.
 
 .. code-block:: python
 
