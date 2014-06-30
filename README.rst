@@ -43,8 +43,12 @@ Installation
 
 
 
-`Read the docs`__.
+External Links
+===============================================
+- `Read the docs`__.
+- Example_.
 
 .. _readthedocs: http://django-dashing.readthedocs.org/
+.. _Example: https://blog.talpor.com/2014/06/make-a-metric-dashboard-for-trello-with-django-das/
 
 __ readthedocs_
