@@ -1,17 +1,18 @@
 {% extends 'dashing/base.html' %}
+{% load static from staticfiles %}
 
 {% block 'stylesheets' %}
-<link rel="stylesheet" href="{{ STATIC_URL }}widgets/clock/clock.css">
-<link rel="stylesheet" href="{{ STATIC_URL }}widgets/list/list.css">
-<link rel="stylesheet" href="{{ STATIC_URL }}widgets/number/number.css">
-<link rel="stylesheet" href="{{ STATIC_URL }}widgets/graph/graph.css">
+<link rel="stylesheet" href="{% static 'widgets/clock/clock.css' %}">
+<link rel="stylesheet" href="{% static 'widgets/list/list.css' %}">
+<link rel="stylesheet" href="{% static 'widgets/number/number.css' %}">
+<link rel="stylesheet" href="{% static 'widgets/graph/graph.css' %}">
 {% endblock %}
 
 {% block 'scripts' %}
-<script type="text/javascript" src="{{ STATIC_URL }}widgets/clock/clock.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}widgets/list/list.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}widgets/number/number.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}widgets/graph/graph.js"></script>
+<script type="text/javascript" src="{% static 'widgets/clock/clock.js' %}"></script>
+<script type="text/javascript" src="{% static 'widgets/list/list.js' %}"></script>
+<script type="text/javascript" src="{% static 'widgets/number/number.js' %}"></script>
+<script type="text/javascript" src="{% static 'widgets/graph/graph.js' %}"></script>
 {% endblock %}
 
 {% block 'templates' %}
