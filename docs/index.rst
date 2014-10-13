@@ -92,6 +92,7 @@ A custom widget can look like this:
 To register the url to serve this widget you must use the register method from ``dashing.utils.router``, then in `urls.py` file put
 
 .. code-block:: python
+
     from dashing.utils import router
 
     router.register(CustomWidget, 'custom_widget')
