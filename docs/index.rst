@@ -35,8 +35,11 @@ Installation
 3. Include the polls URLconf in your project urls.py like this:
 
 .. code-block:: python
-    
-    url(r'^dashboard/', include('dashing.urls')),
+
+    from dashing.utils import router
+    ...
+
+    url(r'^dashboard/', include(router.urls)),
 
 4. Start the development server and visit http://127.0.0.1:8000/dashboard/
    to view the dummy dashboard.
@@ -74,6 +77,27 @@ Optionally this app provide an useful set of classes to return the expected data
         def render_to_response(self, context, **response_kwargs):
             return self.render_to_json_response(context, **response_kwargs)
 
+A custom widget can look like this:
+
+.. code-block:: python
+
+    class CustomWidget(NumberWidget):
+        title = 'My Custom Widget'
+        value = 25
+
+        def get_more_info(self):
+            more_info = 'Random additional info'
+            return more_info
+
+To register the url to serve this widget you must use the register method from ``dashing.utils.router``, then in `urls.py` file put
+
+.. code-block:: python
+
+    from dashing.utils import router
+
+    router.register(CustomWidget, 'custom_widget')
+
+Now we can access to CustomWidget from '/dashboard/widgets/custom_widget' if '/dashboard/' is the root of our dashboard
 
 Dashboards
 ===============================================
