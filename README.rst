@@ -38,7 +38,6 @@ Installation
 
     from dashing.utils import router
     ...
-
     url(r'^dashboard/', include(router.urls)),
 
 4. Start the development server and visit http://127.0.0.1:8000/dashboard/
