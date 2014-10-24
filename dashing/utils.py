@@ -6,8 +6,8 @@ class Router(object):
     def __init__(self):
         self.registry = []
 
-    def register(self, widget, base_name):
-        self.registry.append((widget, base_name))
+    def register(self, widget, basename):
+        self.registry.append((widget, basename))
 
     def get_urls(self):
         urlpatterns = [
@@ -26,5 +26,6 @@ class Router(object):
     @property
     def urls(self):
         return self.get_urls()
+
 
 router = Router()
