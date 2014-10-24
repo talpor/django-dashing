@@ -25,8 +25,8 @@ class JSONResponseMixin(object):
 
 class Widget(JSONResponseMixin, View):
     def get(self, request, *args, **kwargs):
-        context = self.get_context()
-        return HttpResponse(json.dumps(context), content_type="application/json")
+        context = json.dumps(self.get_context())
+        return HttpResponse(context, content_type="application/json")
 
     def render_to_response(self, context, **response_kwargs):
         return self.render_to_json_response(context, **response_kwargs)
