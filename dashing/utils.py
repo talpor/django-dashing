@@ -27,7 +27,7 @@ class Router(object):
             urlpatterns += [
                 url(r'/'.join((
                     r'^widgets/{}'.format(basename),
-                    r'/'.join((r'(P<{}>{})'.format(parameter, regex)
+                    r'/'.join((r'(?P<{}>{})'.format(parameter, regex)
                                for parameter, regex in parameters.items())),
                 )),
                     widget.as_view(),
