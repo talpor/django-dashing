@@ -95,9 +95,11 @@ To register the url to serve this widget you must use the register method from `
 
     from dashing.utils import router
 
-    router.register(CustomWidget, 'custom_widget')
+    router.register(CustomWidget, 'custom_widget', eg_kwargs_param="[A-Za-z0-9_-]+")
 
-Now we can access to CustomWidget from '/dashboard/widgets/custom_widget' if '/dashboard/' is the root of our dashboard
+Now we can access to CustomWidget from '/dashboard/widgets/custom_widget/(?P<eg_kwargs_param>[A-Za-z0-9_-]+)' if '/dashboard/' is the root of our dashboard
+
+The kwargs are optional and you can add as many as you want
 
 Dashboards
 ===============================================
