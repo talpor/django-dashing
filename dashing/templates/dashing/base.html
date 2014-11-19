@@ -15,21 +15,17 @@
     <link rel="stylesheet" href="{% static 'dashing.css' %}">
     {% block 'stylesheets' %}
     {% endblock %}
+    {% block 'templates' %}
+    {% endblock %}
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
     <link rel="icon" href="/assets/images/favicon.ico">
 
 </head>
 <body>
     {% block 'main_container' %}
-    <div id="container">
-        
-    </div>
+    <div id="container"></div>
     {% endblock %}
-
-    <ul id="templates">
-        {% block 'templates' %}
-        {% endblock %}
-    </ul>
+    <script type="text/javascript" src="{% static 'lib/js/rivets.bundled.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'lib/js/jquery-1.11.0.js' %}"></script>
     <script type="text/javascript" src="{% static 'lib/js/jquery.gridster.js' %}"></script>
     <script type="text/javascript" src="{% static 'lib/js/jquery.knob.js' %}"></script>

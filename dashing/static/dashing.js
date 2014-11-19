@@ -1,6 +1,29 @@
-/*global $, document, setInterval, window*/
-/*exported Dashboard, DashboardSet*/
-var DashboardSet = function() {
+/* global $, document, setInterval, window */
+/* exported Dashboard, DashboardSet */
+
+var Dashing = {
+        utils: {
+            loadTemplate: function(name, callback) {
+                var src = $('link[rel=resource][data-widget=' + name + ']').attr('href');
+                return $('<li class="widget widget-' + name + '">').load(src, callback); 
+            },
+            widgetInit: function(dashboard, widgetName) {
+                return function() {
+                    var self = this,
+                        template = Dashing.utils.loadTemplate(widgetName, function() {
+                            rivets.bind(template, {data: self.data});
+                        });
+                    widget = dashboard.grid.add_widget(
+                        template,
+                        self.col,
+                        self.row);
+                };
+            }
+        },
+        widgets: {}
+    },
+    DashboardSet = function() {
+        'use strict';
         var self = this,
             init = function() {
                 bindEvents();
@@ -72,6 +95,7 @@ var DashboardSet = function() {
         init();
     },
     Dashboard = function (options) {
+        'use strict';
         var self = this,
             init = function () {
                 options = options || {};
@@ -92,8 +116,8 @@ var DashboardSet = function() {
                 $(options.selector || "#container").append($wrapper);
 
                 self.widgets = {};
-                for (var key in Dashboard.widgets) {
-                    self.widgets[key] = Dashboard.widgets[key];
+                for (var key in Dashing.widgets) {
+                    self.widgets[key] = Dashing.widgets[key];
                 }
                 bindEvents();
             },
@@ -139,9 +163,7 @@ var DashboardSet = function() {
                 'widget': widget
             });
 
-            self.subscribe(name + '/render', widget.register('render'));
             self.subscribe(name + '/getData', widget.register('getData'));
-
             self.publish(name + '/getData');
             setInterval(function () {
                 self.publish(name + '/getData');
@@ -160,5 +182,3 @@ var DashboardSet = function() {
         };
         init();
     };
-
-Dashboard.widgets = {};

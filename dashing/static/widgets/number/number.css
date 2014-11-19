@@ -2,15 +2,15 @@
     background-color: #96bf48;
 }
 
-.widget-number .title { 
+.widget-number h1 { 
     color: rgba(255, 255, 255, 0.7);
 }
 
-.widget-number .value {
+.widget-number h2 {
     color: #fff;
 }
 
-.widget-number .change-rate {
+.widget-number .detail {
     font-weight: 500;
     font-size: 30px;
     color: #fff;
