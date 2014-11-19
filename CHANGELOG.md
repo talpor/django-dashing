@@ -1,4 +1,4 @@
-## feature/rivetsjs
+## develop
 
 - Add data binding + templating solution provided by rivets
 - Breaking change: [Custom Widgets] Now the templates are loaded by specifying of a link tag type text/html
