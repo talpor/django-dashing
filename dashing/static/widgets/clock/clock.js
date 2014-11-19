@@ -1,22 +1,10 @@
-/*global Dashboard, $*/
-Dashboard.widgets.Clock = function (dashboard) {
+/* global Dashboard, $ */
+
+Dashing.widgets.Clock = function(dashboard) {
     var widget;
-    this.__init__ = function () {
-        var self = this,
-            html = $('#templates').find('.widget-clock').clone();
-        widget = dashboard.grid.add_widget(
-            html,
-            self.col,
-            self.row);
-    };
+    this.__init__ = Dashing.utils.widgetInit(dashboard, 'clock'),
     this.row = 1;
     this.col = 1;
-    this.render = function render () {
-        var self = this,
-            clock = self.getWidget();
-        clock.find('.date').text(self.data.date);
-        clock.find('.time').text(self.data.time);
-    };
     this.data = {};
     this.getWidget = function () {
         return widget;
@@ -32,10 +20,9 @@ Dashboard.widgets.Clock = function (dashboard) {
             s = today.getSeconds();
 
         self.data = {
-            'time': h + ':' + formatTime(m) + ':' + formatTime(s),
-            'date': today.toDateString()
+            time: h + ':' + formatTime(m) + ':' + formatTime(s),
+            date: today.toDateString()
         };
-        self.render();
     };
     this.interval = 500;
 };

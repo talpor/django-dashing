@@ -11,12 +11,12 @@
     top: 0px;
 }
 
-.widget-graph .title, .value {
+.widget-graph h1, h2 {
     position: relative;
     z-index: 99;
 }
 
-.widget-graph .title { 
+.widget-graph h1 { 
     color: rgba(255, 255, 255, 0.7);
 }
 
