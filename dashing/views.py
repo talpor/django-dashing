@@ -1,12 +1,24 @@
 # -*- encoding: utf-8 -*-
 from django.views.generic import TemplateView
-from django.utils.decorators import method_decorator
+from django.core.exceptions import PermissionDenied
 
-from .settings import user_test
+from settings import dashing_settings
+
 
 class Dashboard(TemplateView):
     template_name = 'dashing/dashboard.html'
+    permission_classes = dashing_settings.PERMISSION_CLASSES
 
-    @method_decorator(user_test)
-    def dispatch(self, *args, **kwargs):
-        return super(Dashboard, self).dispatch(*args, **kwargs)
+    def check_permissions(self, request):
+        """
+        Check if the request should be permitted.
+        Raises an appropriate exception if the request is not permitted.
+        """
+        permissions = [permission() for permission in self.permission_classes]
+        for permission in permissions:
+            if not permission.has_permission(request):
+                raise PermissionDenied()
+
+    def get(self, request, *args, **kwargs):
+        self.check_permissions(request)
+        return super(Dashboard, self).get(request, *args, **kwargs)
