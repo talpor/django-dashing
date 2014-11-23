@@ -52,6 +52,7 @@ General guides to using Django Dashing.
 
 .. toctree::
    :maxdepth: 2
+   :numbered:
 
    Getting Started <getting-started>
    Dashboards <dashboards>
