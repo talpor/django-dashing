@@ -170,7 +170,7 @@ var Dashing = {
             }, widget.interval || 1000);
         };
         this.listWidgets = function() {
-            // raise NotImplemented
+            return widgetSet;
         };
         this.subscribe = function(id, func) {
             $(document).on(id, function(e, args){
