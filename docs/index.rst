@@ -15,36 +15,6 @@ Key concepts
 - Use the API to push data to your dashboards.
 - Drag & Drop interface for re-arranging your widgets.
 
-Installation
-===============================================
-1. Install latest stable version from PyPi:
-
-.. code-block:: text
-
-    $ pip install django-dashing
-
-2. Add `dashing` to ``INSTALLED_APPS`` of the your projects.
-
-.. code-block:: python
-
-    INSTALLED_APPS = (
-        ...
-        'dashing',
-    )
-
-3. Include the polls URLconf in your project urls.py like this:
-
-.. code-block:: python
-
-    from dashing.utils import router
-    ...
-
-    url(r'^dashboard/', include(router.urls)),
-
-4. Start the development server and visit http://127.0.0.1:8000/dashboard/
-   to view the dummy dashboard.
-
-
 Topics
 ===============================================
 
