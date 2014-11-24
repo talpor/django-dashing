@@ -68,7 +68,7 @@ Settings
 
 **INSTALLED_WIDGETS**
 
-A list or tuple of name of widgets to load when the dashboard is displayed, searches for resources of widgets (js, css and html) in the static directory, if not found then searches the remote repository
+A list or tuple of name of widgets to load when the dashboard is displayed, searches for resources of widgets (js, css and html) in the static directory, if not found then searches in the remote repository
 
 Default:
 
@@ -96,7 +96,7 @@ A remote location with a repositories.json file, here are specified the third-pa
 Config File 
 -----------
 
-You need put the ``dashing-config.js`` in the static directory (you can change the patch and name if you wrote a template file and start to create widgets for your project.
+You need put the ``dashing-config.js`` in the static directory to begin creating widgets for your project. You can change the patch and name if you write a template file.
 
 The dashing config file should start with the creation of a new dashboard ``var dashboard = new Dashboard();`` and start to place widgets with the following syntax ``dashboard.addWidget(<name_of_widget>, <type_of_widget>, <options>);`` where `name_of_widget` is the name that describe the objective of the widget (should be unique) `type_of_widget` is a valid widget type (Clock, Graph, List, Number) and options depends of each widget.
 
@@ -116,7 +116,7 @@ This is the default ``dashing-config.js`` file, use as a guide for writing your 
                 title: 'Current Valuation',
                 more_info: 'In billions',
                 updated_at: 'Last updated at 14:10',
-                change_rate: '64%',
+                detail: '64%',
                 value: '$35'
             });
         }
@@ -172,15 +172,15 @@ Your ``dashing/dashing.html`` might looks like this:
     {% extends 'dashing/base.html' %}
 
     {% block 'stylesheets' %}
-    <link rel="stylesheet" href="{% static 'my/custon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'my/custom/style.css' %}">
     {% endblock %}
 
     {% block 'scripts' %}
-    <script type="text/javascript" src="{% static 'my/custon/script.js' %}"></script>
+    <script type="text/javascript" src="{% static 'my/custom/script.js' %}"></script>
     {% endblock %}
 
     {% block 'config_file' %}
-    <script type="text/javascript" src="{% static 'my/custon/dashing-config.js' %}"></script>
+    <script type="text/javascript" src="{% static 'my/custom/dashing-config.js' %}"></script>
     {% endblock %}
 
 Python Widget Classes
@@ -208,6 +208,6 @@ To register the url to serve this widget you must use the register method from `
 
     router.register(CustomWidget, 'custom_widget', eg_kwargs_param="[A-Za-z0-9_-]+")
 
-Now we can access to CustomWidget from '/dashboard/widgets/custom_widget/(?P<eg_kwargs_param>[A-Za-z0-9_-]+)' if '/dashboard/' is the root of our dashboard
+Now we can access to CustomWidget from '/dashboard/widgets/custom_widget/(?P<eg_kwargs_param>[A-Za-z0-9_-]+)' if '/dashboard/' is the root of our dashboard.
 
-The kwargs are optional and you can add as many as you want
+The kwargs are optional and you can add as many as you want.

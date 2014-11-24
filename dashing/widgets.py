@@ -36,7 +36,7 @@ class NumberWidget(Widget):
     title = ''
     more_info = ''
     updated_at = ''
-    change_rate = ''
+    detail = ''
     value = ''
 
     def get_title(self):
@@ -48,8 +48,8 @@ class NumberWidget(Widget):
     def get_updated_at(self):
         return self.updated_at
 
-    def get_change_rate(self):
-        return self.change_rate
+    def get_detail(self):
+        return self.detail
 
     def get_value(self):
         return self.value
@@ -59,7 +59,7 @@ class NumberWidget(Widget):
             'title': self.get_title(),
             'more_info': self.get_more_info(),
             'updated_at': self.get_updated_at(),
-            'change_rate': self.get_change_rate(),
+            'detail': self.get_detail(),
             'value': self.get_value(),
         }
 

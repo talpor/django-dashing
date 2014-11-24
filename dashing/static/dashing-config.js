@@ -10,7 +10,7 @@ dashboard.addWidget('current_valuation_widget', 'Number', {
             title: 'Current Valuation',
             more_info: 'In billions',
             updated_at: 'Last updated at 14:10',
-            change_rate: '64%',
+            detail: '64%',
             value: '$35'
         });
     }
