@@ -316,3 +316,133 @@ Here's an example of a graph widget where in `value` is displayed the total of p
             payments = Payment.objects.all()
             total = len([x for x in payments if x.status == Payment.STATUS.rejected])
             return '{} rejected'.format(total)
+
+Custom Widgets
+===============================================
+
+To make a custom widget you must create three static files to define configuration parameters and appearance, in addition, you can create a python class to communicate with the Django project.
+
+To name your widgets should follow a naming convention, where the name must by unique for findable through the settings.
+
+Static Files
+-------------
+
+Template File
+~~~~~~~~~~~~
+
+Its location should be ``<static_directory>/widgets/<widget_name>/<widget_name>.html`` this file describes its UI in plain HTML using the `Rivets.js conventions`__ to bind data to the script file.
+
+.. _RivetsJsTemplates: http://rivetsjs.com/docs/guide/#usage-templates
+
+__ RivetsJsTemplates_
+
+For example ``{% static %}widgets/list/list.html`` looks like this:
+
+.. code-block:: html
+
+    <div>
+        <h1>{ data.title }</h1>
+        <ul>
+          <li rv-each-el="data.data">
+            <span class="label">{ el.label }</span>
+            <span class="value">{ el.value }</span>
+          </li>
+        </ul>
+        <p class="more-info">{ data.more_info }</p>
+        <p class="updated-at">{ data.updated_at }</p>
+    </div>
+
+The classes are only for the stylesheet.
+
+Style File
+~~~~~~~~~~~~
+
+Your location should be ``<static_directory>/widgets/<widget_name>.css`` in this file defines the styles of widget.
+
+Script File
+~~~~~~~~~~~~
+
+Your location should be ``<static_directory>/widgets/<widget_name>.js`` in this file will be defined the configuration options and default values for the new widget, the idea is to create an object using the ``new`` keyword, then we define properties and methods using ``this`` keyword.
+
+We must provide an ``__init__`` method where binding the data with the template and add to the dashboard, this function is quite similar in all widgets, then it is provided by ``Dashing.utils.widgetInit`` to facilitate implementation and improve reading of widgets, also must provide a ``data`` element which will be binded to the template, and a ``getData`` function will surely be the to be overwritten to obtain relevant data as required,
+
+For example ``{% static %}widgets/list/list.js`` looks like this:
+
+.. code-block:: javascript
+
+    /* global Dashboard */
+
+    Dashing.widgets.List = function (dashboard) {
+        var self = this,
+            widget;
+        this.__init__ = Dashing.utils.widgetInit(dashboard, 'list');
+        this.row = 2;
+        this.col = 1;
+        this.data = {};
+        this.getWidget = function () {
+            return widget;
+        };
+        this.getData = function () {};
+        this.interval = 10000;
+    };
+
+if we want to initialize widget with data we can write:
+
+
+.. code-block:: javascript
+    
+    ...
+        this.col = 1;
+        this.data = {
+            title: 'Default Title',
+            more_info: 'No data to display'
+        };
+        this.getWidget = function () {
+    ...
+
+
+Python Class
+-------------
+
+Surely in many cases may be necessary give the option to get some Dajngo project data into the widget, for this dashing has a Widget class that can be inherited to deliver properly serialized data, also subsequently can be serve the data using the dashing router.
+
+For example ListWidget in ``dashing/widgets.py`` looks like this:
+
+.. code-block:: python
+
+    class ListWidget(Widget):
+        title = ''
+        more_info = ''
+        updated_at = ''
+        data = []
+
+        def get_title(self):
+            return self.title
+
+        def get_more_info(self):
+            return self.more_info
+
+        def get_updated_at(self):
+            return self.updated_at
+
+        def get_data(self):
+            return self.data
+
+        def get_context(self):
+            return {
+                'title': self.get_title(),
+                'more_info': self.get_more_info(),
+                'updated_at': self.get_updated_at(),
+                'data': self.get_data(),
+            }
+
+If you develop your widget with python classes necessarily going to have to distribute it via PyPI
+
+Distribution
+------------
+
+Via Django Dashing Channel
+~~~~~~~~~~~~
+
+PyPI Package
+~~~~~~~~~~~~

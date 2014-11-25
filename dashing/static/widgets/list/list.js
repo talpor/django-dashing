@@ -1,4 +1,4 @@
-/* global Dashboard, $ */
+/* global Dashboard */
 
 Dashing.widgets.List = function (dashboard) {
     var self = this,
