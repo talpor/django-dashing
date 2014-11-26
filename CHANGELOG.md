@@ -10,6 +10,8 @@
 - Breaking change: **Custom Widgets** Custom widgets extend from Dashing object instead of Dashboard
 - Breaking change: **List Widget** Data format expected was changed from [{'Some Label': 'value'}, ...] to [{label: 'Some Label', value: 'value'}, ...]
 
+See [Django Dashing 0.2 release notes](https://github.com/talpor/django-dashing/wiki/Django-Dashing-0.2-release-notes)
+
 ## 0.1.2
 
 - Breaking change: Add url registration pattern to access our python widget classes
