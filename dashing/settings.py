@@ -4,7 +4,7 @@ from django.utils import importlib, six
 USER_SETTINGS = getattr(settings, 'DASHING', None)
 
 DEFAULTS = {
-    'REPOSITORY': 'https://dl.dropboxusercontent.com/u/5594456/dashing/repositories.json',
+    'REPOSITORY': 'https://cdn.rawgit.com/talpor/django-dashing-channel/master/repositories.json',
     'INSTALLED_WIDGETS': ('number', 'list', 'graph', 'clock',),
     'PERMISSION_CLASSES':  (
         'dashing.permissions.AllowAny',

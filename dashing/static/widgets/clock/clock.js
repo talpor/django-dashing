@@ -2,7 +2,7 @@
 
 Dashing.widgets.Clock = function(dashboard) {
     var widget;
-    this.__init__ = Dashing.utils.widgetInit(dashboard, 'clock'),
+    this.__init__ = Dashing.utils.widgetInit(dashboard, 'clock');
     this.row = 1;
     this.col = 1;
     this.data = {};
@@ -19,10 +19,10 @@ Dashing.widgets.Clock = function(dashboard) {
             m = today.getMinutes(),
             s = today.getSeconds();
 
-        self.data = {
+        $.extend(self.data, {
             time: h + ':' + formatTime(m) + ':' + formatTime(s),
             date: today.toDateString()
-        };
+        });
     };
     this.interval = 500;
 };

@@ -7,7 +7,7 @@ Dashing.widgets.Number = function(dashboard) {
     this.row = 1;
     this.col = 1;
     this.color = '#96bf48';
-    this.data = {},
+    this.data = {};
     this.getWidget = function () {
         return widget;
     };
