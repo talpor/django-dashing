@@ -1,18 +1,14 @@
-## develop
+## 0.2
 
 - Add data binding + templating solution provided by rivets
 - Add permission classes for dashboard view
+- Add parameters to the method of registration widget URLs
 - Allow load external widgets from [django_dashing_channel](https://github.com/talpor/django-dashing-channel)
 - Breaking change: **Custom Widgets** Now the templates are loaded by specifying of a link tag type text/html
 - Breaking change: **Custom Widgets** Should be rewritten the templates using the rivets binders
 - Breaking change: **Custom Widgets** Is no longer necessary to call the render event when run getData
 - Breaking change: **Custom Widgets** Custom widgets extend from Dashing object instead of Dashboard
-- Breaking change: **List Widget** Data format expected was changed from [{'Some Label': 'value'}, ...] to [{label: 'Some Label', value: 'value'}, ...] 
-
-## master
-
-- Add parameters to the method of registration widget URLs
-- Provide an overrideable way to set user permissions for dashboard
+- Breaking change: **List Widget** Data format expected was changed from [{'Some Label': 'value'}, ...] to [{label: 'Some Label', value: 'value'}, ...]
 
 ## 0.1.2
 
