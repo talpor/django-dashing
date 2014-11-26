@@ -441,8 +441,35 @@ If you develop your widget with python classes necessarily going to have to dist
 Distribution
 ------------
 
+To distribute a widget you have two options, the fastest way is throught  Django Dashing Channel but is a bit limited, and through PyPI a bit trickier to pack but you have more options when developing the widget.
+
 Via Django Dashing Channel
 ~~~~~~~~~~~~
 
+Using this distribution method the users will only have to add the widget name on ``INSTALLED_WIDGETS`` then to loading the dashboard, this locates the static files from a remote location (specified in the preconfigured repository), if the user creates a copy of the files on your local static directory then these will open locally.
+
+You will have to host your files into a CDN, I recommend creating a github project and use RawGit_ to serve through MaxCDN_, you can take `dj-dashing-weather-widget`__ project as a guide.
+
+.. _RawGit: https://rawgit.com/
+.. _MaxCDN: https://www.maxcdn.com/
+.. _WeatherWidget: https://github.com/individuo7/dj-dashing-weather-widget
+__ WeatherWidget_
+
+Finally to publish your widget in Django Dashing Channel you need to make a fork of `django-dashing-channel`__, add your repository to repositories.json and send a pull request. In the repository root will be sought the widget static files (.js .css and .html)
+
+You should create a README file for installations instructions.
+
+.. _DashingChannel: https://github.com/talpor/django-dashing-channel
+__ DashingChannel_
+
 PyPI Package
 ~~~~~~~~~~~~
+
+If your widget requires python code or just want to provide an easy way to get the widget locally then a PyPI package is the way to go.
+
+As a requirement is necessary follow the widgets naming convention (`see static files`__). To create a PyPI package `see the documentation <https://docs.python.org/2/distutils/packageindex.html>`_, and should create a README file for installations instructions.
+
+This not excluding the previous way, you could create a minimalist version of your widget and upload to django-dashing-channel and in the project instructions leave on how to install the PyPI version
+
+.. _WidgetsNamingConvention: #static-files
+__ WidgetsNamingConvention_
