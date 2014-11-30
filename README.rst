@@ -5,6 +5,12 @@ django-dashing
 
 .. _Dashing: http://shopify.github.io/dashing/
 
+.. image:: https://dl.dropboxusercontent.com/u/5594456/dashing/dashboard.png
+    :alt: HTTPie compared to cURL
+    :width: 835
+    :height: 835
+    :align: center
+
 Prerequisites
 ===============================================
 - Django 1.5.+
@@ -45,12 +51,18 @@ Installation
 
 
 
-External Links
+Links
 ===============================================
-- `Read the docs`__.
-- Example_.
 
 .. _readthedocs: http://django-dashing.readthedocs.org/
 .. _Example: https://blog.talpor.com/2014/06/make-a-metric-dashboard-for-trello-with-django-das/
+.. _Widgets: https://github.com/talpor/django-dashing-channel/blob/master/repositories.json
 
+- `Documentation`__.
 __ readthedocs_
+- `Example (blog post)`__.
+__ Example_
+- `Widget List`__.
+__ Widgets_
+
+
