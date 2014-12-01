@@ -3,6 +3,8 @@ django-dashing
 ===============================================
 `django-dashing` is a customisable, modular dashboard application framework for Django to visualize interesting data about your project. Inspired in the exceptionally handsome dashboard framework Dashing_
 
+Check out a demo over `here <https://django-dashing-demo.herokuapp.com/dashboard/>`_.
+
 .. _Dashing: http://shopify.github.io/dashing/
 
 .. image:: https://dl.dropboxusercontent.com/u/5594456/dashing/dashboard.png
@@ -50,19 +52,12 @@ Installation
    to view the dummy dashboard.
 
 
-
 Links
 ===============================================
 
-.. _readthedocs: http://django-dashing.readthedocs.org/
-.. _Example: https://blog.talpor.com/2014/06/make-a-metric-dashboard-for-trello-with-django-das/
-.. _Widgets: https://github.com/talpor/django-dashing-channel/blob/master/repositories.json
-
-- `Documentation`__.
-__ readthedocs_
-- `Example (blog post)`__.
-__ Example_
-- `Widget List`__.
-__ Widgets_
+- `Documentation <http://django-dashing.readthedocs.org/>`_
+- `Example (blog post) <https://blog.talpor.com/2014/06/make-a-metric-dashboard-for-trello-with-django-das/>`_
+- `Demo application <https://github.com/individuo7/django-dashing-demo-app>`_
+- `Widget List <https://github.com/talpor/django-dashing-channel/blob/master/repositories.json>`_
 
 
