@@ -31,7 +31,6 @@ dashboard.addWidget('buzzwords_widget', 'List', {
                    {label: 'Streamlininess', value: 4},
                    {label: 'Paradigm shift', value: 6},
                    {label: 'Synergy', value: 7}]
-            });
         });
     }
 });
