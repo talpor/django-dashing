@@ -8,7 +8,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-dashing',
-    version='0.2',
+    version='0.2.1',
     packages=['dashing'],
     include_package_data=True,
     license='BSD License',
@@ -32,5 +32,5 @@ setup(
         'Topic :: Software Development :: Localization',
         'Topic :: Utilities',
     ],
-    keywords=['django', 'dashboard', 'dashing', 'metrics', 'widgets', 'data'],
+    keywords=['django', 'metrics', 'dashboard', 'dashing', 'metric', 'widgets', 'data'],
 )
