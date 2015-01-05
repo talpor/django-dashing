@@ -1,3 +1,7 @@
+## 0.2.1
+
+- Fix bug 'more_info' not being displayed for the graph widget. Ty @torstenfeld
+
 ## 0.2
 
 - Add data binding + templating solution provided by rivets
