@@ -169,6 +169,7 @@ Your ``dashing/dashing.html`` might looks like this:
 .. code-block:: html
 
     {% extends 'dashing/base.html' %}
+    {% load staticfiles %}
 
     {% block 'stylesheets' %}
     <link rel="stylesheet" href="{% static 'my/custom/style.css' %}">
