@@ -72,26 +72,7 @@ var Dashing = {
                         });
                 });
             },
-            setupRolling = function() {
-                if (set.length > 1) {
-                    var parameterValue = getUrlParameter('roll');
-                    if(parameterValue !== null) {
-                        var interval = parseInt(parameterValue);
-                        if (isNaN(interval))
-                            interval = 30000;
 
-                        setInterval(function() { switchDashboards(); }, interval);
-                    }
-                }
-            },
-            switchDashboards = function() {
-                var currentDashboardId = set.map(function(e) { return e.name; }).indexOf(activeDashboardName);
-                var nextDashboardId = currentDashboardId + 1 == set.length ? 0 : currentDashboardId + 1;
-                var newDashboardName = set[nextDashboardId].name;
-                dashboardSet.getDashboard(activeDashboardName).hide();
-                dashboardSet.getDashboard(newDashboardName).show();
-                activeDashboardName = newDashboardName;
-            },
             getUrlParameter = function(name) {
                 name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
                 var regexS = "[\\?&]"+name+"=([^&#]*)";
@@ -102,7 +83,30 @@ var Dashing = {
             activeDashboardName = '',
             timeoutForDashboardsSet = null,
             set = [];
+        this.switchDashboards = function() {
+            var self = this;
+            var currentDashboardId = set.map(function(e) { return e.name; }).indexOf(activeDashboardName);
+            var nextDashboardId = currentDashboardId + 1 == set.length ? 0 : currentDashboardId + 1;
+            var newDashboardName = set[nextDashboardId].name;
+            self.getDashboard(activeDashboardName).hide();
+            self.getDashboard(newDashboardName).show();
+            activeDashboardName = newDashboardName;
+        };
+        this.setupRolling = function() {
+            var self = this;
+            if (set.length > 1) {
+                var parameterValue = getUrlParameter('roll');
+                if(parameterValue !== null) {
+                    var interval = parseInt(parameterValue);
+                    if (isNaN(interval))
+                        interval = 30000;
+
+                    setInterval(function() { self.switchDashboards(); }, interval);
+                }
+            }
+        };
         this.addDashboard = function(name, options) {
+            var self = this;
             if (!name || typeof name !== 'string') {
                 console.warn('You need specify a name for the dashboard and must be a string');
                 return;
@@ -114,7 +118,7 @@ var Dashing = {
             set.push(dash);
             if (timeoutForDashboardsSet !== null)
                 clearTimeout(timeoutForDashboardsSet);
-            timeoutForDashboardsSet = setTimeout(setupRolling, 1000);
+            timeoutForDashboardsSet = setTimeout(self.setupRolling, 1000);
             if(set.length == 1) { activeDashboardName = name }
             return dash;
         };
