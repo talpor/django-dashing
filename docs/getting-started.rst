@@ -137,7 +137,6 @@ This is the default ``dashing-config.js`` file, use as a guide for writing your 
                        {label: 'Streamlininess', value: 4},
                        {label: 'Paradigm shift', value: 6},
                        {label: 'Synergy', value: 7}]
-                });
             });
         }
     });
