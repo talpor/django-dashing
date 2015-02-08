@@ -72,6 +72,35 @@ var Dashing = {
                         });
                 });
             },
+            setupRolling = function() {
+                if (set.length > 1) {
+                    var parameterValue = getUrlParameter('roll');
+                    if(parameterValue !== null) {
+                        var interval = parseInt(parameterValue);
+                        if (isNaN(interval))
+                            interval = 30000;
+
+                        setInterval(function() { switchDashboards(); }, interval);
+                    }
+                }
+            },
+            switchDashboards = function() {
+                var currentDashboardId = set.map(function(e) { return e.name; }).indexOf(activeDashboardName);
+                var nextDashboardId = currentDashboardId + 1 == set.length ? 0 : currentDashboardId + 1;
+                var newDashboardName = set[nextDashboardId].name;
+                dashboardSet.getDashboard(activeDashboardName).hide();
+                dashboardSet.getDashboard(newDashboardName).show();
+                activeDashboardName = newDashboardName;
+            },
+            getUrlParameter = function(name) {
+                name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+                var regexS = "[\\?&]"+name+"=([^&#]*)";
+                var regex = new RegExp( regexS );
+                var results = regex.exec( window.location.href );
+                return (results == null) ? null : results[1];
+            },
+            activeDashboardName = '',
+            timeoutForDashboardsSet = null,
             set = [];
         this.addDashboard = function(name, options) {
             if (!name || typeof name !== 'string') {
@@ -83,13 +112,16 @@ var Dashing = {
             options.hidden = set.length;
             var dash = new Dashboard(options);
             set.push(dash);
+            if (timeoutForDashboardsSet !== null)
+                clearTimeout(timeoutForDashboardsSet);
+            timeoutForDashboardsSet = setTimeout(setupRolling, 1000);
+            if(set.length == 1) { activeDashboardName = name }
             return dash;
         };
         this.getDashboard = function(name) {
-            for (var i in set) {
-                if (set[i].name === name) {
+            for (var i=0; i<set.length; i++) {
+                if (set[i].hasOwnProperty('name') && set[i].name === name)
                     return set[i];
-                }
             }
         };
         init();
