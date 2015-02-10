@@ -88,8 +88,8 @@ var Dashing = {
                 var currentDashboardId = set.map(function(e) { return e.name; }).indexOf(activeDashboardName);
                 var nextDashboardId = currentDashboardId + 1 == set.length ? 0 : currentDashboardId + 1;
                 var newDashboardName = set[nextDashboardId].name;
-                dashboardSet.getDashboard(activeDashboardName).hide();
-                dashboardSet.getDashboard(newDashboardName).show();
+                self.getDashboard(activeDashboardName).hide();
+                self.getDashboard(newDashboardName).show();
                 activeDashboardName = newDashboardName;
             },
             getUrlParameter = function(name) {
@@ -115,7 +115,7 @@ var Dashing = {
             if (timeoutForDashboardsSet !== null)
                 clearTimeout(timeoutForDashboardsSet);
             timeoutForDashboardsSet = setTimeout(setupRolling, 1000);
-            if(set.length == 1) { activeDashboardName = name }
+            if(set.length == 1) { activeDashboardName = name; }
             return dash;
         };
         this.getDashboard = function(name) {
