@@ -1,16 +1,16 @@
-/* global $, rivets, Dashing, Dashboard */
+/* global Dashing */
 
 Dashing.widgets.Number = function(dashboard) {
     var self = this,
         widget;
-    this.__init__ = Dashing.utils.widgetInit(dashboard, 'number');
-    this.row = 1;
-    this.col = 1;
-    this.color = '#96bf48';
-    this.data = {};
-    this.getWidget = function () {
+    self.__init__ = Dashing.utils.widgetInit(dashboard, 'number');
+    self.row = 1;
+    self.col = 1;
+    self.color = '#96bf48';
+    self.data = {};
+    self.getWidget = function () {
         return widget;
     };
-    this.getData = function () {};
-    this.interval = 1000;
+    self.getData = function () {};
+    self.interval = 1000;
 };

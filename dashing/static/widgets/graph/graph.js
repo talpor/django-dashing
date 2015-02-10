@@ -1,17 +1,17 @@
-/* global Dashing, Rickshaw */
+/* global Dashing, Rickshaw, rivets */
 
 Dashing.widgets.Graph = function (dashboard) {
     var self = this,
         widget;
-    this.__init__ =  Dashing.utils.widgetInit(dashboard, 'graph');
-    this.row = 1;
-    this.col = 2;
-    this.data = {};
-    this.getWidget = function () {
+    self.__init__ =  Dashing.utils.widgetInit(dashboard, 'graph');
+    self.row = 1;
+    self.col = 2;
+    self.data = {};
+    self.getWidget = function () {
         return widget;
     };
-    this.getData = function () {};
-    this.interval = 3000;
+    self.getData = function () {};
+    self.interval = 3000;
 };
 
 rivets.id = 0;
@@ -26,7 +26,7 @@ rivets.binders['dashing-graph'] = function(el, data) {
     if (!data) return;
     if (data.beforeRender) data.beforeRender();
     if (/rickshaw_graph/.test(container.className)) {
-        graph = window[container.dataset.id]
+        graph = window[container.dataset.id];
         graph.series[0].data = data;
         graph.update();
         return;
@@ -56,4 +56,4 @@ rivets.binders['dashing-graph'] = function(el, data) {
     if (data.afterRender) data.afterRender();
     window[id] = graph;
     container.dataset.id = id;
-}
+};

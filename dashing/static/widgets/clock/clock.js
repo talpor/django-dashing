@@ -1,4 +1,4 @@
-/* global Dashboard, $ */
+/* global Dashing, $ */
 
 Dashing.widgets.Clock = function(dashboard) {
     var widget;

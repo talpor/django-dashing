@@ -1,0 +1,18 @@
+{
+  // enforcing
+  "camelcase": true,
+  "immed": false,
+  "indent": 4,
+  "newcap": true,
+  "noempty": true,
+  "quotmark": true,
+  "maxlen": 100,
+  "undef": true,
+  "unused": true,
+
+  // relaxing
+  "lastsemic": true,
+
+  // other configs
+  "browser": ["location"]
+}

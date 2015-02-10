@@ -1,4 +1,4 @@
-/* global $, document, setInterval, window */
+/* global $, rivets, setInterval, console */
 /* exported Dashboard, DashboardSet */
 
 var Dashing = {
@@ -8,15 +8,17 @@ var Dashing = {
                 return $('<li class="widget widget-' + name + '">').load(src, callback); 
             },
             widgetInit: function(dashboard, widgetName) {
+                'use strict';
+                /* jshint camelcase: false, unused: false */
                 return function() {
                     var self = this,
                         template = Dashing.utils.loadTemplate(widgetName, function() {
                             rivets.bind(template, {data: self.data});
-                        });
-                    widget = dashboard.grid.add_widget(
-                        template,
-                        self.col,
-                        self.row);
+                        }),
+                        widget = dashboard.grid.add_widget(
+                            template,
+                            self.col,
+                            self.row);
                 };
             }
         },
@@ -85,19 +87,22 @@ var Dashing = {
                 }
             },
             switchDashboards = function() {
-                var currentDashboardId = set.map(function(e) { return e.name; }).indexOf(activeDashboardName);
-                var nextDashboardId = currentDashboardId + 1 == set.length ? 0 : currentDashboardId + 1;
-                var newDashboardName = set[nextDashboardId].name;
+                var currentDashboardId = set.map(function(e) {
+                        return e.name;
+                    }).indexOf(activeDashboardName),
+                    nextDashboardId = currentDashboardId + 1 ==
+                                        set.length ? 0 : currentDashboardId + 1,
+                    newDashboardName = set[nextDashboardId].name;
                 self.getDashboard(activeDashboardName).hide();
                 self.getDashboard(newDashboardName).show();
                 activeDashboardName = newDashboardName;
             },
             getUrlParameter = function(name) {
-                name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-                var regexS = "[\\?&]"+name+"=([^&#]*)";
+                name = name.replace(/[\[]/,'\\\[').replace(/[\]]/,'\\\]');
+                var regexS = '[\\?&]' + name + '=([^&#]*)';
                 var regex = new RegExp( regexS );
                 var results = regex.exec( window.location.href );
-                return (results == null) ? null : results[1];
+                return (results === null) ? null : results[1];
             },
             activeDashboardName = '',
             timeoutForDashboardsSet = null,
@@ -128,6 +133,7 @@ var Dashing = {
     },
     Dashboard = function (options) {
         'use strict';
+        /* jshint camelcase: false */
         var self = this,
             init = function () {
                 options = options || {};
@@ -136,8 +142,10 @@ var Dashing = {
                     $wrapper.css('display', 'block');
                 }
                 $wrapper.css({
-                    width: options.viewportWidth ? options.viewportWidth + 'px' : $(window).width() + 'px',
-                    height: options.viewportHeight ? + options.viewportWidth + 'px' : $(window).height() + 'px'
+                    width: options.viewportWidth ? options.viewportWidth +
+                                                'px' : $(window).width() + 'px',
+                    height: options.viewportHeight ? +
+                        options.viewportWidth + 'px' : $(window).height() + 'px'
                 });
                 
                 self.grid = $wrapper.find('ul').gridster({
@@ -145,7 +153,7 @@ var Dashing = {
                     widget_base_dimensions: options.widgetBaseDimensions || [370, 340]
                 }).data('gridster');
                 
-                $(options.selector || "#container").append($wrapper);
+                $(options.selector || '#container').append($wrapper);
 
                 self.widgets = {};
                 for (var key in Dashing.widgets) {
