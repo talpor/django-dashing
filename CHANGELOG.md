@@ -1,3 +1,7 @@
+## 0.2.2
+
+- Added rolling through dashboards automatically through url parameter
+
 ## 0.2.1
 
 - Fix bug 'more_info' not being displayed for the graph widget. Ty @torstenfeld
