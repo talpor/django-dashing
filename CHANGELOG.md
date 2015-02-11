@@ -1,3 +1,7 @@
+## 0.2.3
+
+- Fix bug related rolling feature
+
 ## 0.2.2
 
 - Added rolling through dashboards automatically through url parameter
