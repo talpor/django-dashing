@@ -129,7 +129,7 @@ h3 {
     display: none;
 }
 
-#confModal {
+.modal-container {
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     top: 0;
@@ -140,7 +140,7 @@ h3 {
     display: none;
 }
 
-#confModal .box {
+.modal-container .box {
     display: inline-block;
     background-color: #ff9618;
     width: 160px;

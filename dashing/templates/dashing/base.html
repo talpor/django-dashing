@@ -27,6 +27,11 @@
 <body>
     {% block 'main_container' %}
     <div id="container"></div>
+    <div id="configView">
+        <div class="modal-container" rv-fade="showConfModal">
+            <div class="box" rv-each-dashboard="dashboards" rv-on-click="swapDashboard">{ dashboard.name }</div>
+        </div>
+    </div>
     {% endblock %}
     <script type="text/javascript" src="{% static 'lib/js/jquery-1.11.0.js' %}"></script>
     <script type="text/javascript" src="{% static 'lib/js/rivets.bundled.min.js' %}"></script>

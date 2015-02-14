@@ -1,4 +1,4 @@
-/* global $, rivets, setInterval, console */
+/* global $, rivets, setInterval, console, alert */
 /* exported Dashboard, DashboardSet */
 
 var Dashing = {
@@ -27,103 +27,88 @@ var Dashing = {
     DashboardSet = function() {
         'use strict';
         var self = this,
+            scope = {},
             init = function() {
                 bindEvents();
+                initScope();
+                rivets.bind($('#configView'), scope);
             },
-            modal = {
-                $el: undefined,
-                show: function() {
-                    this.$el.fadeIn();
-                },
-                hide: function() {
-                    var self = this;
-                    this.$el.fadeOut(function() {
-                        self.$el.remove();
-                        self.$el = undefined;
-                    });
-                },
-                toggle: function() {
-                    if (this.$el) {
-                        this.hide();
-                        return;
-                    }
-                    this.$el = $('<div id="confModal">');
-                    for (var i in set) {
-                        var box = $('<div class="box">')
-                                    .attr('data-name', set[i].name)
-                                    .text(set[i].name);
-                        this.$el.append(box);
-                    }
-                    $('body').append(this.$el);
-                    this.show();
-                }
+            initScope = function() {
+                scope.dashboards = [];
+                scope.swapDashboard = function(e, el) {
+                    var name = el.dashboard.name,
+                        dash = self.getDashboard(name);
+                        $('.gridster:visible').hide(function() {
+                            dash.show();
+                            scope.showConfModal = false;
+                        });
+                };
             },
             bindEvents = function() {
                 $(document).keyup(function(e) {
                     if (e.which == 17) {
-                        modal.toggle();
+                        scope.showConfModal = !scope.showConfModal;
                     }
-                });
-                $(document).on('click', '#confModal .box', function() {
-                    var name = $(this).attr('data-name'),
-                        dash = self.getDashboard(name);
-                        
-                        $('.gridster:visible').hide(function() {
-                            dash.show();
-                            modal.hide();
-                        });
                 });
             },
             setupRolling = function() {
+                var set = scope.dashboards, parameterValue, interval;
                 if (set.length > 1) {
-                    var parameterValue = getUrlParameter('roll');
-                    if(parameterValue !== null) {
-                        var interval = parseInt(parameterValue);
-                        if (isNaN(interval))
-                            interval = 30000;
-
-                        setInterval(function() { switchDashboards(); }, interval);
+                    parameterValue = getUrlParameter('roll');
+                    if (parameterValue !== null) {
+                        interval = parseInt(parameterValue);
+                        if (isNaN(interval)) {
+                            console.warn('roll parameter must be a number');
+                            return;
+                        }
+                        setInterval(function() {switchDashboards()}, interval);
                     }
                 }
             },
             switchDashboards = function() {
-                var currentDashboardId = set.map(function(e) {
+                var set = scope.dashboards,
+                    currentDashboardId = set.map(function(e) {
                         return e.name;
                     }).indexOf(activeDashboardName),
                     nextDashboardId = currentDashboardId + 1 ==
                                         set.length ? 0 : currentDashboardId + 1,
                     newDashboardName = set[nextDashboardId].name;
-                self.getDashboard(activeDashboardName).hide();
-                self.getDashboard(newDashboardName).show();
-                activeDashboardName = newDashboardName;
+                self.getDashboard(activeDashboardName).hide(function() {
+                    self.getDashboard(newDashboardName).show();
+                    activeDashboardName = newDashboardName;
+                });
             },
             getUrlParameter = function(name) {
                 name = name.replace(/[\[]/,'\\\[').replace(/[\]]/,'\\\]');
-                var regexS = '[\\?&]' + name + '=([^&#]*)';
-                var regex = new RegExp( regexS );
-                var results = regex.exec( window.location.href );
+                var regexS = '[\\?&]' + name + '=([^&#]*)',
+                    regex = new RegExp( regexS ),
+                    results = regex.exec( window.location.href );
                 return (results === null) ? null : results[1];
             },
             activeDashboardName = '',
-            timeoutForDashboardsSet = null,
-            set = [];
+            timeoutForDashboardsSet = null;
         this.addDashboard = function(name, options) {
+            var set = scope.dashboards, dash;
             if (!name || typeof name !== 'string') {
-                console.warn('You need specify a name for the dashboard and must be a string');
+                console.warn('You need specify a name for the dashboard ' +
+                             'and must be a string');
                 return;
             }
             options = options || {};
             options.name = name;
-            options.hidden = set.length;
-            var dash = new Dashboard(options);
+            options.hidden = Boolean(set.length);
+            dash = new Dashboard(options);
+
             set.push(dash);
-            if (timeoutForDashboardsSet !== null)
+            if (timeoutForDashboardsSet !== null) {
                 clearTimeout(timeoutForDashboardsSet);
+            }
             timeoutForDashboardsSet = setTimeout(setupRolling, 1000);
-            if(set.length == 1) { activeDashboardName = name; }
+            if (set.length === 1) activeDashboardName = name;
             return dash;
         };
         this.getDashboard = function(name) {
+            var set = scope.dashboards;
             for (var i=0; i<set.length; i++) {
                 if (set[i].hasOwnProperty('name') && set[i].name === name)
                     return set[i];
@@ -222,3 +207,12 @@ var Dashing = {
         };
         init();
     };
+
+// rivets formatters
+rivets.binders.fade = function(el, value) {
+    /* jshint -W030 */
+    value ? $(el).fadeIn() : $(el).fadeOut();
+};
+
+// polyfill
+window.console = window.console || {warn: alert.bind(null)};
