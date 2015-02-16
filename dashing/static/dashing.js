@@ -28,10 +28,11 @@ var Dashing = {
         'use strict';
         var self = this,
             scope = {},
+            rivetsView = $('#configView'),
             init = function() {
                 bindEvents();
                 initScope();
-                rivets.bind($('#configView'), scope);
+                rivets.bind(rivetsView, scope);
             },
             initScope = function() {
                 scope.dashboards = [];
@@ -48,6 +49,11 @@ var Dashing = {
                 $(document).keyup(function(e) {
                     if (e.which == 17) {
                         scope.showConfModal = !scope.showConfModal;
+                    }
+                });
+                rivetsView.on('click', '.modal-container', function(e) {
+                    if (e.target.className === e.currentTarget.className) {
+                        scope.showConfModal = false;
                     }
                 });
             },
