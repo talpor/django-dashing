@@ -24,11 +24,11 @@
     <link rel="icon" href="/assets/images/favicon.ico">
 
 </head>
-<body>
+<body id="app" rv-on-keydown="toggleOverlay">
     {% block 'main_container' %}
     <div id="container"></div>
-    <div id="configView">
-        <div class="modal-container" rv-fade="showConfModal">
+    <div id="overlayContainer">
+        <div class="modal-container" rv-fade="showingOverlay" rv-on-click="hideOverlay">
             <div class="box" rv-each-dashboard="dashboards" rv-on-click="swapDashboard">{ dashboard.name }</div>
         </div>
     </div>

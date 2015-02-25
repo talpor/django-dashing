@@ -27,35 +27,30 @@ var Dashing = {
     DashboardSet = function() {
         'use strict';
         var self = this,
-            scope = {},
-            rivetsView = $('#configView'),
-            init = function() {
-                bindEvents();
-                initScope();
-                rivets.bind(rivetsView, scope);
-            },
-            initScope = function() {
-                scope.dashboards = [];
-                scope.swapDashboard = function(e, el) {
+            app = $('#app'),
+            scope = {
+                dashboards: [],
+                swapDashboard: function(e, el) {
                     var name = el.dashboard.name,
                         dash = self.getDashboard(name);
                         $('.gridster:visible').hide(function() {
                             dash.show();
-                            scope.showConfModal = false;
+                            scope.showingOverlay = false;
                         });
-                };
-            },
-            bindEvents = function() {
-                $(document).keyup(function(e) {
-                    if (e.which == 17) {
-                        scope.showConfModal = !scope.showConfModal;
-                    }
-                });
-                rivetsView.on('click', '.modal-container', function(e) {
+                },
+                hideOverlay: function(e) {
                     if (e.target.className === e.currentTarget.className) {
-                        scope.showConfModal = false;
+                        scope.showingOverlay = false;
                     }
-                });
+                },
+                toggleOverlay: function(e) {
+                    if (e.which == 17) {
+                        scope.showingOverlay = !scope.showingOverlay;
+                    }
+                }
+            },
+            init = function() {
+                rivets.bind(app, scope);
             },
             setupRolling = function() {
                 var set = scope.dashboards, parameterValue, interval;
@@ -150,13 +145,9 @@ var Dashing = {
                 for (var key in Dashing.widgets) {
                     self.widgets[key] = Dashing.widgets[key];
                 }
-                bindEvents();
-            },
-            bindEvents = function() {
-                // pass
             },
             widgetSet = [];
-        this.name = options ? options.name : undefined;
+        this.name = options ? options.name : 'unnamed';
         this.show = function(func) {
             self.grid.$wrapper.fadeIn(func);
         };
@@ -169,14 +160,6 @@ var Dashing = {
 
             if (self.widgets && self.widgets[type]) {
                 widget = new self.widgets[type](self);
-                widget.register = function register(name) {
-                    // Usefull function to register event handlers with the 
-                    // correct context
-                    return function() {
-                        register.parent[name]();
-                    };
-                };
-                widget.register.parent = widget;
             }
             else {
                 console.error('widget ' + type + ' does not exist');
@@ -184,17 +167,15 @@ var Dashing = {
             }
 
             $.extend(widget, options);
-            if (widget.__init__) {
-                widget.__init__();
-            }
+            if (widget.__init__) widget.__init__();
 
             widgetSet.push({
-                'name': name,
-                'type': type,
-                'widget': widget
+                name: name,
+                type: type,
+                widget: widget
             });
 
-            self.subscribe(name + '/getData', widget.register('getData'));
+            self.subscribe(name + '/getData', widget.getData.bind(widget));
             self.publish(name + '/getData');
             setInterval(function () {
                 self.publish(name + '/getData');
@@ -221,4 +202,7 @@ rivets.binders.fade = function(el, value) {
 };
 
 // polyfill
-window.console = window.console || {warn: alert.bind(null)};
+(function(global) {
+    var alrt = alert.bind(null);
+    global.console = global.console || {warn: alrt, error: alrt};
+}(window));
