@@ -93,6 +93,22 @@ describe('django-dashing tests', function() {
             });
         });
     });
+    describe('displaying multiple dashboards', function() {
+        it('should display dashboard page with the right title', function(done) {
+            browser.open('/multiple_dashboards/', function (status) {
+                var page = this;
+                assert.equal('success', status);
+                page.evaluate(
+                    function () {
+                        return document.title;
+                    },
+                    function (title) {
+                        assert.equal(title, 'Multiple Dashboards');
+                        done();
+                    });
+            });
+        });
+    });
     after(function(){
         browser.exit();
         process.kill(-server.pid);
