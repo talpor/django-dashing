@@ -1,4 +1,4 @@
-/* global Dashing, Rickshaw, rivets */
+/* global $, Dashing, Rickshaw, rivets */
 
 Dashing.widgets.Graph = function (dashboard) {
     var self = this,
@@ -24,6 +24,7 @@ rivets.getId = function() {
 rivets.binders['dashing-graph'] = function(el, data) {
     var container = el.parentNode, id, graph, xAxis, yAxis;
     if (!data) return;
+    if (!$(container).is(':visible')) return;
     if (data.beforeRender) data.beforeRender();
     if (/rickshaw_graph/.test(container.className)) {
         graph = window[container.dataset.id];
