@@ -51,6 +51,23 @@ Installation
 4. Start the development server and visit http://127.0.0.1:8000/dashboard/
    to view the dummy dashboard.
 
+Testing
+===============================================
+
+First install any development dependencies.
+
+.. code-block:: text
+
+    $ npm install
+    $ pip install -r requirements.txt
+
+Then download and install `PhamtonJS <http://phantomjs.org/download.html>`_
+
+django-dashing uses mocha as testing framework. Run the following to run the full test suite.
+
+.. code-block:: text
+
+    $ npm test
 
 Links
 ===============================================
