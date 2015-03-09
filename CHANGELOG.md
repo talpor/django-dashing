@@ -1,3 +1,9 @@
+## 0.2.4
+
+- Add rivets to manage the main template
+- Fix bug in graph chart, not displayed correctly when not on first dashboard set
+- Fix issue with awesome fonts when isn't loading from a static url called 'static'
+
 ## 0.2.3
 
 - Fix bug related rolling feature
