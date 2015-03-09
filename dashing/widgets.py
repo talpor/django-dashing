@@ -96,6 +96,7 @@ class GraphWidget(Widget):
     more_info = ''
     value = ''
     data = []
+    properties = {}
 
     def get_title(self):
         return self.title
@@ -109,10 +110,14 @@ class GraphWidget(Widget):
     def get_data(self):
         return self.data
 
+    def get_properties(self):
+        return self.properties
+
     def get_context(self):
         return {
             'title': self.get_title(),
             'more_info': self.get_more_info(),
             'value': self.get_value(),
             'data': self.get_data(),
+            'properties': self.get_properties(),
         }
