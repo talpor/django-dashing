@@ -21,40 +21,46 @@ rivets.getId = function() {
     return o;
 };
 
-rivets.binders['dashing-graph'] = function(el, data) {
-    var container = el.parentNode, id, graph, xAxis, yAxis;
-    if (!data) return;
-    if (!$(container).is(':visible')) return;
-    if (data.beforeRender) data.beforeRender();
-    if (/rickshaw_graph/.test(container.className)) {
-        graph = window[container.dataset.id];
-        graph.series[0].data = data;
-        graph.update();
-        return;
-    }
-    id = rivets.getId();
-    graph = new Rickshaw.Graph({
-        element: container, 
-        width: container.width, 
-        height: container.height, 
-        series: [{
-            color: '#fff',
-            data: data
-        }]
-    });
-    graph.render();
+rivets.binders['dashing-graph'] = {
+    bind: function(el) {
+        properties = this.model.properties || {};
+    },
+    routine: function(el, data) {
+        var container = el.parentNode, id, graph, xAxis, yAxis;
+        if (!data) return;
+        if (!$(container).is(':visible')) return;
+        if (data.beforeRender) data.beforeRender();
+        if (/rickshaw_graph/.test(container.className)) {
+            graph = window[container.dataset.id];
+            graph.series[0].data = data;
+            graph.update();
+            return;
+        }
+        id = rivets.getId();
+        graph = new Rickshaw.Graph({
+            element: container,
+            width: container.width,
+            height: container.height,
+            series: [{
+                color: '#fff',
+                data: data
+            }]
+        });
+        graph.configure(properties);
+        graph.render();
 
-    xAxis = new Rickshaw.Graph.Axis.X({
-        graph: graph,
-        tickFormat: data.xFormat || Rickshaw.Fixtures.Number.formatKMBT
-    });
-    yAxis = new Rickshaw.Graph.Axis.Y({
-        graph: graph,
-        tickFormat: data.yFormat || Rickshaw.Fixtures.Number.formatKMBT
-    });
-    xAxis.render();
-    yAxis.render();
-    if (data.afterRender) data.afterRender();
-    window[id] = graph;
-    container.dataset.id = id;
+        xAxis = new Rickshaw.Graph.Axis.X({
+            graph: graph,
+            tickFormat: data.xFormat || Rickshaw.Fixtures.Number.formatKMBT
+        });
+        yAxis = new Rickshaw.Graph.Axis.Y({
+            graph: graph,
+            tickFormat: data.yFormat || Rickshaw.Fixtures.Number.formatKMBT
+        });
+        xAxis.render();
+        yAxis.render();
+        if (data.afterRender) data.afterRender();
+        window[id] = graph;
+        container.dataset.id = id;
+    }
 };
