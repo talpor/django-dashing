@@ -57,8 +57,8 @@ class NumberWidget(Widget):
     def get_context(self):
         return {
             'title': self.get_title(),
-            'more_info': self.get_more_info(),
-            'updated_at': self.get_updated_at(),
+            'moreInfo': self.get_more_info(),
+            'updatedAt': self.get_updated_at(),
             'detail': self.get_detail(),
             'value': self.get_value(),
         }
@@ -85,8 +85,8 @@ class ListWidget(Widget):
     def get_context(self):
         return {
             'title': self.get_title(),
-            'more_info': self.get_more_info(),
-            'updated_at': self.get_updated_at(),
+            'moreInfo': self.get_more_info(),
+            'updatedAt': self.get_updated_at(),
             'data': self.get_data(),
         }
 
@@ -116,7 +116,7 @@ class GraphWidget(Widget):
     def get_context(self):
         return {
             'title': self.get_title(),
-            'more_info': self.get_more_info(),
+            'moreInfo': self.get_more_info(),
             'value': self.get_value(),
             'data': self.get_data(),
             'properties': self.get_properties(),

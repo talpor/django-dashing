@@ -8,8 +8,8 @@ dashboard.addWidget('current_valuation_widget', 'Number', {
     getData: function () {
         $.extend(this.data, {
             title: 'Current Valuation',
-            more_info: 'In billions',
-            updated_at: 'Last updated at 14:10',
+            moreInfo: 'In billions',
+            updatedAt: 'Last updated at 14:10',
             detail: '64%',
             value: '$35'
         });
@@ -20,8 +20,8 @@ dashboard.addWidget('buzzwords_widget', 'List', {
     getData: function () {
         $.extend(this.data, {
             title: 'Buzzwords',
-            more_info: '# of times said around the office',
-            updated_at: 'Last updated at 18:58',
+            moreInfo: '# of times said around the office',
+            updatedAt: 'Last updated at 18:58',
             data: [{label: 'Exit strategy', value: 24},
                    {label: 'Web 2.0', value: 12},
                    {label: 'Turn-key', value: 2},
@@ -40,7 +40,7 @@ dashboard.addWidget('convergence_widget', 'Graph', {
         $.extend(this.data, {
             title: 'Convergence',
             value: '41',
-            more_info: '',
+            moreInfo: '',
             data: [ 
                     { x: 0, y: 40 }, 
                     { x: 1, y: 49 }, 

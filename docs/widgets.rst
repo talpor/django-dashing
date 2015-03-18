@@ -15,8 +15,8 @@ For example if you create a number widget
         getData: function () {
             $.extend(this.data, {
                 title: 'Current Valuation',
-                more_info: 'In billions',
-                updated_at: 'Last updated at 14:10',
+                moreInfo: 'In billions',
+                updatedAt: 'Last updated at 14:10',
                 value: '$35',
                 detail: '64%'
             });
@@ -89,7 +89,7 @@ data
                   ],
             value: /string/
             title: /string/,
-            more_info: /string/
+            moreInfo: /string/
         }
 
 getData
@@ -143,7 +143,7 @@ Here's an example of a graph widget where in `value` is displayed the total of E
 
     class HourlyErrandsWidget(GraphWidget):
         title = 'Hourly Errands'
-        more_info = ''
+        moreInfo = ''
 
         def get_value(self):
             return SearchQuerySet().filter(django_ct='errands.errand').count()
@@ -202,8 +202,8 @@ data
                     ...
                   ],
             title: /string/,
-            more_info: /string/,
-            updated_at: /string/
+            moreInfo: /string/,
+            updatedAt: /string/
         }
 
 getData
@@ -234,7 +234,7 @@ Here's an example of a graph widget where in `data` returns an array with the me
 
     class ActiveMessengersWidget(ListWidget):
         title = 'Active Messengers'
-        more_info = 'Those who have more requests'
+        moreInfo = 'Those who have more requests'
 
         def get_updated_at(self):
             modified = SearchQuerySet().filter(
@@ -271,8 +271,8 @@ data
             value: /string/,
             title: /string/,
             detail: /string/,
-            more_info: /string/,
-            updated_at: /string/
+            moreInfo: /string/,
+            updatedAt: /string/
         }
 
 getData
@@ -295,7 +295,7 @@ This class helps to return valid data to be use by the widget, you can see the d
 
 __ NumberWidgetDefinition_
 
-Here's an example of a graph widget where in `value` is displayed the total of payments and in the detail and more_info shows other information of interest
+Here's an example of a graph widget where in `value` is displayed the total of payments and in the detail and moreInfo shows other information of interest
 
 .. code-block:: python
     
@@ -348,8 +348,8 @@ For example ``{% static %}widgets/list/list.html`` looks like this:
             <span class="value">{ el.value }</span>
           </li>
         </ul>
-        <p class="more-info">{ data.more_info }</p>
-        <p class="updated-at">{ data.updated_at }</p>
+        <p class="more-info">{ data.moreInfo }</p>
+        <p class="updated-at">{ data.updatedAt }</p>
     </div>
 
 The classes are only for the stylesheet.
@@ -395,7 +395,7 @@ if we want to initialize widget with data we can write:
         this.col = 1;
         this.data = {
             title: 'Default Title',
-            more_info: 'No data to display'
+            moreInfo: 'No data to display'
         };
         this.getWidget = function () {
     ...
@@ -431,8 +431,8 @@ For example ListWidget in ``dashing/widgets.py`` looks like this:
         def get_context(self):
             return {
                 'title': self.get_title(),
-                'more_info': self.get_more_info(),
-                'updated_at': self.get_updated_at(),
+                'moreInfo': self.get_more_info(),
+                'updatedAt': self.get_updated_at(),
                 'data': self.get_data(),
             }
 

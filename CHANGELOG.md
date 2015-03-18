@@ -1,3 +1,8 @@
+## master
+
+- Manage Rickshaw.Graph properties [details](https://github.com/talpor/django-dashing/pull/20)
+- Change to camel case the name of default widget properties (with backward compatibility)
+
 ## 0.2.4
 
 - Add rivets to manage the main template
