@@ -1,7 +1,8 @@
-/* global $, rivets, setInterval, console, alert */
-/* exported Dashboard, DashboardSet */
+/* global $, rivets, setInterval, alert */
 
-var Dashing = {
+(function(global, console) {
+    var Dashboard, Dashing, DashboardSet;
+    Dashing = {
         utils: {
             loadTemplate: function(name, callback) {
                 var src = $('link[rel=resource][data-widget=' + name + ']').attr('href');
@@ -23,7 +24,7 @@ var Dashing = {
             }
         },
         widgets: {}
-    },
+    };
     DashboardSet = function() {
         'use strict';
         var self = this,
@@ -116,7 +117,7 @@ var Dashing = {
             }
         };
         init();
-    },
+    };
     Dashboard = function (options) {
         'use strict';
         /* jshint camelcase: false */
@@ -194,15 +195,13 @@ var Dashing = {
         };
         init();
     };
+    global.Dashing = Dashing;
+    global.Dashboard = Dashboard;
+    global.DashboardSet = DashboardSet;
+})(window, window.console || {warn: alert.bind(null), error: alert.bind(null)});
 
 // rivets formatters
 rivets.binders.fade = function(el, value) {
     /* jshint -W030 */
     value ? $(el).fadeIn() : $(el).fadeOut();
 };
-
-// polyfill
-(function(global) {
-    var alrt = alert.bind(null);
-    global.console = global.console || {warn: alrt, error: alrt};
-}(window));
