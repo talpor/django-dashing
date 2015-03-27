@@ -10,9 +10,9 @@
 
     <title>{% block 'title' %}Django Dashing{% endblock %}</title>
 
-    <link rel="stylesheet" href="{% static 'lib/css/jquery.gridster.css' %}">
-    <link rel="stylesheet" href="{% static 'lib/css/rickshaw.css' %}">
-    <link rel="stylesheet" href="{% static 'lib/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/jquery-gridster/jquery.gridster.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/rickshaw/rickshaw.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/font-awesome/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'dashing.css' %}">
     {% widget_styles %}
     {% block 'stylesheets' %}
@@ -28,19 +28,19 @@
     {% block 'main_container' %}
     <div id="container"></div>
     <div id="overlayContainer">
-        <div class="modal-container" rv-fade="showingOverlay" rv-on-click="hideOverlay">
+        <div class="overlay" rv-fade="showingOverlay" rv-on-click="hideOverlay">
             <div class="box" rv-each-dashboard="dashboards" rv-on-click="swapDashboard">{ dashboard.name }</div>
         </div>
     </div>
     {% endblock %}
-    <script type="text/javascript" src="{% static 'lib/js/jquery-1.11.0.js' %}"></script>
-    <script type="text/javascript" src="{% static 'lib/js/rivets.bundled.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/jquery-1.11.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/rivets.bundled.min.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'lib/js/jquery.gridster.js' %}"></script>
-    <script type="text/javascript" src="{% static 'lib/js/jquery.knob.js' %}"></script>
-    <script type="text/javascript" src="{% static 'lib/js/d3.js' %}"></script>
-    <script type="text/javascript" src="{% static 'lib/js/rickshaw.js' %}"></script>
-    <script type="text/javascript" src="{% static 'lib/js/moment-with-langs.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/jquery-gridster/jquery.gridster.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/jquery.knob.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/d3.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/rickshaw/rickshaw.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/moment-with-langs.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'dashing.js' %}"></script>
     {% widget_scripts %}
