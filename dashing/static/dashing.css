@@ -163,7 +163,8 @@ h3 {
     margin: 10px;
 }
 
-#actionContainer .action a {
+#actionContainer .action span {
     display: block;
+    cursor: pointer;
     padding: 4px 17px;
 }

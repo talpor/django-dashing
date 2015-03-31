@@ -1,6 +1,6 @@
-/* global $, rivets, setInterval, alert */
+/* global $, rivets, setInterval, alert, utils */
 
-(function(global, console) {
+(function(global, console, getUrlParameter, insertUrlParam) {
     var Dashboard, Dashing, DashboardSet;
     Dashing = {
         utils: {
@@ -56,24 +56,63 @@
                 if (options.rollingChoices) {
                     scope.actions.push({
                         name: 'Rolling Time',
-                        func: function() {
-                            alert('foo');
+                        func: function(event, scope) {
+                            if (!global.rollingMenu) {
+                                global.rollingMenu = $(scope.action.template);
+                                $(event.target).append(global.rollingMenu);
+                                rivets.bind(global.rollingMenu, {action: scope.action});
+                            }
+                            global.rollingMenu.toggle();
+                        },
+                        template: (function() {
+                            var choices = ['not rolling',
+                                           '5 seconds',
+                                           '30 seconds'],
+                                bottomSpace = 57, html = '';
+
+                            choices.forEach(function(text) {
+                                html += $('<span class="rolling-option">').css({
+                                        position: 'absolute',
+                                        bottom: bottomSpace + 'px',
+                                        right: '20px',
+                                        display: 'none'
+                                    }).attr({
+                                        'rv-on-click': 'action.setRoll'
+                                    }).text(text)[0].outerHTML;
+                                bottomSpace += 30;
+                            });
+                            return html;
+                        })(),
+                        setRoll: function(e) {
+                            var choices = {
+                                    'not rolling': 0,
+                                    '5 seconds': 5000,
+                                    '30 seconds': 30000
+                                };
+                            setupRolling(choices[e.target.innerText]);
+                            insertUrlParam('roll', choices[e.target.innerText]);
+                            scope.showingOverlay = false;
                         }
                     });
                 }
                 rivets.bind(app, scope);
             },
-            setupRolling = function() {
-                var set = scope.dashboards, parameterValue, interval;
+            setupRolling = function(interval) {
+                var set = scope.dashboards, parameterValue;
                 if (set.length > 1) {
                     parameterValue = getUrlParameter('roll');
-                    if (parameterValue !== null) {
-                        interval = parseInt(parameterValue);
+                    if (interval !== undefined || parameterValue !== null) {
+                        interval = Number(interval) || Number(parameterValue);
                         if (isNaN(interval)) {
                             console.warn('roll parameter must be a number');
                             return;
                         }
-                        setInterval(function() {switchDashboards()}, interval);
+                        clearInterval(global.rollingInterval);
+                        if (interval !== 0) {
+                            global.rollingInterval = setInterval(function() {
+                                switchDashboards();
+                            }, interval);
+                        }
                     }
                 }
             },
@@ -89,13 +128,6 @@
                     self.getDashboard(newDashboardName).show();
                     activeDashboardName = newDashboardName;
                 });
-            },
-            getUrlParameter = function(name) {
-                name = name.replace(/[\[]/,'\\\[').replace(/[\]]/,'\\\]');
-                var regexS = '[\\?&]' + name + '=([^&#]*)',
-                    regex = new RegExp( regexS ),
-                    results = regex.exec( window.location.href );
-                return (results === null) ? null : results[1];
             },
             activeDashboardName = '',
             timeoutForDashboardsSet = null;
@@ -149,8 +181,8 @@
                 $wrapper.css({
                     width: options.viewportWidth ? options.viewportWidth +
                                                 'px' : $(window).width() + 'px',
-                    height: options.viewportHeight ? +
-                        options.viewportWidth + 'px' : $(window).height() + 'px'
+                    height: options.viewportHeight ?
+                        options.viewportHeight + 'px' : $(window).height() + 'px'
                 });
                 
                 self.grid = $wrapper.find('ul').gridster({
@@ -216,7 +248,8 @@
     global.Dashing = Dashing;
     global.Dashboard = Dashboard;
     global.DashboardSet = DashboardSet;
-})(window, window.console || {warn: alert.bind(null), error: alert.bind(null)});
+})(window, window.console || {warn: alert.bind(null), error: alert.bind(null)},
+   utils.getUrlParameter, utils.insertUrlParam);
 
 // rivets formatters
 rivets.binders.fade = function(el, value) {

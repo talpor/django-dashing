@@ -32,7 +32,7 @@
             <div class="box" rv-each-dashboard="dashboards" rv-on-click="swapDashboard">{ dashboard.name }</div>
             <div id="actionContainer">
                 <div class="action" rv-each-action="actions">
-                    <a href="#" rv-on-click="action.func">{ action.name }</a>
+                    <span rv-on-click="action.func">{ action.name }</span>
                 </div>
             </div>
         </div>
@@ -47,6 +47,7 @@
     <script type="text/javascript" src="{% static 'libs/rickshaw/rickshaw.js' %}"></script>
     <script type="text/javascript" src="{% static 'libs/moment-with-langs.js' %}"></script>
 
+    <script type="text/javascript" src="{% static 'utils.js' %}"></script>
     <script type="text/javascript" src="{% static 'dashing.js' %}"></script>
     {% widget_scripts %}
     {% block 'scripts' %}
