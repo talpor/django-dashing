@@ -11,6 +11,7 @@ register = template.Library()
 
 _resource = None
 
+
 def remote_path(name):
     global _resource
     if not _resource:
@@ -23,7 +24,7 @@ def remote_path(name):
         resource = _resource
 
     if 'widgets' in resource:
-        repositories = {x['name']:x['repository'] for x in resource['widgets']}
+        repositories = {x['name']: x['repository'] for x in resource['widgets']}
     else:
         raise ValueError('No widgets specified in the repository')
 

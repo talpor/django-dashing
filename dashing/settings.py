@@ -4,7 +4,8 @@ from django.utils import importlib, six
 USER_SETTINGS = getattr(settings, 'DASHING', None)
 
 DEFAULTS = {
-    'REPOSITORY': 'https://cdn.rawgit.com/talpor/django-dashing-channel/master/repositories.json',
+    'REPOSITORY': 'https://cdn.rawgit.com/talpor/django-dashing-channel/'
+                  'master/repositories.json',
     'INSTALLED_WIDGETS': ('number', 'list', 'graph', 'clock',),
     'PERMISSION_CLASSES':  (
         'dashing.permissions.AllowAny',
@@ -38,7 +39,10 @@ def import_from_string(val, setting_name):
         module = importlib.import_module(module_path)
         return getattr(module, class_name)
     except ImportError as e:
-        msg = "Could not import '%s' for setting '%s'. %s: %s." % (val, setting_name, e.__class__.__name__, e)
+        msg = ('Could not import \'{}\' '
+               'for setting \'{}\'. {}: {}.').format(val,
+                                                     setting_name,
+                                                     e.__class__.__name__, e)
         raise ImportError(msg)
 
 

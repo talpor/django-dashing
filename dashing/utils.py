@@ -12,8 +12,10 @@ class Router(object):
         Parameters are passed as keyword arguments, i.e.
             >>> router.register(MyWidget, 'mywidget', my_parameter="[A-Z0-9]+")
 
-        This would be the equivalent of manually adding the following to urlpatterns:
-            >>> url(r"^widgets/mywidget/(P<my_parameter>[A-Z0-9]+)/?", MyWidget.as_view(), "widget_mywidget")
+        This would be the equivalent of manually adding the following
+        to urlpatterns:
+            >>> url(r"^widgets/mywidget/(P<my_parameter>[A-Z0-9]+)/?",
+                                         MyWidget.as_view(), "widget_mywidget")
 
         """
         self.registry.append((widget, basename, parameters))

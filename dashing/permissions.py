@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 
+
 class BasePermission(object):
     """
     A base class from which all permission classes should inherit.
