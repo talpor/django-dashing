@@ -129,7 +129,7 @@ h3 {
     display: none;
 }
 
-.overlay {
+#overlayContainer .overlay {
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     top: 0;
@@ -140,7 +140,7 @@ h3 {
     display: none;
 }
 
-.overlay .box {
+#overlayContainer .overlay .box {
     display: inline-block;
     background-color: #ff9618;
     width: 160px;
@@ -148,4 +148,22 @@ h3 {
     margin: 10px;
     cursor: pointer;
     padding: 7px 17px;
+}
+
+#actionContainer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+#actionContainer .action {
+    float: right;
+    background-color: #ffa63c;
+    padding: 0;
+    margin: 10px;
+}
+
+#actionContainer .action a {
+    display: block;
+    padding: 4px 17px;
 }

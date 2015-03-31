@@ -25,12 +25,13 @@
         },
         widgets: {}
     };
-    DashboardSet = function() {
+    DashboardSet = function(options) {
         'use strict';
         var self = this,
             app = $('#app'),
             scope = {
                 dashboards: [],
+                actions: [],
                 swapDashboard: function(e, el) {
                     var name = el.dashboard.name,
                         dash = self.getDashboard(name);
@@ -51,6 +52,15 @@
                 }
             },
             init = function() {
+                options = options || {};
+                if (options.rollingChoices) {
+                    scope.actions.push({
+                        name: 'Rolling Time',
+                        func: function() {
+                            alert('foo');
+                        }
+                    });
+                }
                 rivets.bind(app, scope);
             },
             setupRolling = function() {
@@ -108,6 +118,14 @@
             timeoutForDashboardsSet = setTimeout(setupRolling, 1000);
             if (set.length === 1) activeDashboardName = name;
             return dash;
+        };
+        this.addAction = function(name, func) {
+            if (typeof func !== 'function' ||
+                typeof name !== 'string') return;
+            scope.actions.push({
+                name: name,
+                func: func
+            });
         };
         this.getDashboard = function(name) {
             var set = scope.dashboards;

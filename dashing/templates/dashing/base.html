@@ -30,6 +30,11 @@
     <div id="overlayContainer">
         <div class="overlay" rv-fade="showingOverlay" rv-on-click="hideOverlay">
             <div class="box" rv-each-dashboard="dashboards" rv-on-click="swapDashboard">{ dashboard.name }</div>
+            <div id="actionContainer">
+                <div class="action" rv-each-action="actions">
+                    <a href="#" rv-on-click="action.func">{ action.name }</a>
+                </div>
+            </div>
         </div>
     </div>
     {% endblock %}

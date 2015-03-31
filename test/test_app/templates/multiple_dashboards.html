@@ -2,10 +2,17 @@
 {% block 'title' %}Multiple Dashboards{% endblock %}
 {% block 'config_file' %}
 <script type="text/javascript">
-/* global $, DashboardSet */
-var myDashboardSet = new DashboardSet(),
+/* global $, DashboardSet, alert */
+var myDashboardSet = new DashboardSet({
+        rollingChoices: true
+    }),
     main = myDashboardSet.addDashboard('Primary Dashboard'),
     sub = myDashboardSet.addDashboard('Secundary Dashboard');
+
+    myDashboardSet.addAction('Custom Action', function(e) {
+        e.preventDefault();
+        alert('Custom action launched');
+    });
 
 main.addWidget('clock_widget', 'Clock');
 main.addWidget('weather_widget', 'Weather', {
