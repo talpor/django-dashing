@@ -53,48 +53,7 @@
             },
             init = function() {
                 options = options || {};
-                if (options.rollingChoices) {
-                    scope.actions.push({
-                        name: 'Rolling Time',
-                        func: function(event, scope) {
-                            if (!global.rollingMenu) {
-                                global.rollingMenu = $(scope.action.template);
-                                $(event.target).append(global.rollingMenu);
-                                rivets.bind(global.rollingMenu, {action: scope.action});
-                            }
-                            global.rollingMenu.toggle();
-                        },
-                        template: (function() {
-                            var choices = ['not rolling',
-                                           '5 seconds',
-                                           '30 seconds'],
-                                bottomSpace = 57, html = '';
-
-                            choices.forEach(function(text) {
-                                html += $('<span class="rolling-option">').css({
-                                        position: 'absolute',
-                                        bottom: bottomSpace + 'px',
-                                        right: '20px',
-                                        display: 'none'
-                                    }).attr({
-                                        'rv-on-click': 'action.setRoll'
-                                    }).text(text)[0].outerHTML;
-                                bottomSpace += 30;
-                            });
-                            return html;
-                        })(),
-                        setRoll: function(e) {
-                            var choices = {
-                                    'not rolling': 0,
-                                    '5 seconds': 5000,
-                                    '30 seconds': 30000
-                                };
-                            setupRolling(choices[e.target.innerText]);
-                            insertUrlParam('roll', choices[e.target.innerText]);
-                            scope.showingOverlay = false;
-                        }
-                    });
-                }
+                if (options.rollingChoices) addRollingMenu();
                 rivets.bind(app, scope);
             },
             setupRolling = function(interval) {
@@ -102,7 +61,8 @@
                 if (set.length > 1) {
                     parameterValue = getUrlParameter('roll');
                     if (interval !== undefined || parameterValue !== null) {
-                        interval = Number(interval) || Number(parameterValue);
+                        interval = interval !== undefined ?
+                                    Number(interval) : Number(parameterValue);
                         if (isNaN(interval)) {
                             console.warn('roll parameter must be a number');
                             return;
@@ -127,6 +87,60 @@
                 self.getDashboard(activeDashboardName).hide(function() {
                     self.getDashboard(newDashboardName).show();
                     activeDashboardName = newDashboardName;
+                });
+            },
+            addRollingMenu = function() {
+                scope.actions.push({
+                    name: 'Rolling Time',
+                    func: function(event, scope) {
+                        var fadeAnimation = null, iterList;
+                        if (!global.rollingMenu) {
+                            global.rollingMenu = $(scope.action.template);
+                            $(event.target).append(global.rollingMenu);
+                            rivets.bind(global.rollingMenu, {action: scope.action});
+                        }
+                        iterList = global.rollingMenu.eq(0).is(':visible') ?
+                            global.rollingMenu :
+                            $(global.rollingMenu.get().reverse());
+
+                        iterList.each(function(i, choice) {
+                            fadeAnimation = $(choice).fadeToggle
+                                    .bind($(choice), 100, fadeAnimation);
+                        });
+                        fadeAnimation();
+                    },
+                    template: (function() {
+                        var choices = ['Not rolling',
+                                       '5 seconds',
+                                       '30 seconds',
+                                       'One minute'],
+                            bottomSpace = 50, html = '';
+
+                        choices.forEach(function(text) {
+                            html += $('<span>').css({
+                                    position: 'absolute',
+                                    bottom: bottomSpace + 'px',
+                                    right: '20px',
+                                    display: 'none',
+                                    'padding-right': 0
+                                }).attr({
+                                    'rv-on-click': 'action.setRoll'
+                                }).text(text)[0].outerHTML;
+                            bottomSpace += 30;
+                        });
+                        return html;
+                    })(),
+                    setRoll: function(e) {
+                        var choices = {
+                                'Not rolling': 0,
+                                '5 seconds': 5000,
+                                '30 seconds': 30000,
+                                'One minute': 60000
+                            };
+                        setupRolling(choices[e.target.innerText]);
+                        insertUrlParam('roll', choices[e.target.innerText]);
+                        scope.showingOverlay = false;
+                    }
                 });
             },
             activeDashboardName = '',

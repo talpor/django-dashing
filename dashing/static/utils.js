@@ -26,6 +26,6 @@
 
     global.utils = {
         getUrlParameter: getUrlParameter,
-        insertParam: insertUrlParam
+        insertUrlParam: insertUrlParam
     };
 })(window);
