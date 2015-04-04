@@ -14,7 +14,13 @@
                 return function() {
                     var self = this,
                         template = Dashing.utils.loadTemplate(widgetName, function() {
-                            rivets.bind(template, {data: self.data});
+                            if (self.scope) {
+                                rivets.bind(template, self.scope);
+                            }
+                            else {
+                                /* backward compatibility for old widget pattern */
+                                rivets.bind(template, {data: self.data});
+                            }
                         }),
                         widget = dashboard.grid.add_widget(
                             template,
@@ -237,6 +243,15 @@
 
             $.extend(widget, options);
             if (widget.__init__) widget.__init__();
+
+            /* backward compatibility for old widget pattern */
+            if (widget.scope && !widget.data) {
+                Object.defineProperty(widget, 'data', {
+                    get: function() {
+                        return this.scope;
+                    }
+                });
+            }
 
             widgetSet.push({
                 name: name,
