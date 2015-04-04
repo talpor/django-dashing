@@ -215,16 +215,20 @@
         this.name = options ? options.name : 'unnamed';
         this.show = function(func) {
             self.grid.$wrapper.fadeIn(func);
+            self.grid.$wrapper.trigger('shown');
         };
         this.hide = function(func) {
             self.grid.$wrapper.fadeOut(func);
+            self.grid.$wrapper.trigger('hidden');
         };
         this.grid = undefined;
+        this.activeWidgets = [];
         this.addWidget = function (name, type, options) {
             var widget;
 
             if (self.widgets && self.widgets[type]) {
                 widget = new self.widgets[type](self);
+                this.activeWidgets.push(widget);
             }
             else {
                 console.error('widget ' + type + ' does not exist');
