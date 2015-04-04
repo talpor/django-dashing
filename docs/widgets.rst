@@ -76,7 +76,7 @@ row
 col
     Number of columns occupied by the widget. *(default: 2)*
 
-data
+scope
     JSON object in this format
 
     .. code-block:: javascript
@@ -87,13 +87,18 @@ data
                     {x: /x1/, y: /y1/}
                     ...
                   ],
-            value: /string/
+            value: /string/,
             title: /string/,
-            moreInfo: /string/
+            moreInfo: /string/,
+            beforeRender: /function/,
+            afterRender: /function/,
+            xFormat: /function/,
+            yFormat: /function/,
+            properties: /object/,
         }
 
 getData
-    Function responsible to update `data` value, this function is executed each time interval specified in `interval` variable.
+    Function responsible to update the widget `scope`, this function is executed each time interval specified in `interval` variable.
     You can rewrite this function to get data from an external source.
     *(default: empty function)*
 
@@ -101,28 +106,51 @@ getWidget
     Return the DOM element that represent the widget.
 
 interval
-    Actualization interval of widget data on milliseconds. *(default: 1000)*
+    Actualization interval of widget scope on milliseconds. *(default: 1000)*
 
 Graph options
 ~~~~~~~~~~~~
 
 To render the graph this widget use Rickshaw_ library, for now the config options are quite limited, if you need be more specific you can overwrite the rivetsjs binder (rv-dashing-graph) or write a custom widget use this as guide.
 
-To configure the X and Y axis must be passed as extra aparameters in the data *xFormat* and *yFormat* methods, also you can use the methods beforeRender and afterRender to execute arbitrary javascript before or after of render, for example:
+To configure the X and Y axis you must define custom methods *xFormat* and *yFormat* in the scope, also you can use the methods *beforeRender* and *afterRender* to execute arbitrary javascript before or after of render, for example:
 
 
 .. code-block:: javascript
 
-    var xFormat = function(n) {
-            return '(' + n + ')';
-        };
-    $.get('/my/api/url/', function(data) {
-        data.data.xFormat = xFormat;
-        data.data.afterRender = function() {
+    function xFormat(n) {
+        return '(' + n + ')';
+    };
+    $.get('/my/api/url/', function(scope) {
+        scope.xFormat = xFormat;
+        scope.afterRender = function() {
             alert('graph shown');
         };
-        $.extend(self.data, data);
+        $.extend(self.scope, scope);
     });
+
+Also you can specify any properties that the graph constructor accepts in the `scope` object, for example a valid `scope` may be:
+
+.. code-block:: javascript
+
+    {
+        data: [
+            { x: 0, y: 29 },
+            { x: 1, y: 42 },
+            { x: 2, y: 12 }
+        ],
+        value: 12,
+        title: 'Yeah!',
+        moreInfo: 'Django Rocks',
+        properties: {
+            renderer: 'line',
+            padding: {
+                top: 0.1,
+                right: 0.1
+            }
+        },
+    }
+
 
 .. _Rickshaw: http://code.shutterstock.com/rickshaw/
 

@@ -63,7 +63,7 @@ main.addWidget('convergence_widget1', 'Graph', {
                     { x: 3, y: Math.floor(Math.random() * 50) + 40 }, 
                     { x: 4, y: Math.floor(Math.random() * 50) + 40 }
                 ]
-            });
+        });
     }
 });
 
@@ -79,8 +79,11 @@ sub.addWidget('convergence_widget2', 'Graph', {
                     { x: 2, y: Math.floor(Math.random() * 50) + 40 }, 
                     { x: 3, y: Math.floor(Math.random() * 50) + 40 }, 
                     { x: 4, y: Math.floor(Math.random() * 50) + 40 }
-                ]
-            });
+                ],
+            properties: {
+                renderer: 'line'
+            },
+        });
     }
 });
 </script>
