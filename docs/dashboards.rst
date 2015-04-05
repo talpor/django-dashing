@@ -62,15 +62,22 @@ getDashboard
 
 **Swap between dashboards**
 
-***Manual***
+*Manual*
 
 To swap between dashboards need to press the `ctrl` key to display the menu.
 
-***Automatic***
+*Automatic*
 
-To swap the dashboards automatically, you need to add the parameter `roll=<value>` to the URL, where the value has to be specified in microseconds.
+To swap the dashboards automatically you can set the option `rollingChoices` as *true* when the dashboardSet is created as follows:
+
+.. code-block:: javascript
+
+    myDashboardSet = new DashboardSet({
+        rollingChoices: true
+    }),
+
+Then you can select the rolling time in the `ctrl` menu.  Or you can add the parameter `roll=<value>` to the URL, where the value has to be specified in microseconds.
 
 Examples:
 ::
     http://127.0.0.1:8000/dashboard/?roll=3000
-    http://127.0.0.1:8000/dashboard/?otherparameter=123&roll=3000
