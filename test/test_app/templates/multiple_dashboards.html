@@ -3,7 +3,8 @@
 {% block 'config_file' %}
 <script type="text/javascript">
 /* global $, DashboardSet, alert */
-var myDashboardSet = new DashboardSet({
+var console = window.console || {log: alert.bind(null)},
+    myDashboardSet = new DashboardSet({
         rollingChoices: true
     }),
     main = myDashboardSet.addDashboard('Primary Dashboard'),
@@ -11,8 +12,12 @@ var myDashboardSet = new DashboardSet({
 
     myDashboardSet.addAction('Custom Action', function(e) {
         e.preventDefault();
-        alert('Custom action launched');
+        console.log('Custom action launched');
     });
+
+main.subscribe('shown', function() {
+    console.log('primary dashboard shown');
+});
 
 main.addWidget('clock_widget', 'Clock');
 main.addWidget('weather_widget', 'Weather', {

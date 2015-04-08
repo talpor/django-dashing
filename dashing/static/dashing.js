@@ -221,11 +221,11 @@
         this.name = options ? options.name : 'unnamed';
         this.show = function(func) {
             self.grid.$wrapper.fadeIn(func);
-            self.grid.$wrapper.trigger('shown');
+            self.publish('shown');
         };
         this.hide = function(func) {
             self.grid.$wrapper.fadeOut(func);
-            self.grid.$wrapper.trigger('hidden');
+            self.publish('hidden');
         };
         this.grid = undefined;
         this.activeWidgets = [];
@@ -269,12 +269,12 @@
             return widgetSet;
         };
         this.subscribe = function(id, func) {
-            $(document).on(id, function(e, args){
+            self.grid.$wrapper.on(id, function(e, args){
                 func.apply(this, args);
             });
         };
         this.publish = function(id, args) {
-            $(document).trigger(id, args);
+            self.grid.$wrapper.trigger(id, args);
         };
         init();
     };
