@@ -30,6 +30,57 @@ widgetBaseDimensions `(optional)`
     Default width and height of each widget in the dashboard. *(default:* ``[370, 340]`` *)*
 
 
+**Dashboard methods**
+
+name
+    Return the name of the dashboard or **'unnamed'**.
+
+show
+    Show the dashboard (if it's hidden) and publish the event **shown** for this dashboard.
+
+hide
+    Show the dashboard (if it's showing) and publish the event **hidden** for this dashboard.
+
+grid
+    Return the *gridster* element for this dashboard.
+
+activeWidgets
+    Return the loaded widgets for this dashboard.
+
+addWidget
+    To add a new Widget, for example:
+
+    .. code-block:: javascript
+
+        myDashboard.addWidget('myWheaterWidget', 'Weather', {
+            WOEID: 395269
+        });
+
+    For details you can check the `widgets topic`__
+
+.. _WidgetsNamingConvention: widgets.html
+__ WidgetsNamingConvention_
+
+listWidgets
+    Returns the list of widgets created on this dashboard
+
+subscribe
+    To subscribe an event in this dashboard you can doing as follow:
+
+    .. code-block:: javascript
+
+        myDashboard.subscribe('myEvent', function() {
+            console.log('event fired!');
+        });
+
+publish
+    To publish an event in this dashboard you can doing as follow:
+
+    .. code-block:: javascript
+
+        myDashboard.publish('myEvent');
+
+
 Multiple Dashboards
 -------------------
 
@@ -76,8 +127,18 @@ To swap the dashboards automatically you can set the option `rollingChoices` as 
         rollingChoices: true
     }),
 
-Then you can select the rolling time in the `ctrl` menu.  Or you can add the parameter `roll=<value>` to the URL, where the value has to be specified in microseconds.
+Then you can select the rolling time in the `ctrl` menu.  Or you can add the parameter `roll=<value>` to the URL, where the value has to be specified in microseconds, for example:
 
-Examples:
 ::
+
     http://127.0.0.1:8000/dashboard/?roll=3000
+
+**Dashboard Events**
+
+Each single dashboard publish a **shown** or **hidden** event when the dashboard are loaded or unloaded, you can use it as follows:
+
+.. code-block:: javascript
+
+    myDashboard = myDashboardSet.addDashboard('New Dashboard')
+    myDashboard.subscribe('shown', function() {alert('new dashboard shown')})
+    myDashboard.subscribe('hidden', function() {alert('new dashboard hidden')})
