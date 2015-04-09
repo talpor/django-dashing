@@ -23,6 +23,7 @@ rivets.getId = function() {
 
 rivets.binders['dashing-graph'] = function(el, data) {
     // added `|| data.whatever` for backward compatibility
+    if (!data) return;
     var container = el.parentNode, id, graph, xAxis, yAxis,
         beforeRender = this.model.beforeRender || data.beforeRender,
         afterRender = this.model.afterRender || data.afterRender,
@@ -30,7 +31,6 @@ rivets.binders['dashing-graph'] = function(el, data) {
         yFormat = this.model.yFormat || data.yFormat,
         properties = this.model.properties || {};
 
-    if (!data) return;
     if (!$(container).is(':visible')) return;
     if (beforeRender) beforeRender();
     if (/rickshaw_graph/.test(container.className)) {
