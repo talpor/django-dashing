@@ -88,7 +88,7 @@ To initialize a multiple dashboards you need create a DashboardSet object and pa
 
 .. code-block:: javascript
 
-    var dashboardSet = new DashboardSet();
+    var myDashboardSet = new DashboardSet();
 
 
 
@@ -99,7 +99,7 @@ addDashboard
 
     .. code-block:: javascript
 
-        dashboardSet.addDashboard(name, options)
+        myDashboardSet.addDashboard(name, options)
 
 
     Where `name` is a string with the name of dashboard and `options` is a json object with the same format of the options of the `Dashboard` object.
@@ -109,7 +109,16 @@ getDashboard
 
     .. code-block:: javascript
 
-        dashboardSet.getDashboard(name)
+        myDashboardSet.getDashboard(name)
+
+addAction
+    To add a button on the overlay menu that running arbitrary javascript code, for example:
+
+    .. code-block:: javascript
+
+        myDashboardSet.addAction('Go to Google', function() {
+            window.location.href = 'https://google.com/';
+        })
 
 **Swap between dashboards**
 
@@ -139,6 +148,6 @@ Each single dashboard publish a **shown** or **hidden** event when the dashboard
 
 .. code-block:: javascript
 
-    myDashboard = myDashboardSet.addDashboard('New Dashboard')
-    myDashboard.subscribe('shown', function() {alert('new dashboard shown')})
-    myDashboard.subscribe('hidden', function() {alert('new dashboard hidden')})
+    myDashboard = myDashboardSet.addDashboard('New Dashboard');
+    myDashboard.subscribe('shown', function() {alert('new dashboard shown')});
+    myDashboard.subscribe('hidden', function() {alert('new dashboard hidden')});
