@@ -6,7 +6,12 @@ Dashing.widgets.Graph = function (dashboard) {
     self.__init__ =  Dashing.utils.widgetInit(dashboard, 'graph');
     self.row = 1;
     self.col = 2;
-    self.scope = {};
+    self.scope = {
+        beforeRender: function() {},
+        afterRender: function() {},
+        xFormat: function() {},
+        yFormat: function() {}
+    };
     self.getWidget = function () {
         return widget;
     };
