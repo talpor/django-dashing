@@ -5,7 +5,10 @@ from django.contrib.staticfiles.finders import find
 from dashing.settings import dashing_settings
 
 import json
-import urllib2
+try:
+    import urllib.request as urllib2
+except ImportError:
+    import urllib2
 
 register = template.Library()
 
