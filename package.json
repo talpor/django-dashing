@@ -1,6 +1,6 @@
 {
   "name": "django-dashing",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "`django-dashing` is a customisable, modular dashboard application framework for Django to visualize interesting data about your project.",
   "directories": {
     "doc": "docs",
