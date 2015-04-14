@@ -2,7 +2,7 @@
 from django.views.generic import TemplateView
 from django.core.exceptions import PermissionDenied
 
-from settings import dashing_settings
+from dashing.settings import dashing_settings
 
 
 class Dashboard(TemplateView):

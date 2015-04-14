@@ -5,7 +5,12 @@ from django.contrib.staticfiles.finders import find
 from dashing.settings import dashing_settings
 
 import json
-import urllib2
+try:
+    import urllib.request as urllib2
+except ImportError:
+    import urllib2
+
+import codecs
 
 register = template.Library()
 
@@ -16,7 +21,8 @@ def remote_path(name):
     global _resource
     if not _resource:
         try:
-            resource = json.load(urllib2.urlopen(dashing_settings.REPOSITORY))
+            reader = codecs.getreader("utf-8")
+            resource = json.load(reader(urllib2.urlopen(dashing_settings.REPOSITORY)))
             _resource = resource
         except ValueError:
             raise ValueError('Repository format is incorrect')
