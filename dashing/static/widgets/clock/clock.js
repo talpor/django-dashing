@@ -5,7 +5,7 @@ Dashing.widgets.Clock = function(dashboard) {
     this.__init__ = Dashing.utils.widgetInit(dashboard, 'clock');
     this.row = 1;
     this.col = 1;
-    this.data = {};
+    this.scope = {};
     this.getWidget = function () {
         return widget;
     };
@@ -19,7 +19,7 @@ Dashing.widgets.Clock = function(dashboard) {
             m = today.getMinutes(),
             s = today.getSeconds();
 
-        $.extend(self.data, {
+        $.extend(self.scope, {
             time: h + ':' + formatTime(m) + ':' + formatTime(s),
             date: today.toDateString()
         });

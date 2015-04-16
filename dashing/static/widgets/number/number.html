@@ -1,9 +1,9 @@
 <div>
-    <h1>{ data.title }</h1>
-    <h2>{ data.value }</h2>
-    <p class="detail">{ data.detail }</p>
-    <p class="more-info" rv-if="data.moreInfo">{ data.moreInfo }</p>
-    <p class="updated-at" rv-if="data.updatedAt">{ data.updatedAt }</p>
+    <h1>{ title }</h1>
+    <h2>{ value }</h2>
+    <p class="detail">{ detail }</p>
+    <p class="more-info" rv-if="moreInfo">{ moreInfo }</p>
+    <p class="updated-at" rv-if="updatedAt">{ updatedAt }</p>
     {# backward compatiblility #}
     <p class="more-info" rv-if="data.more_info">{ data.more_info }</p>
     <p class="updated-at" rv-if="data.updated_at">{ data.updated_at }</p>

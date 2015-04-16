@@ -6,7 +6,7 @@ Dashing.widgets.List = function (dashboard) {
     self.__init__ = Dashing.utils.widgetInit(dashboard, 'list');
     self.row = 2;
     self.col = 1;
-    self.data = {};
+    self.scope = {};
     self.getWidget = function () {
         return widget;
     };

@@ -26,7 +26,7 @@ main.addWidget('weather_widget', 'Weather', {
 
 main.addWidget('current_valuation_widget', 'Number', {
     getData: function () {
-        $.extend(this.data, {
+        $.extend(this.scope, {
             title: 'Current Valuation',
             moreInfo: 'In billions',
             updatedAt: 'Last updated at 14:10',
@@ -38,7 +38,7 @@ main.addWidget('current_valuation_widget', 'Number', {
 
 sub.addWidget('buzzwords_widget', 'List', {
     getData: function () {
-        $.extend(this.data, {
+        $.extend(this.scope, {
             title: 'Buzzwords',
             moreInfo: '# of times said around the office',
             updatedAt: 'Last updated at 18:58',
@@ -57,7 +57,7 @@ sub.addWidget('buzzwords_widget', 'List', {
 
 main.addWidget('convergence_widget1', 'Graph', {
     getData: function () {
-        $.extend(this.data, {
+        $.extend(this.scope, {
             title: 'Convergence',
             value: Math.floor(Math.random() * 50) + 40,
             moreInfo: '',
@@ -74,7 +74,7 @@ main.addWidget('convergence_widget1', 'Graph', {
 
 sub.addWidget('convergence_widget2', 'Graph', {
     getData: function () {
-        $.extend(this.data, {
+        $.extend(this.scope, {
             title: 'Convergence',
             value: Math.floor(Math.random() * 50) + 40,
             moreInfo: '',
