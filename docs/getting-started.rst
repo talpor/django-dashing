@@ -112,7 +112,7 @@ This is the default ``dashing-config.js`` file, use as a guide for writing your 
 
     dashboard.addWidget('current_valuation_widget', 'Number', {
         getData: function () {
-            $.extend(this.data, {
+            $.extend(this.scope, {
                 title: 'Current Valuation',
                 moreInfo: 'In billions',
                 updatedAt: 'Last updated at 14:10',
@@ -124,7 +124,7 @@ This is the default ``dashing-config.js`` file, use as a guide for writing your 
 
     dashboard.addWidget('buzzwords_widget', 'List', {
         getData: function () {
-            $.extend(this.data, {
+            $.extend(this.scope, {
                 title: 'Buzzwords',
                 moreInfo: '# of times said around the office',
                 updatedAt: 'Last updated at 18:58',
@@ -143,7 +143,7 @@ This is the default ``dashing-config.js`` file, use as a guide for writing your 
 
     dashboard.addWidget('convergence_widget', 'Graph', {
         getData: function () {
-            $.extend(this.data, {
+            $.extend(this.scope, {
                 title: 'Convergence',
                 value: '41',
                 moreInfo: '',

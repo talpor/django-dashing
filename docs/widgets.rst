@@ -13,7 +13,7 @@ For example if you create a number widget
     
     dashboard.addWidget('current_valuation_widget', 'Number', {
         getData: function () {
-            $.extend(this.data, {
+            $.extend(this.scope, {
                 title: 'Current Valuation',
                 moreInfo: 'In billions',
                 updatedAt: 'Last updated at 14:10',
@@ -41,7 +41,7 @@ row
 col
     Number of columns occupied by the widget. *(default: 1)*
 
-data
+scope
     JSON object that represent the date and time in format 
 
     .. code-block:: javascript
@@ -52,7 +52,7 @@ data
         }
 
 getData
-    Function responsible to update `data` value, this function is executed each time interval specified in `interval` variable.
+    Function responsible to update the `scope` value, this function is executed each time interval specified in `interval` variable.
     You can rewrite this function to get data from an external source.
     *(default: return the browser time in a valid JSON format)*
 
@@ -60,7 +60,7 @@ getWidget
     Return the DOM element that represent the widget.
 
 interval
-    Actualization interval of widget data on milliseconds. *(default: 500)*
+    Actualization interval of widget scope on milliseconds. *(default: 500)*
 
 Graph Widget
 ------------
@@ -157,7 +157,7 @@ Also you can specify any properties that the graph constructor accepts in the `s
 Python Class
 ~~~~~~~~~~~~
 
-This class helps to return valid data to be use by the widget, you can see the definition in GitHub__
+This class helps to return valid scope to be use by the widget, you can see the definition in GitHub__
 
 .. _GraphWidgetDefinition: https://github.com/talpor/django-dashing/blob/59def5a53d5b76db232196f2fffacd49270b27e1/dashing/widgets.py#L94-118
 
@@ -212,7 +212,7 @@ col
 render
     Function responsible of modify the DOM elements of the widget.
 
-data
+scope
     JSON object in this format
 
     .. code-block:: javascript
@@ -235,7 +235,7 @@ data
         }
 
 getData
-    Function responsible to update `data` value, this function is executed each time interval specified in `interval` variable.
+    Function responsible to update the `scope` value, this function is executed each time interval specified in `interval` variable.
     You can rewrite this function to get data from an external source.
     *(default: empty function)*
 
@@ -254,7 +254,7 @@ This class helps to return valid data to be use by the widget, you can see the d
 
 __ ListWidgetDefinition_
 
-Here's an example of a graph widget where in `data` returns an array with the messengers who have more requests
+Here's an example of a graph widget where in the `scope` returns an array with the messengers who have more requests
 
 .. code-block:: python
     
@@ -290,7 +290,7 @@ row
 col
     Number of columns occupied by the widget. *(default: 1)*
 
-data
+scope
     JSON object in this format
 
     .. code-block:: javascript
@@ -304,7 +304,7 @@ data
         }
 
 getData
-    Function responsible to update `data` value, this function is executed each time interval specified in `interval` variable.
+    Function responsible to update the `scope` value, this function is executed each time interval specified in `interval` variable.
     You can rewrite this function to get data from an external source.
     *(default: empty function)*
 
@@ -312,7 +312,7 @@ getWidget
     Return the DOM element that represent the widget.
 
 interval
-    Actualization interval of widget data on milliseconds. *(default: 1000)*
+    Actualization interval of widget scope on milliseconds. *(default: 1000)*
 
 Python Class
 ~~~~~~~~~~~~
@@ -369,15 +369,15 @@ For example ``{% static %}widgets/list/list.html`` looks like this:
 .. code-block:: html
 
     <div>
-        <h1>{ data.title }</h1>
+        <h1>{ scope.title }</h1>
         <ul>
-          <li rv-each-el="data.data">
-            <span class="label">{ el.label }</span>
-            <span class="value">{ el.value }</span>
+          <li rv-each-item="data">
+            <span class="label">{ item.label }</span>
+            <span class="value">{ item.value }</span>
           </li>
         </ul>
-        <p class="more-info">{ data.moreInfo }</p>
-        <p class="updated-at">{ data.updatedAt }</p>
+        <p class="more-info">{ moreInfo }</p>
+        <p class="updated-at">{ updatedAt }</p>
     </div>
 
 The classes are only for the stylesheet.
@@ -392,7 +392,7 @@ Script File
 
 Your location should be ``<static_directory>/widgets/<widget_name>.js`` in this file will be defined the configuration options and default values for the new widget, the idea is to create an object using the ``new`` keyword, then we define properties and methods using ``this`` keyword.
 
-We must provide an ``__init__`` method where binding the data with the template and add to the dashboard, this function is quite similar in all widgets, then it is provided by ``Dashing.utils.widgetInit`` to facilitate implementation and improve reading of widgets, also must provide a ``data`` element which will be binded to the template, and a ``getData`` function will surely be the to be overwritten to obtain relevant data as required,
+We must provide an ``__init__`` method where binding the scope with the template and add to the dashboard, this function is quite similar in all widgets, then it is provided by ``Dashing.utils.widgetInit`` to facilitate implementation and improve reading of widgets, also must provide a ``scope`` element which will be binded to the template, and a ``getData`` function will surely be the to be overwritten to obtain relevant data as required,
 
 For example ``{% static %}widgets/list/list.js`` looks like this:
 
@@ -406,7 +406,7 @@ For example ``{% static %}widgets/list/list.js`` looks like this:
         this.__init__ = Dashing.utils.widgetInit(dashboard, 'list');
         this.row = 2;
         this.col = 1;
-        this.data = {};
+        this.scope = {};
         this.getWidget = function () {
             return widget;
         };
@@ -414,14 +414,14 @@ For example ``{% static %}widgets/list/list.js`` looks like this:
         this.interval = 10000;
     };
 
-if we want to initialize widget with data we can write:
+if we want to initialize widget with an scope we can write:
 
 
 .. code-block:: javascript
     
     ...
         this.col = 1;
-        this.data = {
+        this.socpe = {
             title: 'Default Title',
             moreInfo: 'No data to display'
         };
