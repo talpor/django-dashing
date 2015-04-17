@@ -166,6 +166,25 @@ h3 {
     padding: 4px 17px;
 }
 
+#rollingMenu ul {
+    position: absolute;
+    margin-top: -150px;
+    margin-left: 32px;
+}
+
+#rollingMenu ul li {
+    transition: opacity 0.3s ease-out;
+    opacity: 0;
+    background-color: transparent;
+    text-align: right;
+    cursor: pointer;
+}
+
+
+#rollingMenu ul.in li {
+    opacity: 1;
+}
+
 /* animations */
 
 .fade {

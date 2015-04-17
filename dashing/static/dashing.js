@@ -11,7 +11,7 @@
             },
             widgetInit: function(dashboard, widgetName) {
                 'use strict';
-                /* jshint camelcase: false, unused: false */
+                /* jshint camelcase: false */
                 return function() {
                     var self = this,
                         template = Dashing.utils.loadTemplate(widgetName, function() {
@@ -22,11 +22,8 @@
                                 /* backward compatibility for old widget pattern */
                                 rivets.bind(template, {data: self.data});
                             }
-                        }),
-                        widget = dashboard.grid.api.add_widget(
-                            template,
-                            self.col,
-                            self.row);
+                        });
+                    dashboard.grid.api.add_widget(template, self.col, self.row);
                 };
             }
         },
@@ -55,8 +52,23 @@
                         }
                     }
                 });
-                options = options || {};
-                if (options.rollingChoices) addRollingMenu();
+                if (options && options.rollingChoices) {
+                    scope.rollingMenu = {
+                        showing: false,
+                        toggle: function() {
+                            scope.rollingMenu.showing = !scope.rollingMenu.showing;
+                        },
+                        set: function(e) {
+                            if (!e) return;
+                            var seconds = Number(e.target.dataset.time);
+                            if (isNaN(seconds)) return;
+                            setupRolling(seconds*1000);
+                            insertUrlParam('roll', seconds*1000);
+                            scope.showingOverlay =
+                            scope.rollingMenu.showing = false;
+                        }
+                    };
+                }
                 setupRolling();
             },
             setupRolling = function(interval) {
@@ -84,60 +96,6 @@
                     nextStatus = tmp;
                 });
                 if (nextStatus) scope.dashboards[0].grid.active = nextStatus;
-            },
-            addRollingMenu = function() {
-                scope.actions.push({
-                    name: 'Rolling Time',
-                    func: function(event, scope) {
-                        var fadeAnimation = null, iterList;
-                        if (!global.rollingMenu) {
-                            global.rollingMenu = $(scope.action.template);
-                            $(event.target).append(global.rollingMenu);
-                            rivets.bind(global.rollingMenu, {action: scope.action});
-                        }
-                        iterList = global.rollingMenu.eq(0).is(':visible') ?
-                            global.rollingMenu :
-                            $(global.rollingMenu.get().reverse());
-
-                        iterList.each(function(i, choice) {
-                            fadeAnimation = $(choice).fadeToggle
-                                    .bind($(choice), 100, fadeAnimation);
-                        });
-                        fadeAnimation();
-                    },
-                    template: (function() {
-                        var choices = ['Not rolling',
-                                       '5 seconds',
-                                       '30 seconds',
-                                       'One minute'],
-                            bottomSpace = 50, html = '';
-
-                        choices.forEach(function(text) {
-                            html += $('<span>').css({
-                                    position: 'absolute',
-                                    bottom: bottomSpace + 'px',
-                                    right: '20px',
-                                    display: 'none',
-                                    'padding-right': 0
-                                }).attr({
-                                    'rv-on-click': 'action.setRoll'
-                                }).text(text)[0].outerHTML;
-                            bottomSpace += 30;
-                        });
-                        return html;
-                    })(),
-                    setRoll: function(e) {
-                        var choices = {
-                                'Not rolling': 0,
-                                '5 seconds': 5000,
-                                '30 seconds': 30000,
-                                'One minute': 60000
-                            };
-                        setupRolling(choices[e.target.innerText]);
-                        insertUrlParam('roll', choices[e.target.innerText]);
-                        scope.showingOverlay = false;
-                    }
-                });
             };
         this.addDashboard = function(name, options) {
             var dash;
@@ -153,13 +111,13 @@
             scope.dashboards.push(dash);
             return dash;
         };
-        this.addAction = function(name, func) {
+        this.addAction = function(name, func, obj) {
             if (typeof func !== 'function' ||
                 typeof name !== 'string') return;
-            scope.actions.push({
+            scope.actions.push($.extend({
                 name: name,
                 func: func
-            });
+            }, obj || {}));
         };
         this.getDashboard = function(name) {
             var set = scope.dashboards;

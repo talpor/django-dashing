@@ -33,6 +33,15 @@
         <div class="overlay fade" rv-class-in="showingOverlay" rv-on-click="hideOverlay">
             <div class="box" rv-each-dashboard="dashboards" rv-on-click="swapDashboard">{ dashboard.name }</div>
             <div id="actionContainer">
+                <div class="action" id="rollingMenu" rv-if="rollingMenu">
+                    <span rv-on-click="rollingMenu.toggle">Rolling Time</span>
+                    <ul rv-class-in="rollingMenu.showing">
+                        <li rv-on-click="rollingMenu.set" data-time="60" style="transition-delay:0.3s">One minute</li>
+                        <li rv-on-click="rollingMenu.set" data-time="30" style="transition-delay:0.2s">30 seconds</li>
+                        <li rv-on-click="rollingMenu.set" data-time="5" style="transition-delay:0.1s">5 seconds</li>
+                        <li rv-on-click="rollingMenu.set" data-time="0" style="transition-delay:0s">Not rolling</li>
+                    </ul>
+                </div>
                 <div class="action" rv-each-action="actions">
                     <span rv-on-click="action.func">{ action.name }</span>
                 </div>
