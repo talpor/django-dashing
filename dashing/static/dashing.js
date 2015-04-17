@@ -39,10 +39,8 @@
                     dashboards: [],
                     actions: [],
                     swapDashboard: function(e, model) {
-                        /* TODO: add css transitions */
-                        model.dashboards.forEach(function(dash) {
-                            dash.grid.active = false;
-                        });
+                        // this automatically change all another active
+                        // properties in scope.grids elements to false
                         model.dashboard.grid.active = true;
                         scope.showingOverlay = false;
                     },
@@ -183,7 +181,12 @@
                     height: options.viewportHeight,
                     widgetMargins: options.widgetMargins,
                     widgetBaseDimensions: options.widgetBaseDimensions,
-                    active: options.active
+                    active: options.active,
+                    siblings: function() {
+                        return scope.grids.filter(function(grid) {
+                            return grid._rv !== self.grid._rv;
+                        });
+                    }
                 };
                 scope.grids.push(self.grid);
 
@@ -267,6 +270,11 @@
         }).data('gridster');
 
         this.observe(grid, 'active', function() {
+            if (grid.active) {
+                grid.siblings().forEach(function(sibling) {
+                    sibling.active = false;
+                });
+            }
             grid.api.$wrapper.trigger(grid.active ? 'shown' : 'hidden');
         });
     };
