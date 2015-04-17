@@ -1,7 +1,8 @@
 /* global $, rivets, setInterval, alert, utils */
 
 (function(global, console, getUrlParameter, insertUrlParam) {
-    var Dashboard, Dashing, DashboardSet;
+    var Dashboard, Dashing, DashboardSet,
+        scope = {grids: [], toggleOverlay: function() {}};
     Dashing = {
         utils: {
             loadTemplate: function(name, callback) {
@@ -22,7 +23,7 @@
                                 rivets.bind(template, {data: self.data});
                             }
                         }),
-                        widget = dashboard.grid.add_widget(
+                        widget = dashboard.grid.api.add_widget(
                             template,
                             self.col,
                             self.row);
@@ -33,67 +34,58 @@
     };
     DashboardSet = function(options) {
         'use strict';
-        var self = this,
-            app = $('#app'),
-            scope = {
-                dashboards: [],
-                actions: [],
-                swapDashboard: function(e, el) {
-                    var name = el.dashboard.name,
-                        dash = self.getDashboard(name);
-                        $('.gridster:visible').hide(function() {
-                            dash.show();
-                            scope.showingOverlay = false;
+        var init = function() {
+                $.extend(scope, {
+                    dashboards: [],
+                    actions: [],
+                    swapDashboard: function(e, model) {
+                        /* TODO: add css transitions */
+                        model.dashboards.forEach(function(dash) {
+                            dash.grid.active = false;
                         });
-                },
-                hideOverlay: function(e) {
-                    if (e.target.className === e.currentTarget.className) {
+                        model.dashboard.grid.active = true;
                         scope.showingOverlay = false;
+                    },
+                    hideOverlay: function(e) {
+                        if (e.target.className === e.currentTarget.className) {
+                            scope.showingOverlay = false;
+                        }
+                    },
+                    toggleOverlay: function(e) {
+                        if (e.which == 17) {
+                            scope.showingOverlay = !scope.showingOverlay;
+                        }
                     }
-                },
-                toggleOverlay: function(e) {
-                    if (e.which == 17) {
-                        scope.showingOverlay = !scope.showingOverlay;
-                    }
-                }
-            },
-            init = function() {
+                });
                 options = options || {};
                 if (options.rollingChoices) addRollingMenu();
-                rivets.bind(app, scope);
+                setupRolling();
             },
             setupRolling = function(interval) {
-                var set = scope.dashboards, parameterValue;
-                if (set.length > 1) {
-                    parameterValue = getUrlParameter('roll');
-                    if (interval !== undefined || parameterValue !== null) {
-                        interval = interval !== undefined ?
-                                    Number(interval) : Number(parameterValue);
-                        if (isNaN(interval)) {
-                            console.warn('roll parameter must be a number');
-                            return;
-                        }
-                        clearInterval(global.rollingInterval);
-                        if (interval !== 0) {
-                            global.rollingInterval = setInterval(function() {
-                                switchDashboards();
-                            }, interval);
-                        }
+                var parameterValue = getUrlParameter('roll');
+                if (interval !== undefined || parameterValue !== null) {
+                    interval = interval !== undefined ?
+                               Number(interval) : Number(parameterValue);
+                    if (isNaN(interval)) {
+                        console.warn('roll parameter must be a number');
+                        return;
+                    }
+                    clearInterval(global.rollingInterval);
+                    if (interval !== 0) {
+                        global.rollingInterval = setInterval(function() {
+                            switchDashboards();
+                        }, interval);
                     }
                 }
             },
             switchDashboards = function() {
-                var set = scope.dashboards,
-                    currentDashboardId = set.map(function(e) {
-                        return e.name;
-                    }).indexOf(activeDashboardName),
-                    nextDashboardId = currentDashboardId + 1 ==
-                                        set.length ? 0 : currentDashboardId + 1,
-                    newDashboardName = set[nextDashboardId].name;
-                self.getDashboard(activeDashboardName).hide(function() {
-                    self.getDashboard(newDashboardName).show();
-                    activeDashboardName = newDashboardName;
+                var nextStatus = false, tmp;
+                scope.dashboards.forEach(function(dashboard) {
+                    tmp = dashboard.grid.active;
+                    dashboard.grid.active = nextStatus;
+                    nextStatus = tmp;
                 });
+                if (nextStatus) scope.dashboards[0].grid.active = nextStatus;
             },
             addRollingMenu = function() {
                 scope.actions.push({
@@ -148,11 +140,9 @@
                         scope.showingOverlay = false;
                     }
                 });
-            },
-            activeDashboardName = '',
-            timeoutForDashboardsSet = null;
+            };
         this.addDashboard = function(name, options) {
-            var set = scope.dashboards, dash;
+            var dash;
             if (!name || typeof name !== 'string') {
                 console.warn('You need to specify a name for the dashboard ' +
                              'and it must be a string');
@@ -160,15 +150,9 @@
             }
             options = options || {};
             options.name = name;
-            options.hidden = Boolean(set.length);
             dash = new Dashboard(options);
 
-            set.push(dash);
-            if (timeoutForDashboardsSet !== null) {
-                clearTimeout(timeoutForDashboardsSet);
-            }
-            timeoutForDashboardsSet = setTimeout(setupRolling, 1000);
-            if (set.length === 1) activeDashboardName = name;
+            scope.dashboards.push(dash);
             return dash;
         };
         this.addAction = function(name, func) {
@@ -182,35 +166,29 @@
         this.getDashboard = function(name) {
             var set = scope.dashboards;
             for (var i=0; i<set.length; i++) {
-                if (set[i].hasOwnProperty('name') && set[i].name === name)
+                if (set[i].hasOwnProperty('name') && set[i].name === name) {
                     return set[i];
+                }
             }
         };
         init();
     };
     Dashboard = function (options) {
         'use strict';
-        /* jshint camelcase: false */
         var self = this,
             init = function () {
                 options = options || {};
-                var $wrapper = $('<div class="gridster"><ul></ul></div>');
-                if (!options.hidden) {
-                    $wrapper.css('display', 'block');
-                }
-                $wrapper.css({
-                    width: options.viewportWidth ? options.viewportWidth +
-                                                'px' : $(window).width() + 'px',
-                    height: options.viewportHeight ?
-                        options.viewportHeight + 'px' : $(window).height() + 'px'
-                });
-                
-                self.grid = $wrapper.find('ul').gridster({
-                    widget_margins: options.widgetMargins || [5, 5],
-                    widget_base_dimensions: options.widgetBaseDimensions || [370, 340]
-                }).data('gridster');
-                
-                $(options.selector || '#container').append($wrapper);
+                self.grid = {
+                    width: options.viewportWidth,
+                    height: options.viewportHeight,
+                    widgetMargins: options.widgetMargins,
+                    widgetBaseDimensions: options.widgetBaseDimensions,
+                    active: options.active
+                };
+                scope.grids.push(self.grid);
+
+                // show if is the fist dashboard added
+                if (scope.grids.length === 1) scope.grids[0].active = true;
 
                 self.widgets = {};
                 for (var key in Dashing.widgets) {
@@ -219,13 +197,11 @@
             },
             widgetSet = [];
         this.name = options ? options.name : 'unnamed';
-        this.show = function(func) {
-            self.grid.$wrapper.fadeIn(func);
-            self.publish('shown');
+        this.show = function() {
+            self.grid.active = true;
         };
-        this.hide = function(func) {
-            self.grid.$wrapper.fadeOut(func);
-            self.publish('hidden');
+        this.hide = function() {
+            self.grid.active = false;
         };
         this.grid = undefined;
         this.activeWidgets = [];
@@ -261,31 +237,44 @@
 
             self.subscribe(name + '/getData', widget.getData.bind(widget));
             self.publish(name + '/getData');
-            setInterval(function () {
-                self.publish(name + '/getData');
-            }, widget.interval || 1000);
+
+            setInterval(self.publish.bind(null, name + '/getData'),
+                        widget.interval || 1000);
+
         };
         this.listWidgets = function() {
             return widgetSet;
         };
         this.subscribe = function(id, func) {
-            self.grid.$wrapper.on(id, function(e, args){
+            self.grid.api.$wrapper.on(id, function(e, args){
                 func.apply(this, args);
             });
         };
         this.publish = function(id, args) {
-            self.grid.$wrapper.trigger(id, args);
+            self.grid.api.$wrapper.trigger(id, args);
         };
         init();
     };
+    rivets.binders.gridsterify = function(el, grid) {
+        /* jshint camelcase: false */
+        $(el).css({
+            width: grid.width ? grid.width + 'px' : $(window).width() + 'px',
+            height: grid.height ? grid.height + 'px' : $(window).height() + 'px',
+        });
+        grid.api = $(el).find('ul').gridster({
+            widget_margins: grid.widgetMargins || [5, 5],
+            widget_base_dimensions: grid.widgetBaseDimensions || [370, 340]
+        }).data('gridster');
+
+        this.observe(grid, 'active', function() {
+            grid.api.$wrapper.trigger(grid.active ? 'shown' : 'hidden');
+        });
+    };
+    rivets.bind($('#app'), scope);
+
     global.Dashing = Dashing;
     global.Dashboard = Dashboard;
     global.DashboardSet = DashboardSet;
+    global.scope = scope;
 })(window, window.console || {warn: alert.bind(null), error: alert.bind(null)},
    utils.getUrlParameter, utils.insertUrlParam);
-
-// rivets formatters
-rivets.binders.fade = function(el, value) {
-    /* jshint -W030 */
-    value ? $(el).fadeIn() : $(el).fadeOut();
-};

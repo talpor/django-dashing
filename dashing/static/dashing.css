@@ -85,7 +85,9 @@ h3 {
   color: white;
 }
 
-/* Base widget styles */
+.gridster {
+    position: absolute;
+}
 
 .widget {
     display: table;
@@ -125,10 +127,6 @@ h3 {
     right: 0;
 }
 
-#templates, .gridster {
-    display: none;
-}
-
 #overlayContainer .overlay {
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
@@ -137,11 +135,10 @@ h3 {
     bottom: 0;
     left: 0;
     z-index: 10;
-    display: none;
 }
 
 #overlayContainer .overlay .box {
-    display: inline-block;
+    float: left;
     background-color: #ff9618;
     width: 160px;
     height: 160px;
@@ -167,4 +164,19 @@ h3 {
     display: block;
     cursor: pointer;
     padding: 4px 17px;
+}
+
+/* animations */
+
+.fade {
+    transition: opacity 0.3s ease-out;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.fade.in {
+    opacity: 1;
+    height: auto;
+    overflow: auto;
 }

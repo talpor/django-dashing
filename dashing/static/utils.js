@@ -1,5 +1,4 @@
 (function(global) {
-
     function getUrlParameter(name) {
         name = name.replace(/[\[]/,'\\\[').replace(/[\]]/,'\\\]');
         var regexS = '[\\?&]' + name + '=([^&#]*)',
@@ -7,7 +6,6 @@
             results = regex.exec( window.location.href );
         return (results === null) ? null : results[1];
     }
-
     function insertUrlParam(key, value) {
         key = encodeURI(key); value = encodeURI(value);
         var kvp = document.location.search.substr(1).split('&');
@@ -20,10 +18,9 @@
                 break;
             }
         }
-        if(i<0) {kvp[kvp.length] = [key,value].join('=');}
+        if (i < 0) {kvp[kvp.length] = [key,value].join('=');}
         window.history.pushState(null, null, '?' + kvp.join('&').replace(/^\&/, ''));
     }
-
     global.utils = {
         getUrlParameter: getUrlParameter,
         insertUrlParam: insertUrlParam

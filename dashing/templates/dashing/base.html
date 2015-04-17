@@ -26,9 +26,11 @@
 </head>
 <body id="app" rv-on-keydown="toggleOverlay">
     {% block 'main_container' %}
-    <div id="container"></div>
+    <div id="container">
+        <div class="gridster fade" rv-each-grid="grids" rv-gridsterify="grid" rv-class-in="grid.active"><ul></ul></div>
+    </div>
     <div id="overlayContainer">
-        <div class="overlay" rv-fade="showingOverlay" rv-on-click="hideOverlay">
+        <div class="overlay fade" rv-class-in="showingOverlay" rv-on-click="hideOverlay">
             <div class="box" rv-each-dashboard="dashboards" rv-on-click="swapDashboard">{ dashboard.name }</div>
             <div id="actionContainer">
                 <div class="action" rv-each-action="actions">
