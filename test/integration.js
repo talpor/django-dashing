@@ -9,7 +9,7 @@ var phantom = require('phantom'),
 
 const PORT = '4567';
 
-describe('django-dashing tests', function() {
+describe('django-dashing tests:', function() {
     before(function() {
         // verify django in path
         cp.exec('which django-admin.py' , function (err, stdout) {
@@ -108,8 +108,26 @@ describe('django-dashing tests', function() {
                     });
             });
         });
+        it('should show the menu overlay when toggleOverlay is fired' +
+           'with the ctrl key down event', function(done) {
+            browser.open('/multiple_dashboards/', function (status) {
+                var page = this;
+                assert.equal('success', status);
+                page.evaluate(
+                    function () {
+                        /* jshint ignore:start */
+                        scope.toggleOverlay({which: 17});
+                        return $('#overlayContainer>div').hasClass('in');
+                        /* jshint ignore:end */
+                    },
+                    function (overlayShown) {
+                        assert.ok(overlayShown);
+                        done();
+                    });
+            });
+        });
     });
-    after(function(){
+    after(function() {
         browser.exit();
         process.kill(-server.pid);
     });
