@@ -1,5 +1,6 @@
 from django.conf import settings
-from django.utils import importlib, six
+from django.utils import six
+import importlib
 
 USER_SETTINGS = getattr(settings, 'DASHING', None)
 
