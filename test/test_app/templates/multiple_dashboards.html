@@ -1,4 +1,5 @@
 {% extends 'dashing/dashboard.html' %}
+{% block external_resources %}{% endblock %}
 {% block 'title' %}Multiple Dashboards{% endblock %}
 {% block 'config_file' %}
 <script type="text/javascript">
@@ -20,9 +21,6 @@ main.subscribe('shown', function() {
 });
 
 main.addWidget('clock_widget', 'Clock');
-main.addWidget('weather_widget', 'Weather', {
-  WOEID: 24701613
-});
 
 main.addWidget('current_valuation_widget', 'Number', {
     getData: function () {

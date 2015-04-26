@@ -73,7 +73,7 @@ DATABASES = {
 }
 
 DASHING = {
-    'INSTALLED_WIDGETS': ('number', 'list', 'graph', 'clock', 'weather'),
+    'INSTALLED_WIDGETS': ('number', 'list', 'graph', 'clock'),
 }
 
 # Internationalization
