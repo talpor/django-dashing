@@ -144,7 +144,7 @@ Then you can select the rolling time in the `ctrl` menu.  Or you can add the par
 
 **Dashboard Events**
 
-Each single dashboard publish a **shown** or **hidden** event when the dashboard are loaded or unloaded, you can use it as follows:
+Each single dashboard publishes a **shown** or **hidden** event when the dashboard are loaded or unloaded, you can use it as follows:
 
 .. code-block:: javascript
 
