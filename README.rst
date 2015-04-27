@@ -54,7 +54,7 @@ Installation
 Quick Start
 ===============================================
 
-To make your own dashboard and retrieve the data from django you should:
+To make your own dashboard and retrieves the data from django you should:
 
 1. Create a django dashboard application with a `widgets.py` file
 
@@ -92,7 +92,7 @@ Create a dashing-config.js file with a widget that retrive the data in your stat
         interval: 3000
     });
 
-Also if you want to locate the config file in a diferent directory you can create a `dashing/dashboard.html` file in your **TEMPLATE_DIRS** and replace the **config_file** block to the route of your javascript config file, see the `docs <http://django-dashing.readthedocs.org/en/latest/getting-started.html#template-file>`_.
+Also if you want to locate the config file in a different directory you can create a `dashing/dashboard.html` file in your **TEMPLATE_DIRS** and replace the **config_file** block to the route of your javascript config file, see the `docs <http://django-dashing.readthedocs.org/en/latest/getting-started.html#template-file>`_.
 
 Testing
 ===============================================
@@ -106,7 +106,7 @@ First install any development dependencies.
 
 Then download and install `PhamtonJS <http://phantomjs.org/download.html>`_
 
-django-dashing uses mocha as testing framework. Run the following command in the root directory to run the full test suite.
+django-dashing uses mocha as the testing framework. Run the following command in the root directory to run the full test suite.
 
 .. code-block:: text
 
