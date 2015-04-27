@@ -1,7 +1,7 @@
 Widgets
 ===============================================
 
-To place widgets in your dashboard you need create a javascript file, where you call each widget that you need to place with the correct options, each widget provide an events that you can call in any javascript file to update the data.
+To place widgets in your dashboard you need to create a javascript file, where you call each widget that you need to place with the correct options, each widget provides an event that you can call in any javascript file to update the data.
 
 For example if you create a number widget
 
@@ -23,14 +23,14 @@ For example if you create a number widget
         }
     });
 
-Then you can publish in any moment the event ``dashboard.publish('example_widget/getData')`` to get new data and update the widget.
+Then you can publish at any moment the event ``dashboard.publish('example_widget/getData')`` to get new data and update the widget.
 
-Note that in this example the `getData` method will be executed each 1000 milliseconds because is the default value of `interval` option in a `Number` widget.
+Note that in this example the `getData` method will be executed each 1000 milliseconds because it is the default value of `interval` option in a `Number` widget.
 
 Clock Widget
 ------------
 
-This widget can display an specific day an hour.
+This widget can display a specific day or an hour.
 
 Options
 ~~~~~~~~~~~~
@@ -42,7 +42,7 @@ col
     Number of columns occupied by the widget. *(default: 1)*
 
 data
-    JSON object that represent the date and time in format 
+    JSON object that represents the date and time in format 
 
     .. code-block:: javascript
 
@@ -65,7 +65,7 @@ interval
 Graph Widget
 ------------
 
-This widget can display a value with an associate graph as background.
+This widget can display a value with an associated graph as a background.
 
 Options
 ~~~~~~~~~~~~
@@ -103,7 +103,7 @@ getData
     *(default: empty function)*
 
 getWidget
-    Return the DOM element that represent the widget.
+    Return the DOM element that represents the widget.
 
 interval
     Actualization interval of widget scope on milliseconds. *(default: 1000)*
@@ -111,9 +111,9 @@ interval
 Graph options
 ~~~~~~~~~~~~
 
-To render the graph this widget use Rickshaw_ library, for now the config options are quite limited, if you need be more specific you can overwrite the rivetsjs binder (rv-dashing-graph) or write a custom widget use this as guide.
+To render the graph this widget use Rickshaw_ library, for now the config options are quite limited, if you need to be more specific you can overwrite the rivetsjs binder (rv-dashing-graph) or write a custom widget using this as a guide.
 
-To configure the X and Y axis you must define custom methods *xFormat* and *yFormat* in the scope, also you can use the methods *beforeRender* and *afterRender* to execute arbitrary javascript before or after of render, for example:
+To configure the X and Y axis you must define custom methods *xFormat* and *yFormat* in the scope, also you can use the methods *beforeRender* and *afterRender* to execute arbitrary javascript before or after rendering, for example:
 
 
 .. code-block:: javascript
@@ -129,7 +129,7 @@ To configure the X and Y axis you must define custom methods *xFormat* and *yFor
         $.extend(self.scope, scope);
     });
 
-Also you can specify any properties that the graph constructor accepts in the `scope` object, for example a valid `scope` may be:
+Also, you can specify any properties that the graph constructor accepts in the `scope` object, for example a valid `scope` may be:
 
 .. code-block:: javascript
 
@@ -157,13 +157,13 @@ Also you can specify any properties that the graph constructor accepts in the `s
 Python Class
 ~~~~~~~~~~~~
 
-This class helps to return valid data to be use by the widget, you can see the definition in GitHub__
+This class helps return valid data to be used by the widget, you can see the definition in GitHub__
 
 .. _GraphWidgetDefinition: https://github.com/talpor/django-dashing/blob/59def5a53d5b76db232196f2fffacd49270b27e1/dashing/widgets.py#L94-118
 
 __ GraphWidgetDefinition_
 
-Here's an example of a graph widget where in `value` is displayed the total of Errands and in `data` is returned an array with the last two hour of activity
+Here is an example of a graph widget where `value` is displayed the total number of Errands and in `data` returns an array with the last two hour of activity
 
 .. code-block:: python
     
@@ -198,7 +198,7 @@ Here's an example of a graph widget where in `value` is displayed the total of E
 List Widget
 ------------
 
-This widget can display a list of elements with an associate value.
+This widget can display a list of elements with an associated value.
 
 Options
 ~~~~~~~~~~~~
@@ -279,7 +279,7 @@ Here's an example of a graph widget where in `data` returns an array with the me
 Number Widget
 -------------
 
-This widget can display a value with another interesting information.
+This widget can display a value with other interesting information.
 
 Options
 ~~~~~~~~~~~~
@@ -317,13 +317,13 @@ interval
 Python Class
 ~~~~~~~~~~~~
 
-This class helps to return valid data to be use by the widget, you can see the definition in GitHub__
+This class helps to return valid data to be used by the widget, you can see the definition in GitHub__
 
 .. _NumberWidgetDefinition: https://github.com/talpor/django-dashing/blob/59def5a53d5b76db232196f2fffacd49270b27e1/dashing/widgets.py#L35-64
 
 __ NumberWidgetDefinition_
 
-Here's an example of a graph widget where in `value` is displayed the total of payments and in the detail and moreInfo shows other information of interest
+Here is an example of a graph widget where in `value` is displayed the total of payments and in the detail and moreInfo shows other information of interest
 
 .. code-block:: python
     
@@ -348,9 +348,9 @@ Here's an example of a graph widget where in `value` is displayed the total of p
 Custom Widgets
 ===============================================
 
-To make a custom widget you must create three static files to define configuration parameters and appearance, in addition, you can create a python class to communicate with the Django project.
+To make a custom widget you must create three static files to define configuration parameters and appearance. In addition, you can create a python class to communicate with the Django project.
 
-To name your widgets should follow a naming convention, where the name must by unique for findable through the settings.
+To name your widgets should follow a naming convention were the name must be unique and searchable through the settings.
 
 Static Files
 -------------
@@ -392,7 +392,7 @@ Script File
 
 Your location should be ``<static_directory>/widgets/<widget_name>.js`` in this file will be defined the configuration options and default values for the new widget, the idea is to create an object using the ``new`` keyword, then we define properties and methods using ``this`` keyword.
 
-We must provide an ``__init__`` method where binding the data with the template and add to the dashboard, this function is quite similar in all widgets, then it is provided by ``Dashing.utils.widgetInit`` to facilitate implementation and improve reading of widgets, also must provide a ``data`` element which will be binded to the template, and a ``getData`` function will surely be the to be overwritten to obtain relevant data as required,
+We must provide an ``__init__`` method were we bind the data with the template and add to the dashboard, this function is quite similar in all widgets, then it is provided by ``Dashing.utils.widgetInit`` to facilitate implementation and improve the lecture of widgets, you also must provide a ``data`` element which will be binded to the template, and a ``getData`` function will surely be there to be overwritten to obtain relevant data as required,
 
 For example ``{% static %}widgets/list/list.js`` looks like this:
 
@@ -414,7 +414,7 @@ For example ``{% static %}widgets/list/list.js`` looks like this:
         this.interval = 10000;
     };
 
-if we want to initialize widget with data we can write:
+If we want to initialize the widget with data we can write:
 
 
 .. code-block:: javascript
@@ -432,7 +432,7 @@ if we want to initialize widget with data we can write:
 Python Class
 -------------
 
-Surely in many cases may be necessary give the option to get some Dajngo project data into the widget, for this dashing has a Widget class that can be inherited to deliver properly serialized data, also subsequently can be serve the data using the dashing router.
+Surely in many cases it may be necessary to give the option to get some Dajngo project data into the widget, for this dashing has a Widget class that can be inherited to deliver properly serialized data, subsequently serving data using the dashing router.
 
 For example ListWidget in ``dashing/widgets.py`` looks like this:
 
@@ -464,17 +464,17 @@ For example ListWidget in ``dashing/widgets.py`` looks like this:
                 'data': self.get_data(),
             }
 
-If you develop your widget with python classes necessarily going to have to distribute it via PyPI
+If you develop your widget with python classes it is necessary that you distribute it via PyPI
 
 Distribution
 ------------
 
-To distribute a widget you have two options, the fastest way is throught  Django Dashing Channel but is a bit limited, and through PyPI a bit trickier to pack but you have more options when developing the widget.
+To distribute a widget you have two options. The fastest way is through  Django Dashing Channel but it is a bit limited, and through PyPI, a bit trickier to pack but you have more options when developing the widget.
 
 Via Django Dashing Channel
 ~~~~~~~~~~~~
 
-Using this distribution method the users will only have to add the widget name on ``INSTALLED_WIDGETS`` then to loading the dashboard, this locates the static files from a remote location (specified in the preconfigured repository), if the user creates a copy of the files on your local static directory then these will open locally.
+Using this distribution method the users will only have to add the widget name on ``INSTALLED_WIDGETS`` then load the dashboard, this locates the static files from a remote location (specified in the preconfigured repository), if the user creates a copy of the files on your local static directory then these will open locally.
 
 You will have to host your files into a CDN, I recommend creating a github project and use RawGit_ to serve through MaxCDN_, you can take `dj-dashing-weather-widget`__ project as a guide.
 
@@ -485,7 +485,7 @@ __ WeatherWidget_
 
 Finally to publish your widget in Django Dashing Channel you need to make a fork of `django-dashing-channel`__, add your repository to repositories.json and send a pull request. In the repository root will be sought the widget static files (.js .css and .html)
 
-You should create a README file for installations instructions.
+You should create a README file for installation instructions.
 
 .. _DashingChannel: https://github.com/talpor/django-dashing-channel
 __ DashingChannel_
@@ -493,11 +493,11 @@ __ DashingChannel_
 PyPI Package
 ~~~~~~~~~~~~
 
-If your widget requires python code or just want to provide an easy way to get the widget locally then a PyPI package is the way to go.
+If your widget requires python code or you just want to provide an easy way to get the widget locally then a PyPI package is the way to go.
 
-As a requirement is necessary follow the widgets naming convention (`see static files`__). To create a PyPI package `see the documentation <https://docs.python.org/2/distutils/packageindex.html>`_, and should create a README file for installations instructions.
+As a requirement it is necessary follow the widgets naming convention (`see static files`__). To create a PyPI package `see the documentation <https://docs.python.org/2/distutils/packageindex.html>`_, and should create a README file for installations instructions.
 
-This not excluding the previous way, you could create a minimalist version of your widget and upload to django-dashing-channel and in the project instructions leave on how to install the PyPI version
+This is not excluding the previous way, you could create a minimalist version of your widget and upload it to django-dashing-channel and in the project instructions show how to install the PyPI version
 
 .. _WidgetsNamingConvention: #static-files
 __ WidgetsNamingConvention_
