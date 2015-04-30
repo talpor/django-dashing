@@ -4,7 +4,7 @@ Dashboards
 Single Dashboard 
 ----------------
 
-To initialize a single dashboard you need create a Dashboard object and pass valid options as shown below:
+To initialize a single dashboard you need to create a Dashboard object and pass valid options as shown below:
 
 .. code-block:: javascript
 
@@ -65,7 +65,7 @@ listWidgets
     Returns the list of widgets created on this dashboard
 
 subscribe
-    To subscribe an event in this dashboard you can doing as follow:
+    To subscribe an event in this dashboard you can do the following:
 
     .. code-block:: javascript
 
@@ -74,7 +74,7 @@ subscribe
         });
 
 publish
-    To publish an event in this dashboard you can doing as follow:
+    To publish an event in this dashboard you can do the following:
 
     .. code-block:: javascript
 
@@ -84,7 +84,7 @@ publish
 Multiple Dashboards
 -------------------
 
-To initialize a multiple dashboards you need create a DashboardSet object and pass valid options as shown below:
+To initialize a multiple dashboard you need to create a DashboardSet object and pass valid options as shown below:
 
 .. code-block:: javascript
 
@@ -102,7 +102,7 @@ addDashboard
         myDashboardSet.addDashboard(name, options)
 
 
-    Where `name` is a string with the name of dashboard and `options` is a json object with the same format of the options of the `Dashboard` object.
+    Where `name` is a string with the name of the dashboard and `options` is a json object with the same format of the options of the `Dashboard` object.
 
 getDashboard
     To get a Dashboard from the DashboardSet object:
@@ -112,7 +112,7 @@ getDashboard
         myDashboardSet.getDashboard(name)
 
 addAction
-    To add a button on the overlay menu that running arbitrary javascript code, for example:
+    To add a button on the overlay menu that runs arbitrary javascript code, for example:
 
     .. code-block:: javascript
 
@@ -124,7 +124,7 @@ addAction
 
 *Manual*
 
-To swap between dashboards need to press the `ctrl` key to display the menu.
+To swap between dashboards you need to press the `ctrl` key to display the menu.
 
 *Automatic*
 
@@ -144,7 +144,7 @@ Then you can select the rolling time in the `ctrl` menu.  Or you can add the par
 
 **Dashboard Events**
 
-Each single dashboard publish a **shown** or **hidden** event when the dashboard are loaded or unloaded, you can use it as follows:
+Each single dashboard publishes a **shown** or **hidden** event when the dashboard are loaded or unloaded, you can use it as follows:
 
 .. code-block:: javascript
 

@@ -51,6 +51,49 @@ Installation
 4. Start the development server and visit http://127.0.0.1:8000/dashboard/
    to view the dummy dashboard.
 
+Quick Start
+===============================================
+
+To make your own dashboard and retrieves the data from django you should:
+
+1. Create a django dashboard application with a `widgets.py` file
+
+2. Create your widget extended from **NumberWidget**, **ListWidget**, **GraphWidget** or simply **Widget** (from dashing.widgets), for example `see <https://github.com/individuo7/django-dashing-demo-app/blob/master/django_dashing_demo_app/widgets.py>`_.
+
+.. code-block:: python
+
+3. Register your widget in `urls.py` like:
+
+.. code-block:: python
+
+    from django.conf.urls import patterns, url, include
+        from dashing.utils import router
+
+        from project.dashboard.widgets import CustomWidget
+
+        router.register(CustomWidget, 'custom_widget')
+
+        urlpatterns = patterns('',
+            url(r'^dashboard/', include(router.urls)),
+        )
+
+Create a dashing-config.js file with a widget that retrive the data in your static directory like:
+
+.. code-block:: javascript
+
+    var myDashboard = new Dashboard();
+    myDashboard.addWidget('customWidget', 'Number', {
+        getData: function () {
+            var self = this;
+            $.get('/dashboard/widgets/custom_widget/', function(data) {
+                $.extend(self.data, data);
+            });
+        },
+        interval: 3000
+    });
+
+Also if you want to locate the config file in a different directory you can create a `dashing/dashboard.html` file in your **TEMPLATE_DIRS** and replace the **config_file** block to the route of your javascript config file, see the `docs <http://django-dashing.readthedocs.org/en/latest/getting-started.html#template-file>`_.
+
 Testing
 ===============================================
 
@@ -63,7 +106,7 @@ First install any development dependencies.
 
 Then download and install `PhamtonJS <http://phantomjs.org/download.html>`_
 
-django-dashing uses mocha as testing framework. Run the following command in the root directory to run the full test suite.
+django-dashing uses mocha as the testing framework. Run the following command in the root directory to run the full test suite.
 
 .. code-block:: text
 

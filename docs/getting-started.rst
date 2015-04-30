@@ -3,7 +3,7 @@ Getting Started
 
 Installation
 -----------
-1. Install latest stable version from PyPi:
+1. Install the latest stable version from PyPi:
 
 .. code-block:: text
 
@@ -53,7 +53,7 @@ For example your project's ``settings.py`` file might include something like thi
 Accessing settings
 ~~~~~~~~~~~
 
-If you need to access the values of Django Dashing settings in your project, you should use the dashing_settings object. For example.
+If you need to access the values of Django Dashing settings in your project, you should use the dashing_settings object. For example:
 
 
 .. code-block:: python
@@ -68,7 +68,7 @@ Settings
 
 **INSTALLED_WIDGETS**
 
-A list or tuple of name of widgets to load when the dashboard is displayed, searches for resources of widgets (js, css and html) in the static directory, if not found then searches in the remote repository
+A list or tuple of name of widgets to load when the dashboard is displayed, searches for resources of widgets (js, css and html) in the static directory, if not found then search in the remote repository
 
 Default:
 
@@ -78,7 +78,7 @@ Default:
 
 **PERMISSION_CLASSES**
 
-A list or tuple of permission classes, that determines the default set of permissions checked when display the dashboard.
+A list or tuple of permission classes, that determine the default set of permissions checked when displaying the dashboard.
 
 The default permissions classes provided are: *AllowAny*, *IsAuthenticated*, and *IsAdminUser*
 
@@ -186,7 +186,7 @@ Your ``dashing/dashing.html`` might looks like this:
 Python Widget Classes
 ----------------------
 
-Django Dashing provide an useful set of classes to return the expected data for the default widgets, you can create a `widgets.py` file and inherit of these classes or create your own widgets inherit from ``dashing.widgets.Widget``.
+Django Dashing provides a useful set of classes to return the expected data for the default widgets, you can create a `widgets.py` file and inherit of these classes or create your own widgets inherit from ``dashing.widgets.Widget``.
 
 A custom widget can look like this:
 
