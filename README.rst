@@ -67,15 +67,15 @@ To make your own dashboard and retrieves the data from django you should:
 .. code-block:: python
 
     from django.conf.urls import patterns, url, include
-        from dashing.utils import router
+    from dashing.utils import router
 
-        from project.dashboard.widgets import CustomWidget
+    from project.dashboard.widgets import CustomWidget
 
-        router.register(CustomWidget, 'custom_widget')
+    router.register(CustomWidget, 'custom_widget')
 
-        urlpatterns = patterns('',
-            url(r'^dashboard/', include(router.urls)),
-        )
+    urlpatterns = patterns('',
+        url(r'^dashboard/', include(router.urls)),
+    )
 
 Create a dashing-config.js file with a widget that retrive the data in your static directory like:
 
