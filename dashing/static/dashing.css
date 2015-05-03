@@ -180,7 +180,6 @@ h3 {
     cursor: pointer;
 }
 
-
 #rollingMenu ul.in li {
     opacity: 1;
 }
@@ -188,14 +187,13 @@ h3 {
 /* animations */
 
 .fade {
-    transition: opacity 0.3s ease-out;
+    transition:visibility 0s linear 0.5s,opacity 0.5s ease-out;
     opacity: 0;
-    height: 0;
-    overflow: hidden;
+    visibility:hidden;
 }
 
 .fade.in {
     opacity: 1;
-    height: auto;
-    overflow: auto;
+    visibility:visible;
+    transition-delay:0s;
 }
