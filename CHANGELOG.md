@@ -1,13 +1,14 @@
 ## master
 - Add django compressor as an optional dependency
 - Migrate dashing.js towards an data binding model using rivetsjs
+- Change the naming pattern to refer widgets environments as `data.data` to simply use `scope` (backward compatible)
 
 ## 0.2.5
 
 - Add triggers **shown** and **hidden** to grid wrappers which can be used for specific actions when dashboards in a dashboardset are loaded or unloaded
 - Dashboard has **activeWidgets** array property for direct access to the widgets
 - Manage Rickshaw.Graph properties [details](https://github.com/talpor/django-dashing/pull/20)
-- Change to camel case the name of default widget properties (with backward compatibility)
+- Change to camel case the name of default widget properties (backward compatible)
 - Add custom actions in overlay menu of multiple dashboards
 
 ## 0.2.4
