@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static from staticfiles %}
-{% load dashing_resources %}
+{% load dashing_tags %}
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -9,11 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>{% block 'title' %}Django Dashing{% endblock %}</title>
-
+    {% compress css %}
     <link rel="stylesheet" href="{% static 'libs/jquery-gridster/jquery.gridster.css' %}">
     <link rel="stylesheet" href="{% static 'libs/rickshaw/rickshaw.css' %}">
     <link rel="stylesheet" href="{% static 'libs/font-awesome/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'dashing.css' %}">
+    {% endcompress %}
     {% widget_styles %}
     {% block 'stylesheets' %}
     {% endblock %}
@@ -24,7 +25,6 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
     {% endblock %}
     <link rel="icon" href="/assets/images/favicon.ico">
-
 </head>
 <body id="app" rv-on-keydown="toggleOverlay">
     {% block 'main_container' %}
@@ -51,17 +51,20 @@
         </div>
     </div>
     {% endblock %}
+    {% compress js %}
     <script type="text/javascript" src="{% static 'libs/jquery-1.11.0.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/rivets.bundled.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/sightglass.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/rivets.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'libs/jquery-gridster/jquery.gridster.js' %}"></script>
     <script type="text/javascript" src="{% static 'libs/jquery.knob.js' %}"></script>
     <script type="text/javascript" src="{% static 'libs/d3.js' %}"></script>
     <script type="text/javascript" src="{% static 'libs/rickshaw/rickshaw.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/moment-with-langs.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/moment-with-locales.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'utils.js' %}"></script>
     <script type="text/javascript" src="{% static 'dashing.js' %}"></script>
+    {% endcompress %}
     {% widget_scripts %}
     {% block 'scripts' %}
     {% endblock %}

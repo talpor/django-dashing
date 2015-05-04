@@ -1,6 +1,8 @@
 from django import template
-from django.templatetags.static import static
+from django.conf import settings
 from django.contrib.staticfiles.finders import find
+from django.templatetags.static import static
+from django.template import Node
 
 from dashing.settings import dashing_settings
 
@@ -69,3 +71,29 @@ def widget_scripts():
 def widget_templates():
     return load('<link rel="resource" type="text/html" '
                 'href="{}" data-widget="{}">\n', 'html')
+
+if "compressor" in settings.INSTALLED_APPS:
+    @register.tag
+    def compress(parser, token):
+        """
+        Shadows django-compressor's compress tag so it can be
+        loaded from ``dashing_tags``, allowing us to provide
+        a dummy version when django-compressor isn't installed.
+        """
+        from compressor.templatetags.compress import compress
+        return compress(parser, token)
+else:
+    @register.tag
+    def compress(parser, token):
+        """
+        Dummy tag for fallback when django-compressor isn't installed.
+        """
+        class TagNode(Node):
+            def __init__(self, nodelist):
+                self.nodelist = nodelist
+
+            def render(self, context):
+                return self.nodelist.render(context)
+        nodelist = parser.parse(('endcompress',))
+        parser.delete_first_token()
+        return TagNode(nodelist)

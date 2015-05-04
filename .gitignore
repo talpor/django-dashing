@@ -5,3 +5,4 @@ docs/_build/*
 build/
 dist/
 node_modules/*
+CACHE
