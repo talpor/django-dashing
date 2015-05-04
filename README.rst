@@ -16,6 +16,7 @@ Check out a demo over `here <https://django-dashing-demo.herokuapp.com/dashboard
 Prerequisites
 ===============================================
 - Django 1.5.+
+- Django Compressor (optional)
 
 Key concepts
 ===============================================
