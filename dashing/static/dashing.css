@@ -187,7 +187,7 @@ h3 {
 /* animations */
 
 .fade {
-    transition:visibility 0s linear 0.5s,opacity 0.5s ease-out;
+    transition:visibility 0s linear 0.3s,opacity 0.3s ease-out;
     opacity: 0;
     visibility:hidden;
 }
