@@ -1,3 +1,7 @@
+## master
+- Add django compressor as an optional dependency
+- Migrate dashing.js towards an data binding model using rivetsjs
+
 ## 0.2.5
 
 - Add triggers **shown** and **hidden** to grid wrappers which can be used for specific actions when dashboards in a dashboardset are loaded or unloaded
