@@ -121,7 +121,7 @@ To configure the X and Y axis you must define custom methods *xFormat* and *yFor
     function xFormat(n) {
         return '(' + n + ')';
     };
-    $.get('/my/api/url/', function(scope) {
+    Dashing.utils.get('my-registered-widget-url-name', function(scope) {
         scope.xFormat = xFormat;
         scope.afterRender = function() {
             alert('graph shown');

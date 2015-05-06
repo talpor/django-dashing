@@ -25,6 +25,35 @@
                         });
                     dashboard.grid.api.add_widget(template, self.col, self.row);
                 };
+            },
+            get: function(name, options) {
+                var success = null;
+                options = options || {};
+                if (global.dashingUrlBlacklist && global.dashingUrlBlacklist.indexOf(name) !== -1) {
+                    return;
+                }
+                if (options instanceof Function) {
+                    success = options;
+                    options = {};
+                }
+                $.ajax(
+                    $.extend({
+                        url: [location.origin, location.pathname,
+                              'widgets/', name].join(''),
+                        method: 'GET',
+                        success: success,
+                        error: function(jqxhr) {
+                            if (jqxhr.status === 404) {
+                                var msg = 'does not exists a widget registered with the name `' +
+                                          name + '` check http://django-dashing.readthedocs.org' +
+                                          '/en/latest/getting-started.html#python-widget-classes';
+                                global.dashingUrlBlacklist = global.dashingUrlBlacklist ? 
+                                        global.dashingUrlBlacklist.push(name) : [name];
+                                throw new Error(msg);
+                            }
+                        }
+                    }, options)
+                );
             }
         },
         widgets: {}
