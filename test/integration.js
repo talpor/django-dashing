@@ -35,9 +35,9 @@ describe('django-dashing tests:', function() {
         });
     });
     it('should run a django server', function(done) {
-        (function waitingForServer() {
-            if (server === undefined) {
-                setTimeout(waitingForServer, 100);
+        (function waitingForResources() {
+            if (server === undefined || browser.open === undefined) {
+                setTimeout(waitingForResources, 100);
             }
             else {
                 // Waiting for the overall server load
