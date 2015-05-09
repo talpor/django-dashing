@@ -86,7 +86,7 @@ Create a dashing-config.js file with a widget that retrive the data in your stat
     myDashboard.addWidget('customWidget', 'Number', {
         getData: function () {
             var self = this;
-            $.get('/dashboard/widgets/custom_widget/', function(data) {
+            Dashing.utils.get('custom_widget', function(data) {
                 $.extend(self.data, data);
             });
         },
