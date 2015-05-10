@@ -1,4 +1,4 @@
-## master
+## 0.2.6
 - Add django compressor as an optional dependency
 - Migrate dashing.js towards an data binding model using rivetsjs
 - Change the naming pattern to refer widgets environments as `data.data` to simply use `scope` (backward compatible)
