@@ -21,6 +21,11 @@
                             else {
                                 /* backward compatibility for old widget pattern */
                                 rivets.bind(template, {data: self.data});
+                                console.warn(['the widget',
+                                              widgetName,
+                                              'should be updated to the new',
+                                              'naming pattern to be 0.3.x',
+                                              'compatible, see http://bit.ly/1dUN4GY'].join(' '));
                             }
                         });
                     dashboard.grid.api.add_widget(template, self.col, self.row);
@@ -214,6 +219,13 @@
             if (widget.scope && !widget.data) {
                 Object.defineProperty(widget, 'data', {
                     get: function() {
+                        if (!window['warning_' + name]) {
+                            console.warn(['the widget', name,
+                                          'should be updated to the new',
+                                          'naming pattern to be 0.3.x',
+                                          'compatible, see http://bit.ly/1zTKOd3'].join(' '));
+                        }
+                        window['warning_' + name] = true;
                         return this.scope;
                     }
                 });
