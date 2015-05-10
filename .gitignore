@@ -6,3 +6,4 @@ build/
 dist/
 node_modules/*
 CACHE
+.orig
