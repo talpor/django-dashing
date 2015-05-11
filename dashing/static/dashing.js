@@ -59,6 +59,11 @@
                         }
                     }, options)
                 );
+            },
+            urlify: function(text) {
+                return encodeURIComponent(text.toLowerCase()
+                                              .replace(/\s+/g,'-')
+                                              .replace(/[^\w-]+/g,''));
             }
         },
         widgets: {}
@@ -70,9 +75,7 @@
                     dashboards: [],
                     actions: [],
                     swapDashboard: function(e, model) {
-                        // this automatically change all another active
-                        // properties in scope.grids elements to false
-                        model.dashboard.grid.active = true;
+                        goToDashboard(model.dashboard);
                         scope.showingOverlay = false;
                     },
                     hideOverlay: function(e) {
@@ -103,7 +106,20 @@
                         }
                     };
                 }
+                global.onhashchange = function() {
+                    scope.dashboards.some(function(dashboard) {
+                        if (location.hash.match('#/' + dashboard.slug + '/')) {
+                            // this automatically change all another active
+                            // properties in scope.grids elements to false
+                            dashboard.grid.active = true;
+                            return true;
+                        }
+                    });
+                };
                 setupRolling();
+            },
+            goToDashboard = function(dashboard) {
+                location.hash = '#/' + dashboard.slug + '/';
             },
             setupRolling = function(interval) {
                 var parameterValue = getUrlParameter('roll');
@@ -123,13 +139,13 @@
                 }
             },
             switchDashboards = function() {
-                var nextStatus = false, tmp;
-                scope.dashboards.forEach(function(dashboard) {
-                    tmp = dashboard.grid.active;
-                    dashboard.grid.active = nextStatus;
-                    nextStatus = tmp;
-                });
-                if (nextStatus) scope.dashboards[0].grid.active = nextStatus;
+                var len = scope.dashboards.length,
+                    nextDashboard = $.grep(scope.dashboards,
+                                            function(d, index) {
+                                                var previous = index === 0 ? len - 1 : index - 1;
+                                                return scope.dashboards[previous].grid.active;
+                                            })[0];
+                goToDashboard(nextDashboard);
             };
         this.addDashboard = function(name, options) {
             var dash;
@@ -167,13 +183,13 @@
         'use strict';
         var self = this,
             init = function () {
-                options = options || {};
+                var expectedPath = self.slug ? '#/' + self.slug + '/' : null;
                 self.grid = {
                     width: options.viewportWidth,
                     height: options.viewportHeight,
                     widgetMargins: options.widgetMargins,
                     widgetBaseDimensions: options.widgetBaseDimensions,
-                    active: options.active,
+                    active: !Boolean(expectedPath),
                     siblings: function() {
                         return scope.grids.filter(function(grid) {
                             return grid._rv !== self.grid._rv;
@@ -182,16 +198,24 @@
                 };
                 scope.grids.push(self.grid);
 
-                // show if is the fist dashboard added
-                if (scope.grids.length === 1) scope.grids[0].active = true;
-
+                if (expectedPath) {
+                    if (location.hash === '') {
+                        location.hash = expectedPath;
+                    }
+                    else if (location.hash.match(expectedPath)) {
+                        // wait until it is added
+                        setTimeout(global.onhashchange);
+                    }
+                }
                 self.widgets = {};
                 for (var key in Dashing.widgets) {
                     self.widgets[key] = Dashing.widgets[key];
                 }
             },
             widgetSet = [];
-        this.name = options ? options.name : 'unnamed';
+        options = options || {};
+        this.name = options.name || 'unnamed';
+        this.slug = options.name ? Dashing.utils.urlify(options.name) : undefined;
         this.show = function() {
             self.grid.active = true;
         };
