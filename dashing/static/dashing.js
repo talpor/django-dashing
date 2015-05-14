@@ -1,6 +1,6 @@
-/* global $, rivets, setInterval, alert, utils */
+/* global $, rivets, setInterval, alert */
 
-(function(global, console, getUrlParameter, insertUrlParam) {
+(function(global, console) {
     var Dashboard, Dashing, DashboardSet,
         scope = {grids: [], toggleOverlay: function() {}};
     Dashing = {
@@ -59,6 +59,11 @@
                         }
                     }, options)
                 );
+            },
+            urlify: function(text) {
+                return encodeURIComponent(text.toLowerCase()
+                                              .replace(/\s+/g,'-')
+                                              .replace(/[^\w-]+/g,''));
             }
         },
         widgets: {}
@@ -70,9 +75,7 @@
                     dashboards: [],
                     actions: [],
                     swapDashboard: function(e, model) {
-                        // this automatically change all another active
-                        // properties in scope.grids elements to false
-                        model.dashboard.grid.active = true;
+                        goToDashboard(model.dashboard);
                         scope.showingOverlay = false;
                     },
                     hideOverlay: function(e) {
@@ -96,40 +99,47 @@
                             if (!e) return;
                             var seconds = Number(e.target.dataset.time);
                             if (isNaN(seconds)) return;
-                            setupRolling(seconds*1000);
-                            insertUrlParam('roll', seconds*1000);
+                            setRolling(seconds*1000);
                             scope.showingOverlay =
                             scope.rollingMenu.showing = false;
                         }
                     };
                 }
-                setupRolling();
-            },
-            setupRolling = function(interval) {
-                var parameterValue = getUrlParameter('roll');
-                if (interval !== undefined || parameterValue !== null) {
-                    interval = interval !== undefined ?
-                               Number(interval) : Number(parameterValue);
-                    if (isNaN(interval)) {
-                        console.warn('roll parameter must be a number');
-                        return;
-                    }
+                global.onhashchange = function() {
+                    var opt = /\?roll\=(\d+)/.exec(location.hash), interval;
+                    // show active dashboard
+                    scope.dashboards.some(function(dashboard) {
+                        if (location.hash.match('#/' + dashboard.slug + '/')) {
+                            // this automatically change all another active
+                            // properties in scope.grids elements to false
+                            dashboard.grid.active = true;
+                            return true;
+                        }
+                    });
+                    // set rolling if is necessary
+                    interval = opt ? Number(opt[1]) : 0;
+                    if (isNaN(interval)) return;
                     clearInterval(global.rollingInterval);
-                    if (interval !== 0) {
-                        global.rollingInterval = setInterval(function() {
-                            switchDashboards();
-                        }, interval);
-                    }
-                }
+                    if (interval === 0) return;
+                    global.rollingInterval = setInterval(function() {
+                        // go to next dashboards
+                        var len = scope.dashboards.length,
+                            isPreviousActive = function(d, index) {
+                                var previous = index === 0 ? len - 1 : index - 1;
+                                return scope.dashboards[previous].grid.active;
+                            },
+                            nextDashboard = $.grep(scope.dashboards, isPreviousActive)[0];
+                        goToDashboard(nextDashboard);
+                    }, interval);
+                };
             },
-            switchDashboards = function() {
-                var nextStatus = false, tmp;
-                scope.dashboards.forEach(function(dashboard) {
-                    tmp = dashboard.grid.active;
-                    dashboard.grid.active = nextStatus;
-                    nextStatus = tmp;
-                });
-                if (nextStatus) scope.dashboards[0].grid.active = nextStatus;
+            setRolling = function(ms) {
+                var lhash = /(\#\/.+\/).*/.exec(location.hash) || [null, ''];
+                location.hash = lhash[1] + '?roll=' + ms;
+            },
+            goToDashboard = function(dashboard) {
+                var lhash = /.+(\?roll\=\d+)/.exec(location.hash) || [null, ''];
+                location.hash = '#/' + dashboard.slug + '/' + lhash[1];
             };
         this.addDashboard = function(name, options) {
             var dash;
@@ -167,13 +177,13 @@
         'use strict';
         var self = this,
             init = function () {
-                options = options || {};
+                var expectedPath = self.slug ? '#/' + self.slug + '/' : null;
                 self.grid = {
                     width: options.viewportWidth,
                     height: options.viewportHeight,
                     widgetMargins: options.widgetMargins,
                     widgetBaseDimensions: options.widgetBaseDimensions,
-                    active: options.active,
+                    active: !Boolean(expectedPath),
                     siblings: function() {
                         return scope.grids.filter(function(grid) {
                             return grid._rv !== self.grid._rv;
@@ -182,16 +192,24 @@
                 };
                 scope.grids.push(self.grid);
 
-                // show if is the fist dashboard added
-                if (scope.grids.length === 1) scope.grids[0].active = true;
-
+                if (expectedPath) {
+                    if (location.hash === '') {
+                        location.hash = expectedPath;
+                    }
+                    else if (location.hash.match(expectedPath)) {
+                        // wait until it is added
+                        setTimeout(global.onhashchange);
+                    }
+                }
                 self.widgets = {};
                 for (var key in Dashing.widgets) {
                     self.widgets[key] = Dashing.widgets[key];
                 }
             },
             widgetSet = [];
-        this.name = options ? options.name : 'unnamed';
+        options = options || {};
+        this.name = options.name || 'unnamed';
+        this.slug = options.name ? Dashing.utils.urlify(options.name) : undefined;
         this.show = function() {
             self.grid.active = true;
         };
@@ -283,5 +301,4 @@
     global.Dashboard = Dashboard;
     global.DashboardSet = DashboardSet;
     global.scope = scope;
-})(window, window.console || {warn: alert.bind(null), error: alert.bind(null)},
-   utils.getUrlParameter, utils.insertUrlParam);
+})(window, window.console || {warn: alert.bind(null), error: alert.bind(null)});

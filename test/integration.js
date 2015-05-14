@@ -76,6 +76,22 @@ describe('django-dashing tests:', function() {
                     });
             });
         });
+        it('should have an active dashboard', function(done) {
+            browser.open('/dashboard/', function (status) {
+                var page = this;
+                assert.equal('success', status);
+                page.evaluate(
+                    function () {
+                        /* jshint ignore:start */
+                        return dashboard.grid.active;
+                        /* jshint ignore:end */
+                    },
+                    function (isActive) {
+                        assert.ok(isActive);
+                        done();
+                    });
+            });
+        });
         it('should display four widgets', function(done) {
             browser.open('/dashboard/', function (status) {
                 var page = this;
