@@ -1,6 +1,6 @@
-/* global $, rivets, setInterval, alert, utils */
+/* global $, rivets, setInterval, alert */
 
-(function(global, console, getUrlParameter, insertUrlParam) {
+(function(global, console) {
     var Dashboard, Dashing, DashboardSet,
         scope = {grids: [], toggleOverlay: function() {}};
     Dashing = {
@@ -99,14 +99,15 @@
                             if (!e) return;
                             var seconds = Number(e.target.dataset.time);
                             if (isNaN(seconds)) return;
-                            setupRolling(seconds*1000);
-                            insertUrlParam('roll', seconds*1000);
+                            setRolling(seconds*1000);
                             scope.showingOverlay =
                             scope.rollingMenu.showing = false;
                         }
                     };
                 }
                 global.onhashchange = function() {
+                    var opt = /\?roll\=(\d+)/.exec(location.hash), interval;
+                    // show active dashboard
                     scope.dashboards.some(function(dashboard) {
                         if (location.hash.match('#/' + dashboard.slug + '/')) {
                             // this automatically change all another active
@@ -115,37 +116,30 @@
                             return true;
                         }
                     });
+                    // set rolling if is necessary
+                    interval = opt ? Number(opt[1]) : 0;
+                    if (isNaN(interval)) return;
+                    clearInterval(global.rollingInterval);
+                    if (interval === 0) return;
+                    global.rollingInterval = setInterval(function() {
+                        // go to next dashboards
+                        var len = scope.dashboards.length,
+                            isPreviousActive = function(d, index) {
+                                var previous = index === 0 ? len - 1 : index - 1;
+                                return scope.dashboards[previous].grid.active;
+                            },
+                            nextDashboard = $.grep(scope.dashboards, isPreviousActive)[0];
+                        goToDashboard(nextDashboard);
+                    }, interval);
                 };
-                setupRolling();
+            },
+            setRolling = function(ms) {
+                var lhash = /(\#\/.+\/).*/.exec(location.hash) || [null, ''];
+                location.hash = lhash[1] + '?roll=' + ms;
             },
             goToDashboard = function(dashboard) {
-                location.hash = '#/' + dashboard.slug + '/';
-            },
-            setupRolling = function(interval) {
-                var parameterValue = getUrlParameter('roll');
-                if (interval !== undefined || parameterValue !== null) {
-                    interval = interval !== undefined ?
-                               Number(interval) : Number(parameterValue);
-                    if (isNaN(interval)) {
-                        console.warn('roll parameter must be a number');
-                        return;
-                    }
-                    clearInterval(global.rollingInterval);
-                    if (interval !== 0) {
-                        global.rollingInterval = setInterval(function() {
-                            switchDashboards();
-                        }, interval);
-                    }
-                }
-            },
-            switchDashboards = function() {
-                var len = scope.dashboards.length,
-                    nextDashboard = $.grep(scope.dashboards,
-                                            function(d, index) {
-                                                var previous = index === 0 ? len - 1 : index - 1;
-                                                return scope.dashboards[previous].grid.active;
-                                            })[0];
-                goToDashboard(nextDashboard);
+                var lhash = /.+(\?roll\=\d+)/.exec(location.hash) || [null, ''];
+                location.hash = '#/' + dashboard.slug + '/' + lhash[1];
             };
         this.addDashboard = function(name, options) {
             var dash;
@@ -307,5 +301,4 @@
     global.Dashboard = Dashboard;
     global.DashboardSet = DashboardSet;
     global.scope = scope;
-})(window, window.console || {warn: alert.bind(null), error: alert.bind(null)},
-   utils.getUrlParameter, utils.insertUrlParam);
+})(window, window.console || {warn: alert.bind(null), error: alert.bind(null)});
