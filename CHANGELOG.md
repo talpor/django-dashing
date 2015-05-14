@@ -1,5 +1,6 @@
 ## master
 - add hash based navigation in multiple dashboards
+- add again option to change the background color of a widget
 
 ## 0.2.6
 - Add django compressor as an optional dependency

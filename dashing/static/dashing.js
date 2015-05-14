@@ -28,6 +28,7 @@
                                               'compatible, see http://bit.ly/1dUN4GY'].join(' '));
                             }
                         });
+                    if (self.color) template.css('background-color', self.color);
                     dashboard.grid.api.add_widget(template, self.col, self.row);
                 };
             },
@@ -110,19 +111,19 @@
                     // show active dashboard
                     scope.dashboards.some(function(dashboard) {
                         if (location.hash.match('#/' + dashboard.slug + '/')) {
-                            // this automatically change all another active
+                            // this automatically changes all other active
                             // properties in scope.grids elements to false
                             dashboard.grid.active = true;
                             return true;
                         }
                     });
-                    // set rolling if is necessary
+                    // set rolling if it is necessary
                     interval = opt ? Number(opt[1]) : 0;
                     if (isNaN(interval)) return;
                     clearInterval(global.rollingInterval);
                     if (interval === 0) return;
                     global.rollingInterval = setInterval(function() {
-                        // go to next dashboards
+                        // go to next dashboard
                         var len = scope.dashboards.length,
                             isPreviousActive = function(d, index) {
                                 var previous = index === 0 ? len - 1 : index - 1;
@@ -231,19 +232,20 @@
             }
 
             $.extend(widget, options);
+            console.log(widget);
             if (widget.__init__) widget.__init__();
 
             /* backward compatibility for old widget pattern */
             if (widget.scope && !widget.data) {
                 Object.defineProperty(widget, 'data', {
                     get: function() {
-                        if (!window['warning_' + name]) {
+                        if (!global['warning_' + name]) {
                             console.warn(['the widget', name,
                                           'should be updated to the new',
                                           'naming pattern to be 0.3.x',
                                           'compatible, see http://bit.ly/1zTKOd3'].join(' '));
                         }
-                        window['warning_' + name] = true;
+                        global['warning_' + name] = true;
                         return this.scope;
                     }
                 });
