@@ -232,7 +232,6 @@
             }
 
             $.extend(widget, options);
-            console.log(widget);
             if (widget.__init__) widget.__init__();
 
             /* backward compatibility for old widget pattern */
