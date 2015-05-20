@@ -1,0 +1,11 @@
+p {
+  color: #000;
+}
+
+.widget-map {
+  background: #fff;
+  text-align: center;
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
