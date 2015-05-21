@@ -29,7 +29,7 @@
                             }
                         });
                     if (self.color) template.css('background-color', self.color);
-                    dashboard.grid.api.add_widget(template, self.col, self.row);
+                    self.widget = dashboard.grid.api.add_widget(template, self.col, self.row);
                 };
             },
             get: function(name, options) {
@@ -259,6 +259,9 @@
             self.subscribe(name + '/getData', widget.getData.bind(widget));
             self.publish(name + '/getData');
 
+
+            widget.interval = Number(widget.interval);
+            if (isNaN(widget.interval) || widget.interval === 0) return;
             setInterval(self.publish.bind(null, name + '/getData'),
                         widget.interval || 1000);
 
