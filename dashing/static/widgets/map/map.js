@@ -1,36 +1,32 @@
-/* global Dashing, $, rivets, google, MarkerClusterer */
-
+/* global Dashing, $, rivets, google, MarkerClusterer, createjs */
 Dashing.widgets.Map = function(dashboard) {
     var self = this,
         loadMapLibs = function() {
-            var gmScript = document.createElement('script'),
-                markerLib = document.createElement('script');
-            gmScript.type = markerLib.type = 'text/javascript';
-            gmScript.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-                           '&callback=googleMapsLoaded';
-            markerLib.src = 'https://cdn.rawgit.com/googlemaps/js-marker-' +
-                            'clusterer/gh-pages/src/markerclusterer_compiled.js';
+            var googleMapsScript = document.createElement('script'),
+                jsMarkerClustererLoader = new createjs.JavaScriptLoader({
+                    src:'https://cdn.rawgit.com/googlemaps/js-marker-clusterer' +
+                        '/gh-pages/src/markerclusterer_compiled.js'
+                });
+
+            googleMapsScript.type = 'text/javascript';
+            googleMapsScript.src = 'https://maps.googleapis.com/maps/api/js' +
+                                   '?v=3.exp&callback=googleMapsLoaded';
 
             window.googleMapsLoaded = function() {
-                $(document).trigger('load/google-maps');
+                jsMarkerClustererLoader.load();
+                $(document).trigger('libs/googleapis/maps/loaded');
             };
-            document.body.appendChild(gmScript);
-            $(document).on('load/google-maps', function() {
-                document.body.appendChild(markerLib);
-                (function jsMarkerClustererLoaded() {
-                    if (window.MarkerClusterer === undefined) {
-                        setTimeout(jsMarkerClustererLoaded, 100);
-                    }
-                    else {
-                        $(document).trigger('load/js-marker-clusterer');
-                    }
-                }());
+            jsMarkerClustererLoader.on('complete', function() {
+                $(document).trigger('libs/markerclusterer/loaded');
+
             });
+            // is not possible load google maps using preloadjs, then I use the traditional way
+            document.body.appendChild(googleMapsScript);
         };
 
     self.__init__ = function() {
         Dashing.utils.widgetInit(dashboard, 'map').call(self);
-        loadMapLibs();
+        if (window.googleMapsLoaded === undefined) loadMapLibs();
     };
     self.row = 2;
     self.col = 1;
@@ -53,7 +49,7 @@ rivets.binders['dashing-map'] = {
             height: container.css('height')
 
         });
-        $(document).on('load/js-marker-clusterer', function() {
+        $(document).on('libs/markerclusterer/loaded', function() {
             self.binder.routine.call(self, el, self.model.map);
         });
     },
