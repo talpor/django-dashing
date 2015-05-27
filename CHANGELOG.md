@@ -1,4 +1,4 @@
-## master
+## 0.2.7
 - add hash based navigation in multiple dashboards
 - add again option to change the background color of a widget
 
