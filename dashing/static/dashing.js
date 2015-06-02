@@ -28,7 +28,9 @@
                                               'compatible, see http://bit.ly/1dUN4GY'].join(' '));
                             }
                         });
-                    self.widget = dashboard.grid.api.add_widget(template, self.col, self.row);
+                    // add self.widget for backward compatibility
+                    self.__widget__ = self.widget = dashboard.grid.api.add_widget(
+                                                                template, self.col, self.row);
                 };
             },
             get: function(name, options) {
@@ -64,7 +66,11 @@
                 return encodeURIComponent(text.toLowerCase()
                                               .replace(/\s+/g,'-')
                                               .replace(/[^\w-]+/g,''));
-            }
+            },
+            getVersion: function() {
+                return global.__dashingversion__;
+            },
+            Version: global.__dashingversion__.constructor
         },
         widgets: {}
     };
