@@ -1,13 +1,12 @@
 /* global Dashing, $ */
 
 Dashing.widgets.Clock = function(dashboard) {
-    var widget;
     this.__init__ = Dashing.utils.widgetInit(dashboard, 'clock');
     this.row = 1;
     this.col = 1;
     this.scope = {};
     this.getWidget = function () {
-        return widget;
+        return this.__widget__;
     };
     this.getData = function () {
         var self = this,
