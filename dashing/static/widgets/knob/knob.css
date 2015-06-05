@@ -1,0 +1,25 @@
+.widget-knob {
+    background-color: #808080;
+}
+
+.widget-knob h1 {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-knob h2 {
+    color: #fff;
+}
+
+.widget-knob .detail {
+    font-weight: 500;
+    font-size: 30px;
+    color: #fff;
+}
+
+.widget-knob .more-info {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-knob .updated-at {
+    color: rgba(0, 0, 0, 0.5);
+}
