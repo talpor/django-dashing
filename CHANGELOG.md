@@ -1,3 +1,6 @@
+## master
+- add hash based navigation in multiple dashboards
+
 ## 0.2.6
 - Add django compressor as an optional dependency
 - Migrate dashing.js towards an data binding model using rivetsjs

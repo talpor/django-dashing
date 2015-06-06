@@ -1,14 +1,13 @@
 /* global $, Dashing, Rickshaw, rivets */
 
 Dashing.widgets.Graph = function (dashboard) {
-    var self = this,
-        widget;
+    var self = this;
     self.__init__ =  Dashing.utils.widgetInit(dashboard, 'graph');
     self.row = 1;
     self.col = 2;
     self.scope = {};
     self.getWidget = function () {
-        return widget;
+        return this.__widget__;
     };
     self.getData = function () {};
     self.interval = 3000;

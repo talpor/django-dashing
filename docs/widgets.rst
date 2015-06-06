@@ -171,7 +171,7 @@ Here is an example of a graph widget where `value` is displayed the total number
 
     class HourlyErrandsWidget(GraphWidget):
         title = 'Hourly Errands'
-        moreInfo = ''
+        more_info = ''
 
         def get_value(self):
             return SearchQuerySet().filter(django_ct='errands.errand').count()
