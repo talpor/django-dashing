@@ -1,22 +1,22 @@
-/* global $, rivets, setInterval, alert, STAIC_URL */
+/* global $, rivets, setInterval, alert, DASHING_STATIC */
 
 (function(global, console) {
     var Dashboard, Dashing, DashboardSet,
         scope = {grids: [], toggleOverlay: function() {}};
     Dashing = {
         resources: {
-            d3: STAIC_URL + 'libs/d3.js',
-            rickshaw: STAIC_URL + 'libs/rickshaw/rickshaw.js',
-            jqueryKnob: STAIC_URL + 'libs/jquery.knob.js',
+            d3: DASHING_STATIC + 'libs/d3/d3.min.js',
+            rickshaw: DASHING_STATIC + 'libs/rickshaw/rickshaw.js',
+            jqueryKnob: DASHING_STATIC + 'libs/jquery-knob/jquery.knob.min.js',
             googleMaps: {
                 Loader: function() {
                     this.on = function(id, func) {
-                        $(document).on(id, function(e, args) {
+                        $(document).on('googleMaps/' + id, function(e, args) {
                             func.apply(this, args);
                         });
                     };
                     this.publish = function(id, args) {
-                        $(document).trigger(id, args);
+                        $(document).trigger('googleMaps/' + id, args);
                     };
                     this.load = function() {
                         var self = this,
@@ -31,7 +31,7 @@
                     };
                 },
             },
-            markerClusterer: STAIC_URL + 'libs/markerclusterer.js'
+            markerClusterer: DASHING_STATIC + 'libs/markerclusterer.js'
         },
         widgets: {}
     };

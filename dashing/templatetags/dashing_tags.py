@@ -46,7 +46,7 @@ def load(template, file_extension):
     widgets = dashing_settings.INSTALLED_WIDGETS
     output = ''
     for name in widgets:
-        local_path = '{}/{}/{}.{}'.format('widgets', name, name, file_extension)
+        local_path = 'dashing/{}/{}/{}.{}'.format('widgets', name, name, file_extension)
         if find(local_path):
             output += template.format(static(local_path), name)
         else:
