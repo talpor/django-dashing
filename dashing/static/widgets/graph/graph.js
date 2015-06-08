@@ -2,7 +2,9 @@
 
 Dashing.widgets.Graph = function (dashboard) {
     var self = this;
-    self.__init__ =  Dashing.utils.widgetInit(dashboard, 'graph');
+    self.__init__ =  Dashing.utils.widgetInit(dashboard, 'graph', {
+        require: ['d3', 'rickshaw']
+    });
     self.row = 1;
     self.col = 2;
     self.scope = {};
@@ -13,17 +15,16 @@ Dashing.widgets.Graph = function (dashboard) {
     self.interval = 3000;
 };
 
-rivets.id = 0;
-rivets.getId = function() {
-    var o = rivets.prefix + rivets.id;
-    rivets.id++;
-    return o;
-};
-
-rivets.binders['dashing-graph'] = function(el, data) {
-    // added `|| data.whatever` for backward compatibility
+rivets.binders['dashing-graph'] = function binder(el, data) {
     if (!data) return;
+    if (!window.Rickshaw) {
+        $(document).on('libs/rickshaw/loaded',
+                       binder.bind(this, el, data));
+        return;
+    }
+
     var container = el.parentNode, id, graph, xAxis, yAxis,
+        // added `|| data.whatever` for backward compatibility
         beforeRender = this.model.beforeRender || data.beforeRender,
         afterRender = this.model.afterRender || data.afterRender,
         xFormat = this.model.xFormat || data.xFormat,
@@ -38,7 +39,7 @@ rivets.binders['dashing-graph'] = function(el, data) {
         graph.update();
         return;
     }
-    id = rivets.getId();
+    id = Dashing.utils.getId();
     graph = new Rickshaw.Graph({
         element: container,
         width: container.width,

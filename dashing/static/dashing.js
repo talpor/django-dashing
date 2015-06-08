@@ -1,15 +1,20 @@
-/* global $, rivets, setInterval, alert */
+/* global $, rivets, setInterval, alert, createjs, STAIC_URL */
 
 (function(global, console) {
     var Dashboard, Dashing, DashboardSet,
         scope = {grids: [], toggleOverlay: function() {}};
     Dashing = {
+        resources: {
+            d3: STAIC_URL + 'libs/d3.js',
+            rickshaw: STAIC_URL + 'libs/rickshaw/rickshaw.js',
+            jqueryKnob: STAIC_URL + 'libs/jquery.knob.js'
+        },
         utils: {
             loadTemplate: function(name, callback) {
                 var src = $('link[rel=resource][data-widget=' + name + ']').attr('href');
                 return $('<li class="widget widget-' + name + '">').load(src, callback); 
             },
-            widgetInit: function(dashboard, widgetName) {
+            widgetInit: function(dashboard, widgetName, options) {
                 'use strict';
                 /* jshint camelcase: false */
                 return function() {
@@ -31,6 +36,22 @@
                     // add self.widget for backward compatibility
                     self.__widget__ = self.widget = dashboard.grid.api.add_widget(
                                                                 template, self.col, self.row);
+                    options = options || {};
+                    if (!options.require) return;
+
+                    (function loadResource(name) {
+                        var resource = Dashing.resources[name], loader;
+                        if (!resource) return;
+                        delete Dashing.resources[name];
+
+                        loader = new createjs.JavaScriptLoader({src: resource});
+                        loader.on('complete', function() {
+                            $(document).trigger('libs/' + name + '/loaded');
+                            loadResource(options.require.shift());
+                        });
+                        loader.load();
+                    })(options.require.shift());
+
                 };
             },
             get: function(name, options) {
@@ -61,6 +82,14 @@
                         }
                     }, options)
                 );
+            },
+            getId: function() {
+                if (Dashing.__id__ === undefined) {
+                    Dashing.__id__ = 0;
+                }
+                var aux = Dashing.__id__;
+                Dashing.__id__++;
+                return 'dh' + aux;
             },
             urlify: function(text) {
                 return encodeURIComponent(text.toLowerCase()
