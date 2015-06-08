@@ -72,10 +72,6 @@ DATABASES = {
     }
 }
 
-DASHING = {
-    'INSTALLED_WIDGETS': ('number', 'list', 'graph', 'clock'),
-}
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
