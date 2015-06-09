@@ -6,7 +6,7 @@
     Dashing = {
         resources: {
             d3: DASHING_STATIC + 'libs/d3/d3.min.js',
-            rickshaw: DASHING_STATIC + 'libs/rickshaw/rickshaw.js',
+            rickshaw: DASHING_STATIC + 'libs/rickshaw/rickshaw.min.js',
             jqueryKnob: DASHING_STATIC + 'libs/jquery-knob/jquery.knob.min.js',
             googleMaps: {
                 Loader: function() {
@@ -31,7 +31,7 @@
                     };
                 },
             },
-            markerClusterer: DASHING_STATIC + 'libs/markerclusterer.js'
+            markerClusterer: DASHING_STATIC + 'libs/markerclusterer/markerclusterer.min.js'
         },
         widgets: {}
     };
