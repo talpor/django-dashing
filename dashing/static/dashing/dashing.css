@@ -11,6 +11,7 @@ body {
     background-color: #222222;
     color: #fff;
     font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
 }
 
 ul {
@@ -89,6 +90,11 @@ h3 {
     position: absolute;
 }
 
+.gridster>ul {
+    margin: 0;
+    overflow-x: hidden;
+}
+
 .widget {
     display: table;
 }
@@ -102,7 +108,6 @@ h3 {
 
 .fa {
     width: 100% !important;
-    height: 100%;
     text-align: center;
     position: absolute;
     left: 0;
