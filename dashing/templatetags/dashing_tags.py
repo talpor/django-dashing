@@ -103,6 +103,9 @@ else:
 def moment_locales():
     locales = dashing_settings.LOCALES
     o = ''
+    if len(locales) == 0:
+        return o
+
     for locale in locales:
         src = 'dashing/libs/moment/locale/{}.js'.format(locale)
         o += ('<script type="text/javascript"'
@@ -110,4 +113,3 @@ def moment_locales():
     o += ('<script type="text/javascript">'
           'moment.locale("{}");</script>\n'.format(locales[0]))
     return o
-
