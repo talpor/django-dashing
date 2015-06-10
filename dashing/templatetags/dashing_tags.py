@@ -97,3 +97,17 @@ else:
         nodelist = parser.parse(('endcompress',))
         parser.delete_first_token()
         return TagNode(nodelist)
+
+
+@register.simple_tag
+def moment_locales():
+    locales = dashing_settings.LOCALES
+    o = ''
+    for locale in locales:
+        src = 'dashing/libs/moment/locale/{}.js'.format(locale)
+        o += ('<script type="text/javascript"'
+              ' src="{}"></script>\n'.format(static(src)))
+    o += ('<script type="text/javascript">'
+          'moment.locale("{}");</script>\n'.format(locales[0]))
+    return o
+
