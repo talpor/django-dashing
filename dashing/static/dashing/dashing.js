@@ -138,6 +138,9 @@
                 }
             }
         };
+        this.getDashboards = function() {
+            return scope.dashboards;
+        };
         init();
     };
     Dashboard = function (options) {
@@ -237,8 +240,12 @@
                         widget.interval || 1000);
 
         };
-        this.listWidgets = function() {
+        this.getWidgets = function() {
             return widgetSet;
+        };
+        this.listWidgets = function() {
+            console.warn('the method `listWidgets` will be renamed to `getWidgets` in 0.3.x versions');
+            return this.getWidgets();
         };
         this.subscribe = function(id, func) {
             self.grid.api.$wrapper.on(id, function(e, args){
@@ -253,8 +260,8 @@
     rivets.binders.gridsterify = function(el, grid) {
         /* jshint camelcase: false */
         $(el).css({
-            width: grid.width ? grid.width + 'px' : $(window).width() + 'px',
-            height: grid.height ? grid.height + 'px' : $(window).height() + 'px',
+            width: grid.width ? grid.width + 'px' : window.innerWidth + 'px',
+            height: grid.height ? grid.height + 'px' : window.innerHeight + 'px',
         });
         grid.api = $(el).find('ul').gridster({
             widget_margins: grid.widgetMargins || [5, 5],
