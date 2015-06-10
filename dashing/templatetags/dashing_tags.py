@@ -46,7 +46,7 @@ def load(template, file_extension):
     widgets = dashing_settings.INSTALLED_WIDGETS
     output = ''
     for name in widgets:
-        local_path = '{}/{}/{}.{}'.format('widgets', name, name, file_extension)
+        local_path = 'dashing/{}/{}/{}.{}'.format('widgets', name, name, file_extension)
         if find(local_path):
             output += template.format(static(local_path), name)
         else:
@@ -97,3 +97,19 @@ else:
         nodelist = parser.parse(('endcompress',))
         parser.delete_first_token()
         return TagNode(nodelist)
+
+
+@register.simple_tag
+def moment_locales():
+    locales = dashing_settings.LOCALES
+    o = ''
+    if len(locales) == 0:
+        return o
+
+    for locale in locales:
+        src = 'dashing/libs/moment/locale/{}.js'.format(locale)
+        o += ('<script type="text/javascript"'
+              ' src="{}"></script>\n'.format(static(src)))
+    o += ('<script type="text/javascript">'
+          'moment.locale("{}");</script>\n'.format(locales[0]))
+    return o

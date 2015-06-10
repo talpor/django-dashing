@@ -10,10 +10,10 @@
 
     <title>{% block 'title' %}Django Dashing{% endblock %}</title>
     {% compress css %}
-    <link rel="stylesheet" href="{% static 'libs/jquery-gridster/jquery.gridster.css' %}">
-    <link rel="stylesheet" href="{% static 'libs/rickshaw/rickshaw.css' %}">
-    <link rel="stylesheet" href="{% static 'libs/font-awesome/font-awesome.css' %}">
-    <link rel="stylesheet" href="{% static 'dashing.css' %}">
+    <link rel="stylesheet" href="{% static 'dashing/libs/jquery-gridster/jquery.gridster.css' %}">
+    <link rel="stylesheet" href="{% static 'dashing/libs/rickshaw/rickshaw.css' %}">
+    <link rel="stylesheet" href="{% static 'dashing/libs/font-awesome/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'dashing/dashing.css' %}">
     {% endcompress %}
     {% widget_styles %}
     {% block 'stylesheets' %}
@@ -52,17 +52,18 @@
     </div>
     {% endblock %}
     {% compress js %}
-    <script type="text/javascript" src="{% static 'libs/jquery-1.11.0.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/sightglass.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/rivets.js' %}"></script>
+    <script type="text/javascript">var DASHING_STATIC = "{% static 'dashing/' %}";</script>
+    <script type="text/javascript" src="{% static 'dashing/libs/jquery-1.11.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashing/libs/sightglass.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashing/libs/rivets.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashing/libs/jquery-gridster/jquery.gridster.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashing/libs/preloadjs/preloadjs-0.6.1.combined.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashing/libs/moment/moment.js' %}"></script>
+    {% moment_locales %}
 
-    <script type="text/javascript" src="{% static 'libs/jquery-gridster/jquery.gridster.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/jquery.knob.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/d3.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/rickshaw/rickshaw.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/moment-with-locales.js' %}"></script>
-
-    <script type="text/javascript" src="{% static 'dashing.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashing/version.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashing/dashing.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashing/dashing.utils.js' %}"></script>
     {% endcompress %}
     {% widget_scripts %}
     {% block 'scripts' %}
