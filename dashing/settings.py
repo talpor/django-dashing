@@ -10,7 +10,8 @@ DEFAULTS = {
     'INSTALLED_WIDGETS': ('number', 'list', 'graph', 'clock', 'knob', 'map',),
     'PERMISSION_CLASSES':  (
         'dashing.permissions.AllowAny',
-    )
+    ),
+    'LOCALES': ()
 }
 
 # List of settings that may be in string import notation.
