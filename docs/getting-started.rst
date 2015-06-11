@@ -31,7 +31,7 @@ Installation
    to view the dummy dashboard.
 
 
-To create a custom dashboard you need create a ``dashing-config.js`` file in the static directory and optionally a custom ``dashing/dashboard.html`` template file.
+To create a custom dashboard you need to create a ``dashing-config.js`` file in the static directory and a custom ``dashing/dashboard.html`` template file. This is optional.
 
 Django Settings
 -----------
@@ -68,7 +68,7 @@ Settings
 
 **INSTALLED_WIDGETS**
 
-A list or tuple of name of widgets to load when the dashboard is displayed, searches for resources of widgets (js, css and html) in the static directory, if not found then search in the remote repository
+A list or tuple of names of widgets loads when the dashboard is displayed,then it searches for the resources of those widgets (js, css and html) in the static directory. If they are not found then search them in the remote repository.
 
 Default:
 
@@ -78,7 +78,7 @@ Default:
 
 **PERMISSION_CLASSES**
 
-A list or tuple of permission classes, that determine the default set of permissions checked when displaying the dashboard.
+A list or tuple of permission classes that determine the default set of permissions checked when displaying the dashboard.
 
 The default permissions classes provided are: *AllowAny*, *IsAuthenticated*, and *IsAdminUser*
 
@@ -90,11 +90,11 @@ Default:
 
 **REPOSITORY**
 
-A remote location with a repositories.json file, here are specified the third-party widgets with the remote location to download the static files
+A remote location with a repositories.json file is specified by the third-party widgets with the remote location to download the static files.
 
 **LOCALES**
 
-A list or tuple of locales to load the neccesary i18n resources to configurate momentjs, you can load more that one but by default moment will be configured with the first.
+A list or tuple of locales to load the neccesary i18n resources to configurate momentjs. You can load more than one but by default, one moment will be configured with the first.
 
 The list of valid locales are:
 
@@ -116,11 +116,11 @@ Default:
 Config File 
 -----------
 
-You need put the ``dashing-config.js`` in the static directory to begin creating widgets for your project. You can change the patch and name if you write a template file.
+You need to put the ``dashing-config.js`` in the static directory to begin creating widgets for your project. You can change the patch and name if you write a template file.
 
-The dashing config file should start with the creation of a new dashboard ``var dashboard = new Dashboard();`` and start to place widgets with the following syntax ``dashboard.addWidget(<name_of_widget>, <type_of_widget>, <options>);`` where `name_of_widget` is the name that describe the objective of the widget (should be unique) `type_of_widget` is a valid widget type (Clock, Graph, List, Number) and options depends of each widget.
+The dashing config file should start with the creation of a new dashboard ``var dashboard = new Dashboard();`` and start to place widgets with the following syntax ``dashboard.addWidget(<name_of_widget>, <type_of_widget>, <options>);`` where `name_of_widget` is the name that describes the objective of the widget (it should be unique) `type_of_widget` is a valid widget type (Clock, Graph, List, Number) and the options depend of each widget.
 
-This is the default ``dashing-config.js`` file, use as a guide for writing your own:
+This is the default ``dashing-config.js`` file, use it as a guide for writing your own:
 
 .. code-block:: javascript
 
@@ -182,7 +182,7 @@ This is the default ``dashing-config.js`` file, use as a guide for writing your 
 Template File
 -------------
 
-You can create a `dashboard.html` file to add your custom stylesheets and scripts or specify a custom route to your dashing-config.js file. You will place inside the template directory in ``dashing/dashboard.html``
+You can create a `dashboard.html` file to add your custom stylesheets and scripts or specify a custom route to your dashing-config.js file. You will place it inside the template directory in ``dashing/dashboard.html``
 
 Your ``dashing/dashing.html`` might looks like this:
 
@@ -206,7 +206,7 @@ Your ``dashing/dashing.html`` might looks like this:
 Python Widget Classes
 ----------------------
 
-Django Dashing provides a useful set of classes to return the expected data for the default widgets, you can create a `widgets.py` file and inherit of these classes or create your own widgets inherit from ``dashing.widgets.Widget``.
+Django Dashing provides a useful set of classes to return the expected data for the default widgets. You can create a `widgets.py` file and inherit these classes or create your own widgets inherited from ``dashing.widgets.Widget``.
 
 A custom widget can look like this:
 
@@ -228,6 +228,6 @@ To register the url to serve this widget you must use the register method from `
 
     router.register(CustomWidget, 'custom_widget', eg_kwargs_param="[A-Za-z0-9_-]+")
 
-Now we can access to CustomWidget from '/dashboard/widgets/custom_widget/(?P<eg_kwargs_param>[A-Za-z0-9_-]+)' if '/dashboard/' is the root of our dashboard.
+Now we can access CustomWidget from '/dashboard/widgets/custom_widget/(?P<eg_kwargs_param>[A-Za-z0-9_-]+)' if '/dashboard/' is the root of our dashboard.
 
 The kwargs are optional and you can add as many as you want.
