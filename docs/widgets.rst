@@ -345,6 +345,107 @@ Here is an example of a graph widget where in `value` is displayed the total of 
             total = len([x for x in payments if x.status == Payment.STATUS.rejected])
             return '{} rejected'.format(total)
 
+Knob Widget
+-------------
+
+This widget can display a dial with other interesting information.
+
+Options
+~~~~~~~~~~~~
+
+row
+    Number of rows occupied by the widget. *(default: 1)*
+
+col
+    Number of columns occupied by the widget. *(default: 1)*
+
+scope
+    JSON object in this format
+
+    .. code-block:: javascript
+
+        {
+            title: /string/,
+            moreInfo: /string/,
+            value: /number/,
+            data: {
+                // jquery knob options http://anthonyterrien.com/knob/
+                angleArc: /number/,
+                fgColor: /string/,
+                angleOffset: /number/,
+                displayInput: /boolean/,
+                displayPrevious: /boolean/,
+                step: /number/,
+                min: /number/,
+                max: /number/,
+                readOnly: /boolean/
+            }
+        }
+
+getData
+    Function responsible to update the `scope` value, this function is executed each time interval specified in `interval` variable.
+    You can rewrite this function to get data from an external source.
+    *(default: empty function)*
+
+getWidget
+    Return the DOM element that represent the widget.
+
+interval
+    Actualization interval of widget scope on milliseconds. *(default: 10000)*
+
+Map Widget
+-------------
+
+This widget display a google map widget with one or more markers grouped
+
+Options
+~~~~~~~~~~~~
+
+row
+    Number of rows occupied by the widget. *(default: 1)*
+
+col
+    Number of columns occupied by the widget. *(default: 1)*
+
+scope
+    JSON object in this format
+
+    .. code-block:: javascript
+
+        {
+            theme: /black|blue|gray|green|orange|red|white|yellow/
+            map: {
+                zoom: /number/,
+                doubleClickZoom: /boolean/,
+                defaultUI: /boolean/,
+                center: {
+                    lat: /number/,
+                    lng: /number/
+                },
+                markers: [
+                    {
+                        lat: /number/,
+                        lng: /number/
+                    },
+                    {
+                        lat: /number/,
+                        lng: /number/
+                    }
+                ]
+            }
+        }
+
+getData
+    Function responsible to update the `scope` value, this function is executed each time interval specified in `interval` variable.
+    You can rewrite this function to get data from an external source.
+    *(default: empty function)*
+
+getWidget
+    Return the DOM element that represent the widget.
+
+interval
+    Actualization interval of widget scope on milliseconds. *(default: 0)*
+
 Custom Widgets
 ===============================================
 

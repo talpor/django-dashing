@@ -18,10 +18,10 @@ name `(optional)`
     The name of widget. *(default:* ``undefined`` *)*
 
 viewportWidth `(optional)`
-    Width of viewport where expected that the dashboard was displayed. *(default:* ``$(window).width()`` *)*
+    Width of viewport where expected that the dashboard was displayed. *(default:* ``window.innerWidth`` *)*
 
 viewportHeight `(optional)`
-    Height of viewport where expected that the dashboard was displayed. *(default:* ``$(window).height()`` *)*
+    Height of viewport where expected that the dashboard was displayed. *(default:* ``window.innerHeight`` *)*
 
 widgetMargins `(optional)`
     Margin between each widget. *(default:* ``[5, 5]`` *)*
@@ -61,7 +61,7 @@ addWidget
 .. _WidgetsNamingConvention: widgets.html
 __ WidgetsNamingConvention_
 
-listWidgets
+getWidgets
     Returns the list of widgets created on this dashboard
 
 subscribe
@@ -111,6 +111,9 @@ getDashboard
 
         myDashboardSet.getDashboard(name)
 
+getDashboards
+    Returns the list of the created dashboards
+
 addAction
     To add a button on the overlay menu that runs arbitrary javascript code, for example:
 
@@ -140,7 +143,7 @@ Then you can select the rolling time in the `ctrl` menu.  Or you can add the par
 
 ::
 
-    http://127.0.0.1:8000/dashboard/?roll=3000
+    http://127.0.0.1:8000/dashboard/#/main?roll=3000
 
 **Dashboard Events**
 

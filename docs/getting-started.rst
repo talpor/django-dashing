@@ -74,7 +74,7 @@ Default:
 
 .. code-block:: python
 
-    ('number', 'list', 'graph', 'clock',),
+    ('number', 'list', 'graph', 'clock', 'knob', 'map',)
 
 **PERMISSION_CLASSES**
 
@@ -92,6 +92,26 @@ Default:
 
 A remote location with a repositories.json file, here are specified the third-party widgets with the remote location to download the static files
 
+**LOCALES**
+
+A list or tuple of locales to load the neccesary i18n resources to configurate momentjs, you can load more that one but by default moment will be configured with the first.
+
+The list of valid locales are:
+
+.. code-block:: text
+
+    af, ar, ar-ma, ar-sa, ar-tn, az, be, bg, bn, bo, br, bs, ca, cs, cv, cy, da,
+    de, de-at, el, en-au, en-ca, en-gb, eo, es, et, eu, fa, fi, fo, fr, fr-ca, fy,
+    gl, he, hi, hr, hu, hy-am, id, is, it, ja, jv, ka, km, ko, lb, lt, lv, me, mk,
+    ml, mr, ms-my, my, nb, ne, nl, nn, pl, pt, pt-br, ro, ru, si, sk, sl, sq, sr,
+    sr-cyrl, sv, ta, th, tl-ph, tr, tzm, tzm-latn, uk, uz, vi, zh-cn, zh-tw
+
+
+Default:
+
+.. code-block:: python
+
+    () # empty tuple, english default
 
 Config File 
 -----------
