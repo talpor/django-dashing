@@ -1,3 +1,9 @@
+## 0.2.8
+- Add `getDashboards` method in **DashboardSet** object and `getWidgets` method in **Dashboard** object
+- Improve resource loading adding some minified libraries and using preloadjs to load the libs requires by the widgets
+- Fix some design issues
+- Add Knob and Map plugins [docs](https://github.com/talpor/django-dashing/pull/20)
+
 ## 0.2.7
 - add hash based navigation in multiple dashboards
 - add again option to change the background color of a widget
