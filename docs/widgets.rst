@@ -486,12 +486,12 @@ The classes are only for the stylesheet.
 Style File
 ~~~~~~~~~~~~
 
-Your location should be ``<static_directory>/widgets/<widget_name>.css`` in this file defines the styles of widget.
+Your location should be ``<static_directory>/widgets/<widget_name>/<widget_name>.css`` in this file defines the styles of widget.
 
 Script File
 ~~~~~~~~~~~~
 
-Your location should be ``<static_directory>/widgets/<widget_name>.js`` in this file will be defined the configuration options and default values for the new widget, the idea is to create an object using the ``new`` keyword, then we define properties and methods using ``this`` keyword.
+Your location should be ``<static_directory>/widgets/<widget_name>/<widget_name>.js`` in this file will be defined the configuration options and default values for the new widget, the idea is to create an object using the ``new`` keyword, then we define properties and methods using ``this`` keyword.
 
 We must provide an ``__init__`` method were we bind the scope with the template and add to the dashboard, this function is quite similar in all widgets, then it is provided by ``Dashing.utils.widgetInit`` to facilitate implementation and improve the lecture of widgets, also must provide a ``scope`` element which will be binded to the template, and a ``getData`` function will surely be the to be overwritten to obtain relevant data as required,
 
