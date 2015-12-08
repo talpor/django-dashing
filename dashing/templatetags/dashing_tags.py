@@ -1,18 +1,22 @@
-from django import template
-from django.conf import settings
-from django.contrib.staticfiles.finders import find
-from django.templatetags.static import static
-from django.template import Node
-
-from dashing.settings import dashing_settings
-
+import codecs
 import json
+
 try:
     import urllib.request as urllib2
 except ImportError:
     import urllib2
 
-import codecs
+from django import template
+from django.conf import settings
+from django.template import Node
+from django.utils.safestring import mark_safe
+from django.templatetags.static import static
+from django.contrib.staticfiles.finders import find
+
+from dashing.settings import dashing_settings
+
+
+
 
 register = template.Library()
 
@@ -54,7 +58,7 @@ def load(template, file_extension):
             if path:
                 path += '{}.{}'.format(name, file_extension)
                 output += template.format(path, name)
-    return output
+    return mark_safe(output)
 
 
 @register.simple_tag
@@ -112,4 +116,4 @@ def moment_locales():
               ' src="{}"></script>\n'.format(static(src)))
     o += ('<script type="text/javascript">'
           'moment.locale("{}");</script>\n'.format(locales[0]))
-    return o
+    return mark_safe(o)
