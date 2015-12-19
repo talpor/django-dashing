@@ -2,6 +2,7 @@ from django import template
 from django.conf import settings
 from django.contrib.staticfiles.finders import find
 from django.templatetags.static import static
+from django.utils.safestring import mark_safe
 from django.template import Node
 
 from dashing.settings import dashing_settings
@@ -54,7 +55,7 @@ def load(template, file_extension):
             if path:
                 path += '{}.{}'.format(name, file_extension)
                 output += template.format(path, name)
-    return output
+    return mark_safe(output)
 
 
 @register.simple_tag
