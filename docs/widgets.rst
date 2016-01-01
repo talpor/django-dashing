@@ -118,18 +118,26 @@ To configure the X and Y axis you must define custom methods *xFormat* and *yFor
 
 .. code-block:: javascript
 
-    function xFormat(n) {
-        return '(' + n + ')';
-    };
-    Dashing.utils.get('my-registered-widget-url-name', function(scope) {
-        scope.xFormat = xFormat;
-        scope.afterRender = function() {
-            alert('graph shown');
-        };
-        $.extend(self.scope, scope);
+    myDashboard.addWidget('AvailabilityAverageWidget', 'Graph', {
+        color: 'steelblue',
+        scope: {
+            xFormat(n) {
+                return '(' + n + ')';
+            },
+            afterRender: function() {
+                alert('graph shown');
+            }
+        },
+        getData: function () {
+            var self = this;
+            Dashing.utils.get('availability', function(data) {
+                $.extend(self.data, data);
+            });
+        },
+        interval: 60000
     });
 
-Also, you can specify any properties that the graph constructor accepts in the `scope` object, for example a valid `scope` may be:
+You can specify any properties that the graph constructor accepts in the `scope` object, for example a valid `scope` may be:
 
 .. code-block:: javascript
 
