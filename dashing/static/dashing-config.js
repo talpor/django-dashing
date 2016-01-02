@@ -51,3 +51,24 @@ dashboard.addWidget('convergence_widget', 'Graph', {
             });
     }
 });
+
+dashboard.addWidget('completion_widget', 'Knob', {
+    getData: function () {
+        $.extend(this.scope, {
+            title: 'Completion',
+            updatedAt: 'Last updated at 14:10',
+            detail: 'today 10',
+            value: '35',
+            data: {
+                angleArc: 250,
+                angleOffset: -125,
+                displayInput: true,
+                displayPrevious: true,
+                step: 1,
+                min: 1,
+                max: 99,
+                readOnly: true
+            }
+        });
+    }
+});
