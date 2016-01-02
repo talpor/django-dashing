@@ -401,6 +401,15 @@ getWidget
 interval
     Actualization interval of widget scope on milliseconds. *(default: 10000)*
 
+Python Class
+~~~~~~~~~~~~
+
+This class helps return valid scope to be used by the widget, you can see the definition in GitHub__
+
+.. _KnobWidgetDefinition: https://github.com/talpor/django-dashing/blob/3dc6864569bf76d5391c33e5298c4c1a6be7da1e/dashing/widgets.py#L126-L155
+
+__ KnobWidgetDefinition_
+
 Map Widget
 -------------
 
@@ -453,6 +462,15 @@ getWidget
 
 interval
     Actualization interval of widget scope on milliseconds. *(default: 0)*
+
+Python Class
+~~~~~~~~~~~~
+
+This class helps return valid scope to be used by the widget, you can see the definition in GitHub__
+
+.. _MapWidgetDefinition: https://github.com/talpor/django-dashing/blob/3dc6864569bf76d5391c33e5298c4c1a6be7da1e/dashing/widgets.py#L158-L194
+
+__ MapWidgetDefinition_
 
 Custom Widgets
 ===============================================
