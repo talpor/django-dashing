@@ -121,3 +121,74 @@ class GraphWidget(Widget):
             'data': self.get_data(),
             'properties': self.get_properties(),
         }
+
+
+class KnobWidget(Widget):
+    title = ''
+    data = {}
+    detail = ''
+    more_info = ''
+    updated_at = ''
+
+    def get_title(self):
+        return self.title
+
+    def get_data(self):
+        return self.data
+
+    def get_detail(self):
+        return self.detail
+
+    def get_more_info(self):
+        return self.more_info
+
+    def get_updated_at(self):
+        return self.updated_at
+
+    def get_context(self):
+        return {
+            'title': self.get_title(),
+            'data': self.get_data(),
+            'detail': self.get_detail(),
+            'moreInfo': self.get_more_info(),
+            'updatedAt': self.get_updated_at(),
+        }
+
+
+class MapWidget(Widget):
+    theme = 'blue'
+    zoom = 8
+    double_click_zoom = True
+    default_ui = False
+    center = {}
+    markers = []
+
+    def get_theme(self):
+        return self.theme
+
+    def get_zoom(self):
+        return self.zoom
+
+    def get_double_click_zoom(self):
+        return self.double_click_zoom
+
+    def get_default_ui(self):
+        return self.default_ui
+
+    def get_center(self):
+        return self.center
+
+    def get_markers(self):
+        return self.markers
+
+    def get_context(self):
+        return {
+            'theme': self.get_theme(),
+            'map': {
+                'zoom': self.get_zoom(),
+                'doubleClickZoom': self.double_click_zoom(),
+                'defaultUI': self.get_default_ui(),
+                'center': self.get_center(),
+                'markers': self.get_markers()
+            }
+        }
