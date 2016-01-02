@@ -1,8 +1,8 @@
 <div>
     <h1>{ title }</h1>
     <h2>{ value }</h2>
-    <p class="more-info" rv-if="moreInfo">{ moreInfo }</p>
+    <p class="more-info" rv-show="moreInfo">{ moreInfo }</p>
     {# backward compatiblility #}
-    <p class="more-info" rv-if="more_info">{ more_info }</p>
+    <p class="more-info" rv-show="more_info">{ more_info }</p>
     <div rv-dashing-graph="data"></div>
 </div>
