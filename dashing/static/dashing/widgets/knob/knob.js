@@ -22,13 +22,12 @@ rivets.binders['dashing-knob'] = function binder(el, data) {
         $(document).on('libs/jqueryKnob/loaded', binder.bind(this, el, data));
         return;
     }
-    el.id = Dashing.utils.getId();
-
-    for (var key in data) {
-        if (data.hasOwnProperty(key)) {
-            // workaround as knob.js needs camel case data attributes
-            el.setAttribute('data-' + key, data[key]);
-        }
+    if (!el.init) {
+        $(el).knob(data);
+        el.init = true;
     }
-    $('.dashing-knob').knob();
+    else {
+        $(el).trigger('configure', data);
+    }
+    $(el).val(this.model.value).trigger('change');
 };
