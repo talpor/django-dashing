@@ -16,8 +16,6 @@
                             rivets.bind(template, self.scope);
                         }
                         else {
-                            /* backward compatibility for old widget pattern */
-                            rivets.bind(template, {data: self.data});
                             console.warn(['the widget',
                                           widgetName,
                                           'should be updated to the new',
@@ -26,9 +24,8 @@
                         }
                     });
                 if (self.color) template.css('background-color', self.color);
-                // add self.widget for backward compatibility
-                self.__widget__ = self.widget = dashboard.grid.api.add_widget(
-                                                            template, self.col, self.row);
+                self.__widget__ = dashboard.grid.api.add_widget(
+                                                template, self.col, self.row);
                 options = options || {};
                 if (!options.require) return;
 

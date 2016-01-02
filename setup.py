@@ -8,11 +8,12 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-dashing',
-    version='0.2.8',
+    version='0.3',
     packages=['dashing'],
     include_package_data=True,
     license='MIT License',
-    description='A simple Django dashboard app to visualize interesting data about your project.',
+    description='A simple Django dashboard app to visualize interesting data '
+                'about your project.',
     long_description=README,
     url='https://github.com/talpor/django-dashing/',
     author='Mauricio Reyes',
@@ -31,5 +32,6 @@ setup(
         'Topic :: Software Development :: Localization',
         'Topic :: Utilities',
     ],
-    keywords=['django', 'metrics', 'dashboard', 'dashing', 'metric', 'widgets', 'data'],
+    keywords=['django', 'metrics', 'dashboard', 'dashing', 'metric',
+              'widgets', 'data'],
 )

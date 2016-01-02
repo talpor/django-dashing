@@ -208,22 +208,6 @@
             $.extend(widget, options);
             if (widget.__init__) widget.__init__();
 
-            /* backward compatibility for old widget pattern */
-            if (widget.scope && !widget.data) {
-                Object.defineProperty(widget, 'data', {
-                    get: function() {
-                        if (!global['warning_' + name]) {
-                            console.warn(['the widget', name,
-                                          'should be updated to the new',
-                                          'naming pattern to be 0.3.x',
-                                          'compatible, see http://bit.ly/1zTKOd3'].join(' '));
-                        }
-                        global['warning_' + name] = true;
-                        return this.scope;
-                    }
-                });
-            }
-
             widgetSet.push({
                 name: name,
                 type: type,
@@ -242,10 +226,6 @@
         };
         this.getWidgets = function() {
             return widgetSet;
-        };
-        this.listWidgets = function() {
-            console.warn('the method `listWidgets` will be renamed to `getWidgets` in 0.3.x versions');
-            return this.getWidgets();
         };
         this.subscribe = function(id, func) {
             self.grid.api.$wrapper.on(id, function(e, args){

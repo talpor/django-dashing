@@ -1,3 +1,8 @@
+## 0.3
+- Add KnobWidget and MapWidget python classes
+- Fix several bugs
+- Remove backward compatibility code
+
 ## 0.2.8
 - Add `getDashboards` method in **DashboardSet** object and `getWidgets` method in **Dashboard** object
 - Improve resource loading adding some minified libraries and using preloadjs to load the libs requires by the widgets
