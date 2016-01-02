@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>{% block 'title' %}Django Dashing{% endblock %}</title>
+    <title>{% block title %}Django Dashing{% endblock %}</title>
     {% compress css %}
     <link rel="stylesheet" href="{% static 'dashing/libs/jquery-gridster/jquery.gridster.css' %}">
     <link rel="stylesheet" href="{% static 'dashing/libs/rickshaw/rickshaw.css' %}">
@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="{% static 'dashing/dashing.css' %}">
     {% endcompress %}
     {% widget_styles %}
-    {% block 'stylesheets' %}
+    {% block stylesheets %}
     {% endblock %}
     {% widget_templates %}
-    {% block 'templates' %}
+    {% block templates %}
     {% endblock %}
     {% block external_resources %}
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -27,7 +27,7 @@
     <link rel="icon" href="/assets/images/favicon.ico">
 </head>
 <body id="app" rv-on-keydown="toggleOverlay">
-    {% block 'main_container' %}
+    {% block main_container %}
     <div id="container">
         <div class="gridster fade" rv-each-grid="grids" rv-gridsterify="grid" rv-class-in="grid.active"><ul></ul></div>
     </div>
@@ -66,9 +66,9 @@
     <script type="text/javascript" src="{% static 'dashing/dashing.utils.js' %}"></script>
     {% endcompress %}
     {% widget_scripts %}
-    {% block 'scripts' %}
+    {% block scripts %}
     {% endblock %}
-    {% block 'config_file' %}
+    {% block config_file %}
     <script type="text/javascript" src="{% static 'dashing-config.js' %}"></script>
     {% endblock %}
 </body>
