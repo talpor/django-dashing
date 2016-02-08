@@ -131,7 +131,7 @@ To configure the X and Y axis you must define custom methods *xFormat* and *yFor
         getData: function () {
             var self = this;
             Dashing.utils.get('availability', function(data) {
-                $.extend(self.data, data);
+                $.extend(self.scope, data);
             });
         },
         interval: 60000
