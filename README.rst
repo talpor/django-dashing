@@ -87,7 +87,7 @@ Create a dashing-config.js file with a widget that retrive the data in your stat
         getData: function () {
             var self = this;
             Dashing.utils.get('custom_widget', function(data) {
-                $.extend(self.data, data);
+                $.extend(self.scope, data);
             });
         },
         interval: 3000
