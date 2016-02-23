@@ -188,18 +188,18 @@ Your ``dashing/dashboard.html`` might looks like this:
 
 .. code-block:: html
 
-    {% extends 'dashing/base.html' %}
+    {% extends dashing/base.html %}
     {% load staticfiles %}
 
-    {% block 'stylesheets' %}
+    {% block stylesheets %}
     <link rel="stylesheet" href="{% static 'my/custom/style.css' %}">
     {% endblock %}
 
-    {% block 'scripts' %}
+    {% block scripts %}
     <script type="text/javascript" src="{% static 'my/custom/script.js' %}"></script>
     {% endblock %}
 
-    {% block 'config_file' %}
+    {% block config_file %}
     <script type="text/javascript" src="{% static 'my/custom/dashing-config.js' %}"></script>
     {% endblock %}
 
