@@ -184,22 +184,22 @@ Template File
 
 You can create a `dashboard.html` file to add your custom stylesheets and scripts or specify a custom route to your dashing-config.js file. You will place it inside the template directory in ``dashing/dashboard.html``
 
-Your ``dashing/dashing.html`` might looks like this:
+Your ``dashing/dashboard.html`` might looks like this:
 
 .. code-block:: html
 
-    {% extends 'dashing/base.html' %}
+    {% extends dashing/base.html %}
     {% load staticfiles %}
 
-    {% block 'stylesheets' %}
+    {% block stylesheets %}
     <link rel="stylesheet" href="{% static 'my/custom/style.css' %}">
     {% endblock %}
 
-    {% block 'scripts' %}
+    {% block scripts %}
     <script type="text/javascript" src="{% static 'my/custom/script.js' %}"></script>
     {% endblock %}
 
-    {% block 'config_file' %}
+    {% block config_file %}
     <script type="text/javascript" src="{% static 'my/custom/dashing-config.js' %}"></script>
     {% endblock %}
 
