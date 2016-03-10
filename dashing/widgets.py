@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import json
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.views.generic.detail import View
+
+from dashing.settings import dashing_settings
 
 
 class JSONResponseMixin(object):
@@ -24,7 +27,20 @@ class JSONResponseMixin(object):
 
 
 class Widget(JSONResponseMixin, View):
+    permission_classes = dashing_settings.PERMISSION_CLASSES
+
+    def check_permissions(self, request):
+        """
+        Check if the request should be permitted.
+        Raises an appropriate exception if the request is not permitted.
+        """
+        permissions = [permission() for permission in self.permission_classes]
+        for permission in permissions:
+            if not permission.has_permission(request):
+                raise PermissionDenied()
+
     def get(self, request, *args, **kwargs):
+        self.check_permissions(request)
         context = json.dumps(self.get_context())
         return HttpResponse(context, content_type="application/json")
 
