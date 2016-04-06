@@ -116,7 +116,7 @@ Default:
 Config File 
 -----------
 
-You need to put the ``dashing-config.js`` in the static directory to begin creating widgets for your project. You can change the patch and name if you write a template file.
+You need to put the ``dashing-config.js`` in the static directory to begin creating widgets for your project. You can change the path and name if you write a template file.
 
 The dashing config file should start with the creation of a new dashboard ``var dashboard = new Dashboard();`` and start to place widgets with the following syntax ``dashboard.addWidget(<name_of_widget>, <type_of_widget>, <options>);`` where `name_of_widget` is the name that describes the objective of the widget (it should be unique) `type_of_widget` is a valid widget type (Clock, Graph, List, Number) and the options depend of each widget.
 
