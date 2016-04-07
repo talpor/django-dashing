@@ -141,6 +141,7 @@ class GraphWidget(Widget):
 
 class KnobWidget(Widget):
     title = ''
+    value = ''
     data = {}
     detail = ''
     more_info = ''
@@ -158,12 +159,16 @@ class KnobWidget(Widget):
     def get_more_info(self):
         return self.more_info
 
+    def get_value(self):
+        return self.value
+
     def get_updated_at(self):
         return self.updated_at
 
     def get_context(self):
         return {
             'title': self.get_title(),
+            'value': self.get_value(),
             'data': self.get_data(),
             'detail': self.get_detail(),
             'moreInfo': self.get_more_info(),
