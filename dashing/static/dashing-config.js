@@ -67,7 +67,8 @@ dashboard.addWidget('completion_widget', 'Knob', {
                 step: 1,
                 min: 1,
                 max: 99,
-                readOnly: true
+                readOnly: true,
+                format: function(value) { return value + '%'; }
             }
         });
     }
