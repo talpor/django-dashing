@@ -188,7 +188,7 @@ Your ``dashing/dashboard.html`` might looks like this:
 
 .. code-block:: html
 
-    {% extends dashing/base.html %}
+    {% extends 'dashing/base.html' %}
     {% load staticfiles %}
 
     {% block stylesheets %}
@@ -202,6 +202,8 @@ Your ``dashing/dashboard.html`` might looks like this:
     {% block config_file %}
     <script type="text/javascript" src="{% static 'my/custom/dashing-config.js' %}"></script>
     {% endblock %}
+
+Also make sure the app which hosts the ``dashing/dashboard.html`` template is listed before ``dashing`` in ``INSTALLED_APPS``, since you are overriding the default template.
 
 Python Widget Classes
 ----------------------
