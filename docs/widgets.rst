@@ -270,7 +270,7 @@ Here's an example of a graph widget where in the `scope` returns an array with t
 
     class ActiveMessengersWidget(ListWidget):
         title = 'Active Messengers'
-        moreInfo = 'Those who have more requests'
+        more_info = 'Those who have more requests'
 
         def get_updated_at(self):
             modified = SearchQuerySet().filter(
