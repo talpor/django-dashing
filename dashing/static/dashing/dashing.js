@@ -23,7 +23,8 @@
                             googleMapsScript = document.createElement('script');
                         googleMapsScript.type = 'text/javascript';
                         googleMapsScript.src = 'https://maps.googleapis.com/maps/api/js' +
-                                               '?v=3.exp&callback=__googlemapscallbackfunc__';
+                                               '?v=3.exp&callback=__googlemapscallbackfunc__' +
+                                               '&key=' + GOOGLE_MAPS_API_KEY;
                         window.__googlemapscallbackfunc__ = function() {
                             self.publish('complete');
                         };
