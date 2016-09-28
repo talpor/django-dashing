@@ -207,7 +207,7 @@ class MapWidget(Widget):
             'theme': self.get_theme(),
             'map': {
                 'zoom': self.get_zoom(),
-                'doubleClickZoom': self.double_click_zoom(),
+                'doubleClickZoom': self.get_double_click_zoom(),
                 'defaultUI': self.get_default_ui(),
                 'center': self.get_center(),
                 'markers': self.get_markers()
