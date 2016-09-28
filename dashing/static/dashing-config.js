@@ -11,7 +11,8 @@ dashboard.addWidget('current_valuation_widget', 'Number', {
             moreInfo: 'In billions',
             updatedAt: 'Last updated at 14:10',
             detail: '64%',
-            value: '$35'
+            value: '$35',
+            icon: 'fa fa-arrow-up'
         });
     }
 });
