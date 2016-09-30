@@ -53,6 +53,7 @@
     {% endblock %}
     {% compress js %}
     <script type="text/javascript">var DASHING_STATIC = "{% static 'dashing/' %}";</script>
+    {% widget_configs %}
     <script type="text/javascript" src="{% static 'dashing/libs/jquery-1.11.0.js' %}"></script>
     <script type="text/javascript" src="{% static 'dashing/libs/sightglass.js' %}"></script>
     <script type="text/javascript" src="{% static 'dashing/libs/rivets.js' %}"></script>
