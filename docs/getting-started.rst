@@ -113,6 +113,18 @@ Default:
 
     () # empty tuple, english default
 
+
+**WIDGET_CONFIGS**
+
+A widget name -> {key: value} dictionary holding any additional configuration values needed for some of your ``INSTALLED_WIDGETs``, such as API keys.
+
+Default:
+
+.. code-block:: python
+
+    {} # empty dict, no additional configuration
+
+
 Config File 
 -----------
 

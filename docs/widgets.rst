@@ -415,6 +415,21 @@ Map Widget
 
 This widget display a google map widget with one or more markers grouped
 
+You need to specify your GoogleMaps API key in ``WIDGET_CONFIGS`` for this widget to work properly, using the ``GOOGLE_MAPS_API_KEY`` key. For example:
+
+
+.. code-block:: python
+
+    DASHING = {
+        'INSTALLED_WIDGETS': ('number', 'list', 'map',),
+        'WIDGET_CONFIGS': {
+                'map': {
+                        'GOOGLE_MAPS_API_KEY': '<insert your GoogleMaps API key here>',
+                },
+        },
+    }
+
+
 Options
 ~~~~~~~~~~~~
 
