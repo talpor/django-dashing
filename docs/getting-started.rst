@@ -116,7 +116,7 @@ Default:
 
 **WIDGET_CONFIGS**
 
-A widget name -> {key: value} dictionary holding any additional configuration values needed for some of your ``INSTALLED_WIDGETs``, such as API keys.
+A widget name -> {key: value} dictionary holding any additional configuration values needed for some of your ``INSTALLED_WIDGETS``, such as API keys.
 
 Default:
 
