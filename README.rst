@@ -118,7 +118,6 @@ Links
 
 - `Documentation <http://django-dashing.readthedocs.org/>`_
 - `Example (blog post) <https://blog.talpor.com/2014/06/make-a-metric-dashboard-for-trello-with-django-das/>`_
-- `Demo application <https://github.com/individuo7/django-dashing-demo-app>`_
 - `Widget List <https://github.com/talpor/django-dashing-channel/blob/master/repositories.json>`_
 
 

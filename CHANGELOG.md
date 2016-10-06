@@ -1,3 +1,12 @@
+## 0.3.2
+- Add option to set a background icon in the number widget
+- Add setting to add google maps API key for the map widget
+- Bug fixes
+
+## 0.3.1
+- Ability to set permission for each widget
+- Bug fixes
+
 ## 0.3
 - Add KnobWidget and MapWidget python classes
 - Fix several bugs
@@ -10,8 +19,8 @@
 - Add Knob and Map plugins [docs](https://github.com/talpor/django-dashing/pull/20)
 
 ## 0.2.7
-- add hash based navigation in multiple dashboards
-- add again option to change the background color of a widget
+- Add hash based navigation in multiple dashboards
+- Add again option to change the background color of a widget
 
 ## 0.2.6
 - Add django compressor as an optional dependency
