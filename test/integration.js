@@ -144,6 +144,20 @@ describe('django-dashing tests:', function() {
                 assert.ok(overlayShown);
             });
         });
+        it('should have both rickshaw and d3 available', function() {
+            return browser.open('/multiple_dashboards/').then( function (status) {
+                var page = browser.page;
+                assert.equal('success', status);
+                return page.evaluate( function () {
+                    /* jshint ignore:start */
+                    return d3 !== undefined && Rickshaw !== undefined;
+                    /* jshint ignore:end */
+                });
+            })
+            .then( function (isAvailable) {
+                assert.ok(isAvailable);
+            });
+        });
     });
     after(function() {
         browser.instance.exit();
