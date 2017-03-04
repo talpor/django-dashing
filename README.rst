@@ -105,13 +105,11 @@ First install any development dependencies.
     $ npm install
     $ pip install -r requirements.txt
 
-Then download and install `PhamtonJS <http://phantomjs.org/download.html>`_
-
-django-dashing uses mocha as the testing framework. Run the following command in the root directory to run the full test suite.
+Then run the following command in the root directory to run the full test suite.
 
 .. code-block:: text
 
-    $ mocha -t 10000
+    $ node_modules/mocha/bin/mocha -t 10000
 
 Links
 ===============================================
