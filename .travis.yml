@@ -2,7 +2,6 @@ language: python
 python:
   - "2.7"
 env:
-  - TRAVIS_NODE_VERSION="0.12"
   - TRAVIS_NODE_VERSION="4"
 install:
   - pip install -r requirements.txt
