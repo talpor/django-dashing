@@ -98,18 +98,18 @@ Also if you want to locate the config file in a different directory you can crea
 Testing
 ===============================================
 
-First install any development dependencies.
+Install dependencies.
 
 .. code-block:: text
 
     $ npm install
     $ pip install -r requirements.txt
 
-Then run the following command in the root directory to run the full test suite.
+Run tests.
 
 .. code-block:: text
 
-    $ node_modules/mocha/bin/mocha -t 10000
+    $ npm test
 
 Links
 ===============================================
