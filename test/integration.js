@@ -4,6 +4,7 @@
 var phantom = require('phantom'),
     cp = require('child_process'),
     assert = require('assert'),
+    promiseRetry = require('promise-retry'),
     browser = {},
     server;
 
@@ -23,128 +24,143 @@ describe('django-dashing tests:', function() {
                                             {detached: true});
         });
         // create a browser instance
-        phantom.create(function (ph) {
-            ph.createPage(function (page) {
-                browser.open = function(pathname, callback) {
-                    page.open.apply(page,
-                            ['http://127.0.0.1:' + PORT + pathname,
-                             callback.bind(page)]);
-                };
-                browser.exit = ph.exit.bind(null);
-            });
+        phantom.create()
+          .then(function (instance) {
+            browser.instance = instance;
+            return instance.createPage();
+        })
+        .then(function (page) {
+            browser.page = page;
+            browser.open = function(pathname) {
+                var url = 'http://127.0.0.1:' + PORT + pathname;
+                return page.open(url);
+            };
         });
     });
+
     it('should run a django server', function(done) {
+        this.timeout(10000);
         (function waitingForResources() {
             if (server === undefined || browser.open === undefined) {
                 setTimeout(waitingForResources, 100);
             }
             else {
                 // Waiting for the overall server load
-                setTimeout(done, 1000);
+                promiseRetry( function(retry) {
+                    return browser.open('/')
+                    .then(function(status) {
+                        if (status != 'success') {
+                            retry();
+                        } else {
+                            done();
+                        }
+                    });
+                }, {minTimeout: 100, maxTimeout: 1000, retries: 10});
             }
         }());
     });
     describe('displaying starter dashboard', function() {
-        it('should display dashboard page with the right title', function(done) {
-            browser.open('/dashboard/', function (status) {
-                var page = this;
+        it('should display dashboard page with the right title', function() {
+            return browser.open('/dashboard/').then(function (status) {
+                var page = browser.page;
                 assert.equal('success', status);
-                page.evaluate(
-                    function () {
-                        return document.title;
-                    },
-                    function (title) {
-                        assert.equal(title, 'Django Dashing');
-                        done();
-                    });
+                return page.evaluate( function () {
+                    return document.title;
+                });
+            })
+            .then( function (title) {
+                assert.equal(title, 'Django Dashing');
             });
         });
-        it('should have a variable called ´dashboard´', function(done) {
-            browser.open('/dashboard/', function (status) {
-                var page = this;
+        it('should have a variable called ´dashboard´', function() {
+            return browser.open('/dashboard/').then( function (status) {
+                var page = browser.page;
                 assert.equal('success', status);
-                page.evaluate(
-                    function () {
-                        /* jshint ignore:start */
-                        return (dashboard instanceof Dashboard);
-                        /* jshint ignore:end */
-                    },
-                    function (instanceofDashboard) {
-                        assert.ok(instanceofDashboard);
-                        done();
-                    });
+                return page.evaluate( function () {
+                    /* jshint ignore:start */
+                    return (dashboard instanceof Dashboard);
+                    /* jshint ignore:end */
+                });
+            })
+            .then( function (instanceofDashboard) {
+                assert.ok(instanceofDashboard);
             });
         });
-        it('should have an active dashboard', function(done) {
-            browser.open('/dashboard/', function (status) {
-                var page = this;
+        it('should have an active dashboard', function() {
+            return browser.open('/dashboard/').then( function (status) {
+                var page = browser.page;
                 assert.equal('success', status);
-                page.evaluate(
-                    function () {
-                        /* jshint ignore:start */
-                        return dashboard.grid.active;
-                        /* jshint ignore:end */
-                    },
-                    function (isActive) {
-                        assert.ok(isActive);
-                        done();
-                    });
+                return page.evaluate( function () {
+                    /* jshint ignore:start */
+                    return dashboard.grid.active;
+                    /* jshint ignore:end */
+                });
+            })
+            .then( function (isActive) {
+                assert.ok(isActive);
             });
         });
-        it('should display four widgets', function(done) {
-            browser.open('/dashboard/', function (status) {
-                var page = this;
+        it('should display five widgets', function() {
+            return browser.open('/dashboard/').then( function (status) {
+                var page = browser.page;
                 assert.equal('success', status);
-                page.evaluate(
-                    function () {
-                        /* jshint ignore:start */
-                        return dashboard.listWidgets().length;
-                        /* jshint ignore:end */
-                    },
-                    function (length) {
-                        assert.equal(length, 4);
-                        done();
-                    });
+                return page.evaluate( function () {
+                    /* jshint ignore:start */
+                    return dashboard.getWidgets().length;
+                    /* jshint ignore:end */
+                });
+            })
+            .then( function (length) {
+                assert.equal(length, 5);
             });
         });
     });
     describe('displaying multiple dashboards', function() {
-        it('should display dashboard page with the right title', function(done) {
-            browser.open('/multiple_dashboards/', function (status) {
-                var page = this;
+        it('should display dashboard page with the right title', function() {
+            return browser.open('/multiple_dashboards/').then( function (status) {
+                var page = browser.page;
                 assert.equal('success', status);
-                page.evaluate(
-                    function () {
-                        return document.title;
-                    },
-                    function (title) {
-                        assert.equal(title, 'Multiple Dashboards');
-                        done();
-                    });
+                return page.evaluate( function () {
+                    return document.title;
+                });
+            })
+            .then( function (title) {
+                assert.equal(title, 'Multiple Dashboards');
             });
         });
         it('should show the menu overlay when toggleOverlay is fired' +
-           'with the ctrl key down event', function(done) {
-            browser.open('/multiple_dashboards/', function (status) {
-                var page = this;
+           'with the ctrl key down event', function() {
+            return browser.open('/multiple_dashboards/').then( function (status) {
+                var page = browser.page;
                 assert.equal('success', status);
-                page.evaluate(
-                    function () {
-                        /* jshint ignore:start */
-                        scope.toggleOverlay({which: 17});
-                        return $('#overlayContainer>div').hasClass('in');
-                        /* jshint ignore:end */
-                    },
-                    function (overlayShown) {
-                        assert.ok(overlayShown);
-                        done();
-                    });
+                return page.evaluate( function () {
+                    /* jshint ignore:start */
+                    scope.toggleOverlay({which: 17});
+                    return $('#overlayContainer>div').hasClass('in');
+                    /* jshint ignore:end */
+                });
+            })
+            .then( function (overlayShown) {
+                assert.ok(overlayShown);
+            });
+        });
+        it('should have both rickshaw and d3 available', function() {
+            return browser.open('/multiple_dashboards/').then( function (status) {
+                var page = browser.page;
+                assert.equal('success', status);
+                return page.evaluate( function () {
+                    /* jshint ignore:start */
+                    return d3 !== undefined && Rickshaw !== undefined;
+                    /* jshint ignore:end */
+                });
+            })
+            .then( function (isAvailable) {
+                assert.ok(isAvailable);
             });
         });
     });
     after(function() {
-        browser.exit();
+        browser.instance.exit();
         process.kill(-server.pid);
     });
 });

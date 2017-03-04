@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/talpor/django-dashing",
   "dependencies": {
-    "mocha": "^2.1.0",
-    "phantom": "^0.7.2"
+    "mocha": "^3.2.0",
+    "phantom": "^3.2.1",
+    "promise-retry": "^1.1.1"
   }
 }

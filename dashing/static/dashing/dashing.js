@@ -5,9 +5,15 @@
         scope = {grids: [], toggleOverlay: function() {}};
     Dashing = {
         resources: {
-            d3: DASHING_STATIC + 'libs/d3/d3.min.js',
-            rickshaw: DASHING_STATIC + 'libs/rickshaw/rickshaw.min.js',
-            jqueryKnob: DASHING_STATIC + 'libs/jquery-knob/jquery.knob.min.js',
+            d3: {
+              src: DASHING_STATIC + 'libs/d3/d3.min.js',
+            },
+            rickshaw: {
+              src: DASHING_STATIC + 'libs/rickshaw/rickshaw.min.js',
+            },
+            jqueryKnob: {
+              src: DASHING_STATIC + 'libs/jquery-knob/jquery.knob.min.js',
+            },
             googleMaps: {
                 Loader: function() {
                     this.on = function(id, func) {
@@ -265,3 +271,4 @@
     global.DashboardSet = DashboardSet;
     global.scope = scope;
 })(window, window.console || {warn: alert.bind(null), error: alert.bind(null)});
+
