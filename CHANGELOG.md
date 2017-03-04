@@ -1,3 +1,7 @@
+## 0.3.3
+- Fix bug when many widgets try to load the same dependency
+- Update test suite
+
 ## 0.3.2
 - Add option to set a background icon in the number widget
 - Add setting to add google maps API key for the map widget
