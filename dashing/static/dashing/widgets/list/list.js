@@ -6,6 +6,7 @@ Dashing.widgets.List = function (dashboard) {
     self.row = 2;
     self.col = 1;
     self.scope = {};
+    self.color = '#12b0c5';
     self.getWidget = function () {
         return this.__widget__;
     };
