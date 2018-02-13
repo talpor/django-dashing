@@ -76,6 +76,18 @@ def widget_templates():
     return load('<link rel="resource" type="text/html" '
                 'href="{}" data-widget="{}">\n', 'html')
 
+
+@register.simple_tag
+def widget_configs():
+    widgets = dashing_settings.INSTALLED_WIDGETS
+    output = ''
+    for name in widgets:
+        if name in dashing_settings.WIDGET_CONFIGS:
+            for key, value in dashing_settings.WIDGET_CONFIGS[name].items():
+                output += '<script type="text/javascript">var {} = "{}";</script>'.format(key, value)
+    return mark_safe(output)
+
+
 if "compressor" in settings.INSTALLED_APPS:
     @register.tag
     def compress(parser, token):

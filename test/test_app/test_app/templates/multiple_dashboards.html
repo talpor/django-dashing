@@ -1,7 +1,7 @@
 {% extends 'dashing/dashboard.html' %}
 {% block external_resources %}{% endblock %}
-{% block 'title' %}Multiple Dashboards{% endblock %}
-{% block 'config_file' %}
+{% block title %}Multiple Dashboards{% endblock %}
+{% block config_file %}
 <script type="text/javascript">
 /* global $, DashboardSet, alert */
 var console = window.console || {log: alert.bind(null)},
@@ -52,6 +52,45 @@ sub.addWidget('buzzwords_widget', 'List', {
             });
     }
 });
+
+/* define a new widget that only uses d3,
+ * used as part of a test for issue #73
+ * https://github.com/talpor/django-dashing/issues/73
+ *
+ * This must be added to a dashboard before any widget that
+ * requires Rickshaw, or the Rickshaw dependency will cause
+ * d3 to be pulled in.
+ */
+sub.widgets.Issue73 = function (dashboard) {
+    var self = this;
+
+    /* reuse 'number' template */
+    self.__init__ =  Dashing.utils.widgetInit(dashboard, 'number', {
+        require: ['d3'] /* require just d3, not also rickshaw */
+    });
+    self.row = 1;
+    self.col = 1;
+    self.scope = {};
+    self.getWidget = function () {
+        return this.__widget__;
+    };
+    self.getData = function () {};
+    self.interval = 3000;
+};
+
+sub.addWidget('issue-73-widget', 'Issue73', {
+    getData: function () {
+        $.extend(this.scope, {
+            title: 'Current Valuation',
+            moreInfo: 'In billions',
+            updatedAt: 'Last updated at 14:10',
+            detail: '64%',
+            value: '$35'
+        });
+    }
+});
+
+
 
 main.addWidget('convergence_widget1', 'Graph', {
     getData: function () {

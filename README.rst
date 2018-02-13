@@ -1,6 +1,9 @@
 ===============================================
 django-dashing
 ===============================================
+
+.. image:: https://travis-ci.org/talpor/django-dashing.svg?branch=master
+
 `django-dashing` is a customisable, modular dashboard application framework for Django to visualize interesting data about your project. Inspired in the exceptionally handsome dashboard framework Dashing_
 
 Check out a demo over `here <https://django-dashing-demo.herokuapp.com/dashboard/>`_.
@@ -98,26 +101,23 @@ Also if you want to locate the config file in a different directory you can crea
 Testing
 ===============================================
 
-First install any development dependencies.
+Install dependencies.
 
 .. code-block:: text
 
     $ npm install
     $ pip install -r requirements.txt
 
-Then download and install `PhamtonJS <http://phantomjs.org/download.html>`_
-
-django-dashing uses mocha as the testing framework. Run the following command in the root directory to run the full test suite.
+Run tests.
 
 .. code-block:: text
 
-    $ mocha -t 10000
+    $ npm test
 
 Links
 ===============================================
 
 - `Documentation <http://django-dashing.readthedocs.org/>`_
-- `Example (blog post) <https://blog.talpor.com/2014/06/make-a-metric-dashboard-for-trello-with-django-das/>`_
 - `Demo application <https://github.com/individuo7/django-dashing-demo-app>`_
 - `Widget List <https://github.com/talpor/django-dashing-channel/blob/master/repositories.json>`_
 

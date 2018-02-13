@@ -1,0 +1,10 @@
+language: python
+python:
+  - "2.7"
+env:
+  - TRAVIS_NODE_VERSION="4"
+install:
+  - pip install -r requirements.txt
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+  - npm install
+script: npm test

@@ -17,10 +17,6 @@ BASE_DIR = dirname(dirname(__file__))
 # add dashing directory to sys.path
 sys.path.append(dirname(dirname(BASE_DIR)))
 
-TEMPLATE_DIRS = (
-    join(BASE_DIR, 'templates/'),
-)
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -29,8 +25,6 @@ SECRET_KEY = '4jt7ni5l93&+amvv854ak_fd-kdgeef^+4bu$^qwvgratj+6i#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -103,3 +97,19 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]

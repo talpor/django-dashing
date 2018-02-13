@@ -22,9 +22,9 @@
     {% block templates %}
     {% endblock %}
     {% block external_resources %}
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
     {% endblock %}
-    <link rel="icon" href="/assets/images/favicon.ico">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
 </head>
 <body id="app" rv-on-keydown="toggleOverlay">
     {% block main_container %}
@@ -53,6 +53,7 @@
     {% endblock %}
     {% compress js %}
     <script type="text/javascript">var DASHING_STATIC = "{% static 'dashing/' %}";</script>
+    {% widget_configs %}
     <script type="text/javascript" src="{% static 'dashing/libs/jquery-1.11.0.js' %}"></script>
     <script type="text/javascript" src="{% static 'dashing/libs/sightglass.js' %}"></script>
     <script type="text/javascript" src="{% static 'dashing/libs/rivets.js' %}"></script>

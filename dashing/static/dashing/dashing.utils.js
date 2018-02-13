@@ -30,17 +30,23 @@
                 if (!options.require) return;
 
                 (function loadResource(name) {
-                    var resource = Dashing.resources[name], loader;
-                    if (!resource) return;
-                    delete Dashing.resources[name];
+                    if (!name) return;
+                    var resource = Dashing.resources[name];
+                    if (resource.loaded && options.require.length) {
+                        loadResource(options.require.shift());
+                        return;
+                    } else if (resource.loaded) {
+                        return;
+                    }
 
-                    loader = resource.Loader ? new resource.Loader() :
-                             new createjs.JavaScriptLoader({src: resource});
-                    loader.on('complete', function() {
+                    resource.loader = resource.Loader ? new resource.Loader() :
+                             new createjs.JavaScriptLoader({src: resource.src});
+                    resource.loader.on('complete', function() {
+                        resource.loaded = true;
                         $(document).trigger('libs/' + name + '/loaded');
                         loadResource(options.require.shift());
                     });
-                    loader.load();
+                    resource.loader.load();
                 })(options.require.shift());
 
             };
@@ -88,3 +94,4 @@
         Version: global.__dashingversion__.constructor
     };
 })(window, window.Dashing);
+

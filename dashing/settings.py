@@ -11,7 +11,8 @@ DEFAULTS = {
     'PERMISSION_CLASSES':  (
         'dashing.permissions.AllowAny',
     ),
-    'LOCALES': ()
+    'LOCALES': (),
+    'WIDGET_CONFIGS': {},
 }
 
 # List of settings that may be in string import notation.
