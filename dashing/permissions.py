@@ -27,7 +27,10 @@ class IsAuthenticated(BasePermission):
     """
 
     def has_permission(self, request):
-        return request.user and request.user.is_authenticated()
+        try:
+            return request.user and request.user.is_authenticated()
+        except TypeError:
+            return request.user and request.user.is_authenticated
 
 
 class IsAdminUser(BasePermission):
