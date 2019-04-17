@@ -160,7 +160,7 @@ You can specify any properties that the graph constructor accepts in the `scope`
     }
 
 
-.. _Rickshaw: http://code.shutterstock.com/rickshaw/
+.. _Rickshaw: https://tech.shutterstock.com/rickshaw/
 
 Python Class
 ~~~~~~~~~~~~
