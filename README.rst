@@ -10,8 +10,8 @@ Check out a demo over `here <https://django-dashing-demo.herokuapp.com/dashboard
 
 .. _Dashing: http://shopify.github.io/dashing/
 
-.. image:: https://dl.dropboxusercontent.com/u/5594456/dashing/dashboard.png
-    :alt: HTTPie compared to cURL
+.. image:: https://blog.talpor.com/uploads/2014/06/25/captura-de-pantalla-de-2014-06-25-132349.png
+    :alt: dashboard screenshot
     :width: 835
     :height: 835
     :align: center
