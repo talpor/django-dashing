@@ -14,5 +14,5 @@
             return value;
         };
     }
-    global.__dashingversion__ = new Version('v0.3.3');
+    global.__dashingversion__ = new Version('v0.3.4');
 })(window);

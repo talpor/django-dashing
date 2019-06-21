@@ -1,3 +1,8 @@
+## 0.3.4
+- Fix Rickshaw link
+- Fix is_authenticated not a callable after django 2
+- Support change color for list widget
+
 ## 0.3.3
 - Fix bug when many widgets try to load the same dependency
 - Update test suite
