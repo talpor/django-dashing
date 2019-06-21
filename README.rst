@@ -64,8 +64,6 @@ To make your own dashboard and retrieves the data from django you should:
 
 2. Create your widget extended from **NumberWidget**, **ListWidget**, **GraphWidget** or simply **Widget** (from dashing.widgets), for example `see <https://github.com/individuo7/django-dashing-demo-app/blob/master/django_dashing_demo_app/widgets.py>`_.
 
-.. code-block:: python
-
 3. Register your widget in `urls.py` like:
 
 .. code-block:: python
