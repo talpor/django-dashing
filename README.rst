@@ -10,7 +10,7 @@ Check out a demo over `here <https://django-dashing-demo.herokuapp.com/dashboard
 
 .. _Dashing: http://shopify.github.io/dashing/
 
-.. image:: https://blog.talpor.com/uploads/2014/06/25/captura-de-pantalla-de-2014-06-25-132349.png
+.. image:: https://i.imgur.com/Uo67Q7L.png
     :alt: dashboard screenshot
     :width: 835
     :height: 835
