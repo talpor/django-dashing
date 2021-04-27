@@ -4,8 +4,10 @@ django-dashing
 
 .. image:: https://travis-ci.org/talpor/django-dashing.svg?branch=master
 
-*Note this fork is to support Django 3, which dropped support for Python2.*
-*NOTE: Using Python 3.9 for development as shown in pipfile, but Pytho3.6 or greater should work too.*
+**Note this fork is to support Django 3, which dropped support for Python2.**
+
+**NOTE: Using Python 3.9 for development as shown in pipfile, but Python 3.6 or greater should work too.**
+
 `django-dashing` is a customisable, modular dashboard application framework for Django to visualize interesting data about your project. Inspired in the exceptionally handsome dashboard framework Dashing_
 
 Check out a demo over `here <https://django-dashing-demo.herokuapp.com/dashboard/>`_.
