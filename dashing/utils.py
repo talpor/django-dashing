@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path, re_path
 from .views import Dashboard
 
 
@@ -14,7 +14,7 @@ class Router(object):
 
         This would be the equivalent of manually adding the following
         to urlpatterns:
-            >>> url(r"^widgets/mywidget/(P<my_parameter>[A-Z0-9]+)/?",
+            >>> re_path(r"^widgets/mywidget/(P<my_parameter>[A-Z0-9]+)/?",
                                          MyWidget.as_view(), "widget_mywidget")
 
         """
@@ -22,12 +22,12 @@ class Router(object):
 
     def get_urls(self):
         urlpatterns = [
-            url(r'^$', Dashboard.as_view(), name='dashboard'),
+            path('', Dashboard.as_view(), name='dashboard'),
         ]
 
         for widget, basename, parameters in self.registry:
             urlpatterns += [
-                url(r'/'.join((
+                re_path(r'/'.join((
                     r'^widgets/{}'.format(basename),
                     r'/'.join((r'(?P<{}>{})'.format(parameter, regex)
                                for parameter, regex in parameters.items())),

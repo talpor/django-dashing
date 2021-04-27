@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.utils import six
 import importlib
 
 USER_SETTINGS = getattr(settings, 'DASHING', None)
@@ -24,7 +23,7 @@ def perform_import(val, setting_name):
     If the given setting is a string import notation,
     then perform the necessary import or imports.
     """
-    if isinstance(val, six.string_types):
+    if isinstance(val, str):
         return import_from_string(val, setting_name)
     elif isinstance(val, (list, tuple)):
         return [import_from_string(item, setting_name) for item in val]
@@ -58,6 +57,7 @@ class Settings(object):
     Any setting with string import paths will be automatically resolved
     and return the class, rather than the string literal.
     """
+
     def __init__(self, user_settings=None, defaults=None, import_strings=None):
         self.user_settings = user_settings or {}
         self.defaults = defaults or {}

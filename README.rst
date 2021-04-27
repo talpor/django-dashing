@@ -4,6 +4,8 @@ django-dashing
 
 .. image:: https://travis-ci.org/talpor/django-dashing.svg?branch=master
 
+*Note this fork is to support Django 3, which dropped support for Python2.*
+*NOTE: Using Python 3.9 for development as shown in pipfile, but Pytho3.6 or greater should work too.*
 `django-dashing` is a customisable, modular dashboard application framework for Django to visualize interesting data about your project. Inspired in the exceptionally handsome dashboard framework Dashing_
 
 Check out a demo over `here <https://django-dashing-demo.herokuapp.com/dashboard/>`_.
@@ -18,7 +20,7 @@ Check out a demo over `here <https://django-dashing-demo.herokuapp.com/dashboard
 
 Prerequisites
 ===============================================
-- Django 1.5.+
+- Django 3+
 - Django Compressor (optional)
 
 Key concepts
@@ -50,7 +52,7 @@ Installation
 
     from dashing.utils import router
     ...
-    url(r'^dashboard/', include(router.urls)),
+    path('dashboard/', include(router.urls)),
 
 4. Start the development server and visit http://127.0.0.1:8000/dashboard/
    to view the dummy dashboard.
@@ -68,7 +70,7 @@ To make your own dashboard and retrieves the data from django you should:
 
 .. code-block:: python
 
-    from django.conf.urls import url, include
+    from django.urls import include, path
     from dashing.utils import router
 
     from project.dashboard.widgets import CustomWidget
@@ -76,7 +78,7 @@ To make your own dashboard and retrieves the data from django you should:
     router.register(CustomWidget, 'custom_widget')
 
     urlpatterns = [
-        url(r'^dashboard/', include(router.urls)),
+        path('dashboard/', include(router.urls)),
     ]
 
 Create a dashing-config.js file with a widget that retrive the data in your static directory like:

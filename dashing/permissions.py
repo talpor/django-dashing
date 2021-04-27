@@ -17,6 +17,7 @@ class AllowAny(BasePermission):
     """
     Allow any access.
     """
+
     def has_permission(self, request):
         return True
 

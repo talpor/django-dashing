@@ -1,3 +1,6 @@
+## 0.4.0
+- Add Django 3 support (which means Python 3, i.e. Python 2 support dropped)
+
 ## 0.3.4
 - Fix Rickshaw link
 - Fix is_authenticated not a callable after django 2

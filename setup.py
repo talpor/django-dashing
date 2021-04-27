@@ -12,7 +12,7 @@ setup(
     packages=['dashing'],
     include_package_data=True,
     license='MIT License',
-    description='A simple Django dashboard app to visualize interesting data '
+    description='A simple Django (v3 which requires Python 3) dashboard app to visualize interesting data '
                 'about your project.',
     long_description=README,
     url='https://github.com/talpor/django-dashing/',
@@ -25,7 +25,10 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Libraries :: Python Modules',
