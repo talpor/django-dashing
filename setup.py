@@ -7,17 +7,17 @@ README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='django-dashing',
-    version='0.3.4',
+    name='django3-dashing',
+    version='0.4.0',
     packages=['dashing'],
     include_package_data=True,
     license='MIT License',
     description='A simple Django (v3 which requires Python 3) dashboard app to visualize interesting data '
                 'about your project.',
     long_description=README,
-    url='https://github.com/talpor/django-dashing/',
-    author='Mauricio Reyes',
-    author_email='mreyes@talpor.com',
+    url='https://github.com/wickeyware/django-dashing/',
+    author='Michael Wickey',
+    author_email='wickeym@gmail.com',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
@@ -35,6 +35,6 @@ setup(
         'Topic :: Software Development :: Localization',
         'Topic :: Utilities',
     ],
-    keywords=['django', 'metrics', 'dashboard', 'dashing', 'metric',
+    keywords=['django', 'python3', 'metrics', 'dashboard', 'dashing', 'metric',
               'widgets', 'data'],
 )
