@@ -1,3 +1,6 @@
+## 0.5.0
+- Add hoverFormatter to graph
+
 ## 0.4.0
 - Add Django 3 support (which means Python 3, i.e. Python 2 support dropped)
 
