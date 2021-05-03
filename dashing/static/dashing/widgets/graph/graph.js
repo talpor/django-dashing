@@ -38,8 +38,8 @@ rivets.binders['dashing-graph'] = function binder(el, data) {
         xFormat = this.model.xFormat || data.xFormat,
         yFormat = this.model.yFormat || data.yFormat,
         properties = this.model.properties || {},
-        yAxisType = this.model.yAxisType || 1, //Display Axis.Y default format Number
-        xAxisType = this.model.xAxisType || 1, //Display Axis.X default format Number
+        yAxisType = this.model.yAxisType,  // Default nil and uses xFormat or Rickshaw.Fixtures.Number.formatKMBT
+        xAxisType = this.model.xAxisType,  // Default nil and uses yFormat or Rickshaw.Fixtures.Number.formatKMBT
         hoverFormatter = this.model.hoverFormatter || defaultHoverFormatter;
 
     if (!$(container).is(':visible')) return;
@@ -74,22 +74,22 @@ rivets.binders['dashing-graph'] = function binder(el, data) {
     //var time = new Rickshaw.Fixtures.Time();
     //var days = time.unit('day');
     //xAxis = new Rickshaw.Graph.Axis.Time( { graph: graph, timeUnit: days } );
-    if (xAxisType) {
+    if (xAxisType === 'time') {
+        xAxis = new Rickshaw.Graph.Axis.Time({ graph: graph });
+    } else {
         xAxis = new Rickshaw.Graph.Axis.X({
             graph: graph,
             tickFormat: xFormat || Rickshaw.Fixtures.Number.formatKMBT
         });
-    } else {
-        xAxis = new Rickshaw.Graph.Axis.Time({ graph: graph });
     }
 
-    if (yAxisType) {
+    if (yAxisType === 'time') {
+        yAxis = new Rickshaw.Graph.Axis.Time({ graph: graph });
+    } else {
         yAxis = new Rickshaw.Graph.Axis.Y({
             graph: graph,
             tickFormat: yFormat || Rickshaw.Fixtures.Number.formatKMBT
         });
-    } else {
-        yAxis = new Rickshaw.Graph.Axis.Time({ graph: graph });
     }
 
     xAxis.render();

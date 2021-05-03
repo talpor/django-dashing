@@ -42,7 +42,7 @@ dashboard.addWidget('convergence_widget', 'Graph', {
             title: 'Convergence',
             value: '41',
             moreInfo: 'Above is total number',
-            yAxisType: 1, //Display Axis.Y default format Number
+            xAxisType: 'time', // types: time or default Display Axis.Y default format Number
             properties: { renderer: 'area', color: '#fff' },
             data: [
                 { x: 0, y: 40 },
