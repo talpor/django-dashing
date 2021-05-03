@@ -1,3 +1,6 @@
+## 0.5.1
+- Fix Allow setting xAxisType/yAxisType to defualt (number) or time.
+
 ## 0.5.0
 - Add hoverFormatter to graph
 
