@@ -1,3 +1,6 @@
+## 0.5.2
+- Fix Add support to set Number icon in widgets python file.
+
 ## 0.5.1
 - Fix Allow setting xAxisType/yAxisType to defualt (number) or time.
 
