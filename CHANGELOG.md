@@ -1,3 +1,15 @@
+## 0.5.2
+- Fix Add support to set Number icon in widgets python file.
+
+## 0.5.1
+- Fix Allow setting xAxisType/yAxisType to defualt (number) or time.
+
+## 0.5.0
+- Add hoverFormatter to graph
+
+## 0.4.0
+- Add Django 3 support (which means Python 3, i.e. Python 2 support dropped)
+
 ## 0.3.4
 - Fix Rickshaw link
 - Fix is_authenticated not a callable after django 2

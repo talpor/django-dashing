@@ -23,15 +23,15 @@ dashboard.addWidget('buzzwords_widget', 'List', {
             title: 'Buzzwords',
             moreInfo: '# of times said around the office',
             updatedAt: 'Last updated at 18:58',
-            data: [{label: 'Exit strategy', value: 24},
-                   {label: 'Web 2.0', value: 12},
-                   {label: 'Turn-key', value: 2},
-                   {label: 'Enterprise', value: 12},
-                   {label: 'Pivoting', value: 3},
-                   {label: 'Leverage', value: 10},
-                   {label: 'Streamlininess', value: 4},
-                   {label: 'Paradigm shift', value: 6},
-                   {label: 'Synergy', value: 7}]
+            data: [{ label: 'Exit strategy', value: 24 },
+            { label: 'Web 2.0', value: 12 },
+            { label: 'Turn-key', value: 2 },
+            { label: 'Enterprise', value: 12 },
+            { label: 'Pivoting', value: 3 },
+            { label: 'Leverage', value: 10 },
+            { label: 'Streamlininess', value: 4 },
+            { label: 'Paradigm shift', value: 6 },
+            { label: 'Synergy', value: 7 }]
         });
     }
 });
@@ -41,16 +41,19 @@ dashboard.addWidget('convergence_widget', 'Graph', {
         $.extend(this.scope, {
             title: 'Convergence',
             value: '41',
-            moreInfo: '',
-            data: [ 
-                    { x: 0, y: 40 }, 
-                    { x: 1, y: 49 }, 
-                    { x: 2, y: 38 }, 
-                    { x: 3, y: 30 }, 
-                    { x: 4, y: 32 }
-                ]
-            });
-    }
+            moreInfo: 'Above is total number',
+            xAxisType: 'time', // types: time or default Display Axis.Y default format Number
+            properties: { renderer: 'area', color: '#fff' },
+            data: [
+                { x: 0, y: 40 },
+                { x: 1, y: 49 },
+                { x: 2, y: 38 },
+                { x: 3, y: 30 },
+                { x: 4, y: 32 }
+            ]
+        });
+    },
+    interval: 120000  // every two minutes
 });
 
 dashboard.addWidget('completion_widget', 'Knob', {
@@ -69,7 +72,7 @@ dashboard.addWidget('completion_widget', 'Knob', {
                 min: 1,
                 max: 99,
                 readOnly: true,
-                format: function(value) { return value + '%'; }
+                format: function (value) { return value + '%'; }
             }
         });
     }

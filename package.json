@@ -1,6 +1,6 @@
 {
   "name": "django-dashing",
-  "version": "0.3.4",
+  "version": "0.5.2",
   "description": "`django-dashing` is a customisable, modular dashboard application framework for Django to visualize interesting data about your project.",
   "directories": {
     "doc": "docs",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/talpor/django-dashing.git"
+    "url": "https://github.com/wickeyware/django-dashing.git"
   },
   "author": "Mauricio Reyes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/talpor/django-dashing/issues"
+    "url": "https://github.com/wickeyware/django-dashing/issues"
   },
-  "homepage": "https://github.com/talpor/django-dashing",
+  "homepage": "https://github.com/wickeyware/django-dashing",
   "dependencies": {
     "mocha": "^3.2.0",
     "phantom": "^3.2.1",

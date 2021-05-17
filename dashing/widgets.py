@@ -11,6 +11,7 @@ class JSONResponseMixin(object):
     """
     A mixin that can be used to render a JSON response.
     """
+
     def render_to_json_response(self, context, **response_kwargs):
         """
         Returns a JSON response, transforming 'context' to make the payload.
@@ -54,6 +55,7 @@ class NumberWidget(Widget):
     updated_at = ''
     detail = ''
     value = ''
+    icon = ''
 
     def get_title(self):
         return self.title
@@ -70,6 +72,9 @@ class NumberWidget(Widget):
     def get_value(self):
         return self.value
 
+    def get_icon(self):
+        return self.icon
+
     def get_context(self):
         return {
             'title': self.get_title(),
@@ -77,6 +82,7 @@ class NumberWidget(Widget):
             'updatedAt': self.get_updated_at(),
             'detail': self.get_detail(),
             'value': self.get_value(),
+            'icon': self.get_icon(),
         }
 
 

@@ -1,0 +1,14 @@
+{
+    "python.pythonPath": "/Users/wickeym/.local/share/virtualenvs/django-dashing-cnwWdXle/bin/python",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_django",
+        "--ignore=E501",
+        "--max-line-length=119"
+    ],
+    "python.formatting.autopep8Args": [
+        "--max-line-length=119"
+    ]
+}
