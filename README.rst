@@ -1,3 +1,5 @@
+**Note:** An updated version with Python3/Django3+ support maintained by `wickeym <https://pypi.org/user/wickeym/>`_ can be installed by doing `pip install django3-dashing`
+
 ===============================================
 django-dashing
 ===============================================
@@ -6,14 +8,12 @@ django-dashing
 
 `django-dashing` is a customisable, modular dashboard application framework for Django to visualize interesting data about your project. Inspired in the exceptionally handsome dashboard framework Dashing_
 
-Check out a demo over `here <https://django-dashing-demo.herokuapp.com/dashboard/>`_.
-
 .. _Dashing: http://shopify.github.io/dashing/
 
 .. image:: https://i.imgur.com/Uo67Q7L.png
     :alt: dashboard screenshot
     :width: 835
-    :height: 835
+    :height: 427
     :align: center
 
 Prerequisites
