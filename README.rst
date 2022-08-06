@@ -79,7 +79,7 @@ To make your own dashboard and retrieves the data from django you should:
         url(r'^dashboard/', include(router.urls)),
     ]
 
-Create a dashing-config.js file with a widget that retrive the data in your static directory like:
+Create a dashing-config.js file with a widget that retrieve the data in your static directory like:
 
 .. code-block:: javascript
 

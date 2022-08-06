@@ -94,7 +94,7 @@ A remote location with a repositories.json file is specified by the third-party 
 
 **LOCALES**
 
-A list or tuple of locales to load the neccesary i18n resources to configurate momentjs. You can load more than one but by default, one moment will be configured with the first.
+A list or tuple of locales to load the necessary i18n resources to configurate momentjs. You can load more than one but by default, one moment will be configured with the first.
 
 The list of valid locales are:
 
